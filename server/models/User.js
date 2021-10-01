@@ -20,12 +20,47 @@ const userSchema = new Schema(
         required: true,
       },
       // set savedBooks to be an array of data that adheres to the bookSchema
-      savedPosts: [bookSchema],
+      posts: [
+          {
+              type: Schema.Posts.ObjectId,
+              ref: 'Post'
+          }
+      ],
+      savedPosts: [
+          {
+              type: Schema.Types.ObjectId,
+              ref: 'Saved Post'
+          }
+      ],
+      friends: [
+          {
+              type: Schema.Types.ObjectId,
+              ref: 'User'
+          }
+      ]
     },
     // set this to use virtual below
     {
       toJSON: {
         virtuals: true,
+        getters: true
       },
+      id: false
     }
-  );
+  )
+
+userSchema.virtual('friendCount').get(function(){
+    return this.friends.length;
+})
+
+userSchema.virtual('postCount').get(function(){
+    return this.posts.length;
+})
+
+userSchema.virtual('savedPostsCount').get(function(){
+    return this.savedPosts.length;
+})
+
+const User = model('User', userSchema)
+
+module.exports = User;
