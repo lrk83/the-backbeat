@@ -19,7 +19,6 @@ const userSchema = new Schema(
         type: String,
         required: true,
       },
-      // set savedBooks to be an array of data that adheres to the bookSchema
       posts: [
           {
               type: Schema.Posts.ObjectId,
@@ -37,6 +36,12 @@ const userSchema = new Schema(
               type: Schema.Types.ObjectId,
               ref: 'User'
           }
+      ],
+      comments: [
+          {
+              type: Schema.Types.ObjectId,
+              ref: 'Post'
+          }
       ]
     },
     // set this to use virtual below
@@ -48,6 +53,19 @@ const userSchema = new Schema(
       id: false
     }
   )
+
+userSchema.pre('save', async function (next) {
+    if (this.isNew || this.isModified('password')) {
+        const saltRounds=10;
+        this.password = await bcrypt.hash(this.password, saltRounds);
+    }
+
+    next();
+});
+
+userSchema.methods.isCorrectPassWord = async function (password) {
+    return bcrypt.compare(password, this.password);
+};
 
 userSchema.virtual('friendCount').get(function(){
     return this.friends.length;
