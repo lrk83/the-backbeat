@@ -35,9 +35,9 @@ const resolvers = {
           post: async (parent, { _id }) => {
             return Post.findOne({ _id });
           },
-          post: async (parent, { genre }) => {
-              const parame = genre ? {genre } : {};
-              return Post.find(params).sort({createdAt: -1});
+          postbyGenre: async (parent, { genreId }) => {
+              const genre = await Genre.findById(genreId);
+              return Post.find({genre:genre}).sort({createdAt: -1});
           }
     },
     Mutation: {
@@ -63,7 +63,26 @@ const resolvers = {
       
             return { token, user };
         },
-        savePost: async(parent, args, context) => {
+        addPost: async (parent, args, context) => {
+
+            if (context.user) {
+
+              const genre = await Genre.findById(args.genreID);
+
+              const post = await Post.create({ genre:genre, postDescription:args.postDescription, username: context.user.username });
+      
+              await User.findByIdAndUpdate(
+                { _id: context.user._id },
+                { $push: { posts: post._id } },
+                { new: true }
+              );
+      
+              return post;
+            }
+      
+            throw new AuthenticationError('You need to be logged in!');
+          },
+        followPost: async(parent, args, context) => {
 
             if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(

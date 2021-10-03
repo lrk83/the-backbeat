@@ -7,4 +7,4 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/the-backbeat', 
     useFindAndModify: false,
 });
 
-module.exports = mongoose.connecttion;
+module.exports = mongoose.connection;

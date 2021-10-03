@@ -1,15 +1,21 @@
 {
-  "name": "the-backbeat",
+  "name": "the-backbeat-client",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3001/",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-    "web-vitals": "^1.1.2"
+    "@apollo/react-hooks": "^3.1.5",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "apollo-boost": "^0.4.7",
+    "graphql": "^15.0.0",
+    "graphql-tag": "^2.10.3",
+    "jwt-decode": "^2.2.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -18,10 +24,7 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "extends": "react-app"
   },
   "browserslist": {
     "production": [

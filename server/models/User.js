@@ -21,7 +21,7 @@ const userSchema = new Schema(
       },
       posts: [
           {
-              type: Schema.Posts.ObjectId,
+              type: Schema.Types.ObjectId,
               ref: 'Post'
           }
       ],
@@ -56,6 +56,11 @@ userSchema.pre('save', async function (next) {
 
     next();
 });
+
+// custom method to compare and validate password for logging in
+userSchema.methods.isCorrectPassword = async function (password) {
+    return bcrypt.compare(password, this.password);
+  };
 
 userSchema.methods.isCorrectPassWord = async function (password) {
     return bcrypt.compare(password, this.password);

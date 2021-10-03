@@ -40,27 +40,20 @@ const typeDefs = gql`
         user: User
     }
 
-    input PostInput{
-        postDescription: String
-        genre: Genre
-        createdAt: String
-        author: User
-    }
-
     type Query{
         me: User
         users: [User]
         user(username: String!):User
-        posts(username: Strings); [Post]
+        posts(username: String): [Post]
         post(_id: ID!):Post
-        post(genre: GENRE): [Post]
+        postbyGenre(genreId: ID!): [Post]
     }
 
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        addPost(postData: PostInput!): User
-        followPost(postData: PostInput!, id:ID!): User
+        addPost(postDescription: String!, genreID: ID!): User
+        followPost(postId: ID!): User
         removePost(id: ID!): User
         addComment(postId: ID!, commentBody: String!): Post
         addFriend(friendId: ID!): User
