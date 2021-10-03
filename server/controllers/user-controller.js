@@ -38,7 +38,6 @@ module.exports = {
         res.json({ token, user });
       },
       async savePost({ user, body }, res) {
-        
         try {
           const updatedUser = await User.findOneAndUpdate(
             { _id: user._id },
