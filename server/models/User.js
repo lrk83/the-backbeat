@@ -36,12 +36,6 @@ const userSchema = new Schema(
               type: Schema.Types.ObjectId,
               ref: 'User'
           }
-      ],
-      comments: [
-          {
-              type: Schema.Types.ObjectId,
-              ref: 'Post'
-          }
       ]
     },
     // set this to use virtual below
@@ -75,10 +69,10 @@ userSchema.virtual('postCount').get(function(){
     return this.posts.length;
 })
 
-userSchema.virtual('savedPostsCount').get(function(){
+userSchema.virtual('savedPostCount').get(function(){
     return this.savedPosts.length;
 })
 
-const User = model('User', userSchema)
+const User = model('User', userSchema);
 
 module.exports = User;
