@@ -14,7 +14,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "if-env": "^1.0.4"
+    "if-env": "^1.0.4",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^2.0.4"
   },
   "devDependencies": {
     "concurrently": "^5.1.0"
