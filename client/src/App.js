@@ -3,9 +3,20 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/client';
 import ApolloClient from 'apollo-boost';
 
+//Components
 import Navbar from './components/Navbar';
-import HomePage from './pages/HomePage';
 
+//Pages
+import HomePage from './pages/HomePage';
+import SkillPage from './pages/SkillPage';
+import SoundPage from './pages/SoundPage';
+import CommunityPage from './pages/CommunityPage';
+import AccountPage from './pages/AccountPage';
+import FriendPage from './pages/FriendPage';
+import LoginPage from './pages/LoginPage';
+import SignUpPage from './pages/SignUpPage';
+
+//ApolloClient
 const client = new ApolloClient({
   request: operation => {
     const token = localStorage.getItem('id_token');
@@ -19,6 +30,7 @@ const client = new ApolloClient({
   uri: '/graphql'
 });
 
+//App Structure
 function App() {
   return (
     <ApolloProvider client={client}>
@@ -27,6 +39,13 @@ function App() {
           <Navbar />
           <Switch>
             <Route exact path="/" component={HomePage} />
+            <Route exact path='/skills' component={SkillPage} />
+            <Route exact path='/sounds' component={SoundPage} />
+            <Route exact path='/community' component={CommunityPage} />
+            <Route exact path='/account' component={AccountPage} />
+            <Route exact path='/friends' component={FriendPage} />
+            <Route exact path="/login" component={LoginPage} />
+            <Route exact path='/signup' component={SignUpPage} />
           </Switch>
         </>
       </Router>
