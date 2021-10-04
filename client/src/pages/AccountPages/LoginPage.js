@@ -2,12 +2,12 @@
 import React, { useState } from 'react';
 import {Container, Input, Button, Form, Label } from 'semantic-ui-react'
 
-import { validateEmail } from '../utils/validate';
-import Auth from '../utils/auth';
-import MenuTabular from '../components/Menus/MenuTabularLogin';
+import { validateEmail } from '../../utils/validate';
+import Auth from '../../utils/auth';
+import MenuTabular from '../../components/Menus/MenuTabularLogin';
 
 import { useMutation } from '@apollo/client';
-import { LOGIN_USER } from '../utils/mutation';
+import { LOGIN_USER } from '../../utils/mutation';
 
 const LoginPage = () => {
 

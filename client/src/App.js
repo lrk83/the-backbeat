@@ -11,10 +11,10 @@ import HomePage from './pages/HomePage';
 import SkillPage from './pages/SkillPage';
 import SoundPage from './pages/SoundPage';
 import CommunityPage from './pages/CommunityPage';
-import AccountPage from './pages/AccountPage';
-import FriendPage from './pages/FriendPage';
-import LoginPage from './pages/LoginPage';
-import SignUpPage from './pages/SignUpPage';
+import AccountPage from './pages/AccountPages/AccountPage';
+import FriendPage from './pages/AccountPages/FriendPage';
+import LoginPage from './pages/AccountPages/LoginPage';
+import SignUpPage from './pages/AccountPages/SignUpPage';
 
 //ApolloClient
 const client = new ApolloClient({
