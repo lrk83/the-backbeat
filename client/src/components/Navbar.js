@@ -3,7 +3,7 @@ import {Menu, Dropdown} from "semantic-ui-react";
 import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
 
-export default class MenuExampleSecondary extends Component {
+export default class AppNavbar extends Component {
   
   //Navbar active item
   state = { activeItem: '' }
@@ -11,13 +11,12 @@ export default class MenuExampleSecondary extends Component {
   render() {
     const { activeItem } = this.state
 
-
     return (
       <div className="big-nav">
         <Menu secondary>
           <Menu.Item>
           <h1 className="nav-title" id="nav-title" as={Link} to='/'>The Backbeat</h1>
-            </Menu.Item>
+          </Menu.Item>
           <Menu.Item
             name='skills'
             active={activeItem === 'skills'}
@@ -40,7 +39,7 @@ export default class MenuExampleSecondary extends Component {
           {/*Right hand side of the menu*/}
           <Menu.Menu position='right'>
             {Auth.loggedIn() ? (
-            <Dropdown item text='Categories'>
+            <Dropdown item text='Account'>
             <Dropdown.Menu>
               <Dropdown.Item as={Link} to='/account'>Account</Dropdown.Item>
               <Dropdown.Item as={Link} to='/friends'>Friends </Dropdown.Item>

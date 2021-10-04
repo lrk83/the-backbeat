@@ -50,3 +50,31 @@ code {
 .ui.secondary.menu{
   width: 100%;
 }
+
+.big-container{
+  padding: 1rem;
+}
+
+.shadow-container{
+  border: 1px rgba(0,0,0,.2);
+  border-radius: 5px;
+  box-shadow: 0 1px 1px 0 rgb(0 0 0 / 6%), 0 2px 5px 0 rgb(0 0 0 / 20%);
+  background-color: #fff;
+  padding: 1rem;
+  z-index: 2;
+}
+
+main{
+  background-color: #e9e8e6;
+}
+
+.ui.label {
+  margin-bottom:1em;
+  margin-top: none;
+  margin-left: 7px;
+}
+
+.ui.form:not(.unstackable) [class*="equal width"].fields:not(.unstackable)>.field{
+  margin: 0 0 10px;
+}
+
