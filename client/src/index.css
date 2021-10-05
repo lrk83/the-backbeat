@@ -155,7 +155,7 @@ main{
 .ui.header.single-header{
   width: 100%;
   text-align: center;
-  padding: 20px;
+  padding-top: 20px;
 }
 
 .ui.container .single-post-container{
@@ -219,11 +219,58 @@ main{
 }
 
 .ui.container.three-suggestions-container .ui.card{
-  width: 33%;
+  width: 100%;
 }
 
 .three-suggestions .ui.header{
   width: 100%;
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
+}
+
+.ui.secondary.menu.see-all-skills{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.three-suggestions-link{
+  width: 33%;
+  padding: 1rem;
+}
+
+.skill-photo{
+  flex: 100%;
+  max-width: max-content;
+}
+
+#skill-container{
+  display: block;
+  flex-direction: column;
+  max-width: inherit;
+}
+
+.ui.container.links-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.ui.vertical.menu.links-menu{
+  width: 50%;
+}
+
+h2.ui.header.links-menu-header{
+  padding-top: 15px;
+  text-align: center;
+}
+
+.ui.vertical.menu.links-menu .item{
+  text-align: center;
+}
+
+.skill-button-div{
+  align-self: center;
 }
