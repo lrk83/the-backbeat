@@ -15,6 +15,7 @@ import AccountPage from './pages/AccountPages/AccountPage';
 import FriendPage from './pages/AccountPages/FriendPage';
 import LoginPage from './pages/AccountPages/LoginPage';
 import SignUpPage from './pages/AccountPages/SignUpPage';
+import SingleSound from './pages/SingleSound';
 
 //ApolloClient
 const client = new ApolloClient({
@@ -46,6 +47,7 @@ function App() {
             <Route exact path='/friends' component={FriendPage} />
             <Route exact path="/login" component={LoginPage} />
             <Route exact path='/signup' component={SignUpPage} />
+            <Route path="/sounds/single-sound/:soundId" component={SingleSound} />
           </Switch>
         </main>
       </Router>

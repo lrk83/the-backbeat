@@ -2,12 +2,12 @@ import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import {Button, Menu, Header} from "semantic-ui-react"; 
 import CurrentSlide from './currentSlides';
-import data from "../assets/sounddata.json";
 
-const Slides = () => {
+const Slides = (data) => {
+    console.log(data);
     const [photos]=useState(data);
-    const [currentPhotos, updateCurrentPhotos] = useState(photos.slice(0, 5));
-
+    console.log(photos);
+    const [currentPhotos, updateCurrentPhotos] = useState(photos.data.slice(0, 5));
     
     const updatePhotos = () => {
         updateCurrentPhotos(photos.slice(currentPhotos.length+1,currentPhotos.length+5));

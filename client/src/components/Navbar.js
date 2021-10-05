@@ -14,8 +14,8 @@ export default class AppNavbar extends Component {
     return (
       <div className="big-nav">
         <Menu secondary>
-          <Menu.Item>
-          <h1 className="nav-title" id="nav-title" as={Link} to='/'>The Backbeat</h1>
+          <Menu.Item as={Link} to='/'>
+          <h1 className="nav-title" id="nav-title">The Backbeat</h1>
           </Menu.Item>
           <Menu.Item
             name='skills'
