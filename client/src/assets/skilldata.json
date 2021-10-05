@@ -1,0 +1,42 @@
+[
+    {
+        "id":1,
+        "name":"RC-20 resources",
+        "author":"Lukas",
+        "date":"6/05/2021",
+        "image":"https://assets.xlnaudio.com/products/content/fxfx0003/RC-20-Retro-Color-UI-Alpha.png",
+        "description":"I've compiled a list of some of the best videos and articles discussing the incredible RC-20 vintage tape FX by XLM audio",
+        "text":"Here is my discussion of RC-20",
+        "links": [],
+        "tags":["hip-hop","funk","west-coast"],
+        "additional":["rnb","neo-soul"]
+    },
+    {
+        "id":2,
+        "name":"Great new Disclosure Video on Making Half Time House",
+        "author":"Miles",
+        "date":"10/05/2021",
+        "image":"https://www.nme.com/wp-content/uploads/2020/08/Disclosure-review-header.jpg",
+        "description":"Wanted to recomend this new awesome video from the legendary London house duo Discolusure",
+        "text":"Here is my discussion of the video",
+        "links": [
+            {"name":"video","content":"https://www.youtube.com/watch?v=3n6iXC-knVI&t=5415s"}
+        ],
+        "tags":["hip-hop","funk","west-coast"],
+        "additional":["rnb","neo-soul"]
+    },
+    {
+        "id":3,
+        "name":"The Definitive List of Best Free Plugins 2021",
+        "author":"Ana",
+        "date":"2/05/2021",
+        "image":"https://valhalladsp.com/wp-content/uploads/2020/05/Supermassive-GUI-960x509.jpg",
+        "description":"If you're as addicted to finding the next greatest free plugin as I am, look no further! We have here the definitive list of best plugins, absolutely free",
+        "text":"Here is my discussion of the video",
+        "links": [
+            {"name":"Valhalla Suppermassive","content":"https://valhalladsp.com/shop/reverb/valhalla-supermassive/"},
+            {"name":"iZotope Vinyl","content":"https://www.izotope.com/en/products/vinyl.html"}],
+        "tags":["hip-hop","funk","west-coast"],
+        "additional":["rnb","neo-soul"]
+    }
+]
