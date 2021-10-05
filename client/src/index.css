@@ -81,11 +81,15 @@ main{
 .ui.container .suggested-container{
   display: flex;
   width: 100%!important;
+  max-width: auto!important;
   align-items: flex-start;
   justify-content: space-between;
   flex-direction: row;
+  flex-wrap: nowrap;
   margin-left: 0!important;
   margin-right: 0!important;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .slide-show{
@@ -93,6 +97,7 @@ main{
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
+  max-width: auto;
 }
 
 .discover-menu-buttons button{
@@ -102,4 +107,42 @@ main{
 .ui.card{
   margin: 10px;
   margin-top: 0;
+}
+
+.suggested-container .ui.card{
+  width: 20%;
+  height: 100%;
+}
+
+.suggested-container .a{
+  width: 100%;
+}
+
+.suggested-container .content {
+  padding: 5px;
+}
+
+.content .header {
+  color: black;
+}
+
+.content .meta {
+  color: rgb(211,211,211);
+}
+
+.content .description {
+  color: black;
+}
+
+.slide-show .ui.secondary.menu .item:hover{
+  color: black;
+}
+
+.slide-show .ui.secondary.menu {
+  margin-top: 0;
+}
+
+.slide-show .ui.header {
+  width: 100%;
+  text-align: center;
 }

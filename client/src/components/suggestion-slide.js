@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import {Button, Menu, Header} from "semantic-ui-react"; 
 import CurrentSlide from './currentSlides';
-import data from "../assets/photolist.json";
+import data from "../assets/sounddata.json";
 
 const Slides = () => {
     const [photos]=useState(data);
