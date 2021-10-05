@@ -100,10 +100,6 @@ main{
   max-width: auto;
 }
 
-.discover-menu-buttons button{
-  max-width: 20px;
-}
-
 .ui.card{
   margin: 10px;
   margin-top: 0;
@@ -189,12 +185,27 @@ main{
   background-color: #e9e8e6;
   box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
   padding: 15px;
-  margin-top: 2rem;
+  margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
 .buttons-div {
   display: flex;
-  justify-content: flex-end;
-  margin: 1rem;
+  justify-content: center;
+  margin: .5rem;
+}
+
+.tags-menu{
+  padding-left: 1rem;
+}
+
+.ui.secondary.menu.tags-menu .item{
+  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+  padding: 10px;
+  color: gray
+}
+
+.ui.secondary.menu .item:hover{
+  background-color: #e9e8e6;
+  color: black;
 }
