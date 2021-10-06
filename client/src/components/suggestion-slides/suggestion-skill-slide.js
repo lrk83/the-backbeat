@@ -36,10 +36,8 @@ const Slides = (data) => {
                             </Card.Description>
                             </Card.Content>
                             <Card.Content extra>
-                            <a>
                                 <Icon name='user' />
                                 {photos[number].author}
-                            </a>
                             </Card.Content>  
                         </Card>   
                     </Link>

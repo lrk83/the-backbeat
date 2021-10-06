@@ -35,10 +35,8 @@ const SingleSound = ({ match }) => {
                         </Card.Description>
                     </Card.Content>
                     <Card.Content extra>
-                    <a>
                         <Icon name='user' />
                         Posted by Name
-                    </a>
                     </Card.Content>
                 </Card>
                 <Container className="single-post-content">
