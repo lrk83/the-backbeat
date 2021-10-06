@@ -53,3 +53,15 @@ export const GET_ME = gql`
         }
     }
 }`
+
+export const GET_SOUNDS_FOR_SUGGESTED = gql`
+{
+    soundPosts{
+        _id
+        name
+        artist
+        date
+        image
+        followerCount
+    }
+}`

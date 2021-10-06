@@ -6,20 +6,26 @@ import CurrentSlide from './current-sounds-slides';
 const Slides = (data) => {
     const [photos]=useState(data);
     const [currentPhotos, updateCurrentPhotos] = useState(photos.data.slice(0, 4));
+    const [currentIndex, updateCurrentIndex] = useState(4);
+
+    console.log(currentPhotos);
 
     const forwardPhotos = () => {
-        let upperbound = (currentPhotos[3].id+4);
-        if (upperbound>10){
-            upperbound=10;
-        }
+        let upperbound = currentIndex+4;
+        console.log(upperbound);
+        if (upperbound>20){
+            upperbound=20;
+        };
+        updateCurrentIndex(upperbound);
         updateCurrentPhotos(photos.data.slice(upperbound-4,upperbound));
     }
 
     const backPhotos = () => {
-        let lowerbound=(currentPhotos[0].id-4);
+        let lowerbound=currentIndex-8;
         if (lowerbound<0){
-            lowerbound=0
-        }
+            lowerbound=0;
+        };
+        updateCurrentIndex(lowerbound+4);
         updateCurrentPhotos(photos.data.slice(lowerbound,lowerbound+4));
     }
 

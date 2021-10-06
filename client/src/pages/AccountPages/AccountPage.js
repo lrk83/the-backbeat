@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import { useQuery, useMutation } from '@apollo/client';
+import React, {useEffect} from 'react';
+import { useQuery } from '@apollo/client';
 import {Container} from "semantic-ui-react";
 import {GET_ME} from '../../utils/queries';
 import Auth from '../../utils/auth';
