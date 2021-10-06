@@ -130,36 +130,52 @@ db.once('open', async() => {
         const image = images[(Math.floor(Math.random()*10))];
         const description = faker.lorem.paragraphs(1);
         const link = "https://splice.com/home";
+
         followers = [];
-
-        const randomTagIds=[];
-        for (x=0;x<3;x+=1){
-            let randomTagIndex = Math.floor(Math.random()*createdTags.ops.length);
-            let {name, _id: tagId }=createdTags.ops[randomTagIndex];
-            randomTagIds.push(tagId);
-        };
+        tags=[];
         
-        let createdSound = await SoundPost.create({name, artist, image, description, link, randomTagIds, followers});
+        let createdSound = await SoundPost.create({name, artist, image, description, link, tags, followers});
 
+        let randomTagIndexOne = Math.floor(Math.random()*createdTags.ops.length);
+        updateSound = await SoundPost.updateOne(
+            {_id: createdSound._id},
+            { $push: {tags: createdTags.ops[randomTagIndexOne]}}
+        );
+
+        let randomTagIndexTwo = Math.floor(Math.random()*createdTags.ops.length);
+        updateSoundTwo = await SoundPost.updateOne(
+            {_id: updateSound._id},
+            { $push: {tags: createdTags.ops[randomTagIndexTwo]}}
+        );
+
+        let randomTagIndexThree = Math.floor(Math.random()*createdTags.ops.length);
+        updateSoundThree = await SoundPost.updateOne(
+            {_id: updateSoundTwo._id},
+            { $push: {tags: createdTags.ops[randomTagIndexThree]}}
+        );
+
+        let additionalTags=[];
         const additionalTagLength = Math.floor(Math.random()*5);
         for (y=0;y<additionalTagLength;y+=1){
             let randomTagIndex = Math.floor(Math.random()*createdTags.ops.length);
-        
-            createdSound = await SoundPost.updateOne(
-                {_id:createdSound._id},
-                { $push: { additionalTags: createdTags.ops[randomTagIndex] }}
-            );
+            additionalTags.push(createdTags.ops[randomTagIndex])
+
         };
+
+        let updateSoundFour = await SoundPost.updateOne(
+            {_id: updateSoundThree._id},
+            {additionalTags: additionalTags}
+        )
 
         const randomUserIndex=Math.floor(Math.random()*createdUsers.ops.length);
         const { username, _id: userId }=createdUsers.ops[randomUserIndex];
 
         await User.updateOne(
             {_id: userId},
-            { $push: {soundPosts: createdSkill._id}}
+            { $push: {soundPosts: updateSoundFour._id}}
         );
 
-        createdSoundPosts.push(createdSound);
+        createdSoundPosts.push(updateSoundFour);
     };
 
     //create skill post comments

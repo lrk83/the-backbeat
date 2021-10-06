@@ -31,6 +31,7 @@ const typeDefs = gql`
         followers: [User]
         followerCount: Int
         comments: [Comment]
+        commentCount: Int
     }
 
     type SoundPost {
@@ -47,6 +48,7 @@ const typeDefs = gql`
         followers: [User]
         followerCount: Int
         comments: [Comment]
+        commentCount: Int
     }
 
     type Comment {

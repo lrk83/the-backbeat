@@ -15,8 +15,6 @@ const HomePage = () => {
 
     const soundData = data?.soundPosts || {};
 
-    console.log(soundData);
-
     useEffect(()=>{
         AOS.init({
             duration:200

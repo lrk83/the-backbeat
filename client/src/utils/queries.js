@@ -64,4 +64,41 @@ export const GET_SOUNDS_FOR_SUGGESTED = gql`
         image
         followerCount
     }
-}`
+}`;
+
+export const GET_SINGLE_SOUND = gql`
+    query soundPost($id: ID!){
+        soundPost(_id: $id){
+            _id
+            name
+            artist
+            date
+            link 
+            image
+            description
+            tags {
+                _id
+                name
+            }
+            aditionalTags{
+                _id
+                name
+            }
+            author {
+                _id
+                username
+            }
+            followerCount
+            followers{
+                _id
+                username
+            }
+            comments{
+                _id
+                commentBody
+                username
+                createdAt
+            }
+            commentCount
+        }
+    }`;
