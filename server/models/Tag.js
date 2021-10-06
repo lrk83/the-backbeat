@@ -16,6 +16,6 @@ const TagSchema = new Schema(
     }
 )
 
-const Tag = model("Tag", GenreSchema);
+const Tag = model("Tag", TagSchema);
 
 module.exports = Tag;

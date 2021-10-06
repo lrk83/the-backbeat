@@ -105,31 +105,46 @@ const resolvers = {
       
             return { token, user };
         },
-        addPost: async (parent, args, context) => {
+        addSkillPost: async (parent, {postData}, context) => {
 
             if (context.user) {
-
-              const genre = await Genre.findById(args.genreID);
-
-              const post = await Post.create({ genre:genre, postDescription:args.postDescription, username: context.user.username });
+              const post = await SkillPost.create({ postData });
       
-              await User.findByIdAndUpdate(
-                { _id: context.user._id },
-                { $push: { posts: post._id } },
-                { new: true }
-              );
-      
-              return post;
+              const updatedUser = await User.findOneAndUpdate(
+                {_id: context.user._id},
+                { $push: {skillPosts: post}},
+                {new: true}
+              )
+
+              return updatedUser;
             }
       
             throw new AuthenticationError('You need to be logged in!');
-          },
-        followPost: async(parent, args, context) => {
+        },
+        addSoundPost: async (parent, {postData}, context) => {
 
             if (context.user) {
+              const post = await SoundPost.create({ postData });
+      
+              const updatedUser = await User.findOneAndUpdate(
+                {_id: context.user._id},
+                { $push: {soundPosts: post}},
+                {new: true}
+              )
+
+              return updatedUser;
+            }
+      
+            throw new AuthenticationError('You need to be logged in!');
+        },
+        saveSkillPost: async(parent, {postId}, context) => {
+
+            if (context.user) {
+                const post = await SkillPost.findById({_id:postId});
+
                 const updatedUser = await User.findOneAndUpdate(
                     { _id: context.user._id},
-                    { $push: { savedPosts:  args.postData  } },
+                    { $push: { savedSkillPosts:  post  } },
                     { new: true }
                 );
                 
@@ -138,11 +153,27 @@ const resolvers = {
 
             throw new AuthenticationError("You need to be logged in!");
         },
-        removePost: async(parent, { postId }, context) => {
+        saveSoundPost: async(parent, {postId}, context) => {
+
+          if (context.user) {
+              const post = await SoundPost.findById({_id:postId});
+
+              const updatedUser = await User.findOneAndUpdate(
+                  { _id: context.user._id},
+                  { $push: { savedSoundPosts:  post  } },
+                  { new: true }
+              );
+              
+              return updatedUser;
+          }
+
+          throw new AuthenticationError("You need to be logged in!");
+        },
+        removeSkillPost: async(parent, { postId }, context) => {
             if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
                     {_id: context.user._id},
-                    { $pull: {savedPosts: {postId: postId}}},
+                    { $pull: {savedSkillPosts: {postId: postId}}},
                     { new: true}
                 );
 
@@ -151,20 +182,96 @@ const resolvers = {
 
             throw new AuthenticationError("You need to be logged in!");
         },
-        addComment: async (parent, { postId, commentBody }, context) => {
+        removeSoundPost: async(parent, { postId }, context) => {
+          if (context.user) {
+              const updatedUser = await User.findOneAndUpdate(
+                  {_id: context.user._id},
+                  { $pull: {savedSoundPosts: {postId: postId}}},
+                  { new: true}
+              );
+
+              return updatedUser;
+          }
+
+          throw new AuthenticationError("You need to be logged in!");
+        },
+        addCommentSkill: async (parent, { postId, commentBody }, context) => {
             if (context.user) {
-              const updatedPost = await Post.findOneAndUpdate(
+              const updatedPost = await SkillPost.findOneAndUpdate(
                 { _id: postId },
                 { $push: { comments: { commentBody, username: context.user.username } } },
                 { new: true, runValidators: true }
               );
       
               return updatedPost;
-            }
+            };
       
             throw new AuthenticationError('You need to be logged in!');
-          },
-          addFriend: async (parent, { friendId }, context) => {
+        },
+        addCommentSound: async (parent, { postId, commentBody }, context) => {
+          if (context.user) {
+            const updatedPost = await SoundPost.findOneAndUpdate(
+              { _id: postId },
+              { $push: { comments: { commentBody, username: context.user.username } } },
+              { new: true, runValidators: true }
+            );
+    
+            return updatedPost;
+          };
+    
+          throw new AuthenticationError('You need to be logged in!');
+      },
+      addTag: async (parent, {name}, context) => {
+        if (context.user){
+          return await Tag.create({name: name});
+        };
+
+        throw new AuthenticationError('You need to be logged in!');
+      },
+      addLink: async (parent, {name, content}, context) => {
+        if (context.user){
+          return await SkillLink.create({name:name, content: content});
+        };
+
+        throw new AuthenticationError('You need to be logged in!');
+      },
+      addLinktoPost: async (parent, {linkId, postId}, context) => {
+        if (context.user){
+          const link = SkillLink.findById(linkId);
+          return await SkillPost.findOneAndUpdate(
+            {_id:postId},
+            { $push: {links:link}},
+            {new: true}
+          )
+        };
+
+        throw new AuthenticationError('You need to be logged in!');
+      },
+      addTagtoSkill: async (parent, {tagId, postId}, context) => {
+        if (context.user){
+          const tag = Tag.findById(tagId);
+          return await SkillPost.findOneAndUpdate(
+            {_id: postId},
+            { $push: {tags: tag}},
+            {new: true}
+          )
+        };
+
+        throw new AuthenticationError('You need to be logged in!');
+      },
+      addTagtoSound: async (parent, {tagId, postId}, context) => {
+        if (context.user){
+          const tag = Tag.findById(tagId);
+          return await SoundPost.findOneAndUpdate(
+            {_id: postId},
+            { $push: {tags: tag}},
+            {new: true}
+          )
+        };
+
+        throw new AuthenticationError('You need to be logged in!');
+      },
+      addFriend: async (parent, { friendId }, context) => {
             if (context.user) {
               const updatedUser = await User.findOneAndUpdate(
                 { _id: context.user._id },

@@ -59,15 +59,15 @@ const skillPostSchema = new Schema(
     }
 )
 
-postSchema.virtual('aditionalTagCount').get(function(){
+skillPostSchema.virtual('aditionalTagCount').get(function(){
     return this.aditionalTags.length;
 })
 
-postSchema.virtual('followerCount').get(function(){
+skillPostSchema.virtual('followerCount').get(function(){
     return this.followers.length;
 })
 
-postSchema.virtual('commentCount').get(function(){
+skillPostSchema.virtual('commentCount').get(function(){
     return this.comments.length;
 })
 

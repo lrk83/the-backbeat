@@ -91,8 +91,8 @@ const typeDefs = gql`
         me: User
         users: [User]
         user(username: String!):User
-        skillPosts(author: User): [SkillPost]
-        soundPosts(author: User): [SoundPost]
+        skillPosts(username: String): [SkillPost]
+        soundPosts(username: String): [SoundPost]
         skillPost(_id: ID!):SkillPost
         soundPost(_id: ID!):SoundPost
         skillPostbyTag(tagId: ID!): [SkillPost]
@@ -109,9 +109,13 @@ const typeDefs = gql`
         saveSoundPost(postId: ID!): User
         removeSkillPost(id: ID!): User
         removeSoundPost(id: ID!): User
-        addTag(name: String): User
-        addLink(name: String, content: String): User
-        addComment(postId: ID!, commentBody: String!): Post
+        addTag(name: String): Tag
+        addLink(name: String, content: String): SkillLink
+        addLinktoPost(linkId: ID!, postId: ID!): SkillPost
+        addTagtoSkill(tagId: ID!, postId: ID!): SkillPost
+        addTagtoSound(tagId: ID!, postId: ID!): SkillPost
+        addCommentSkill(postId: ID!, commentBody: String!): SkillPost
+        addCommentSound(postId: ID!, commentBody: String!): SoundPost
         addFriend(friendId: ID!): User
     }
 `;

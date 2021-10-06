@@ -59,15 +59,15 @@ const soundPostSchema = new Schema(
     }
 )
 
-postSchema.virtual('aditionalTagCount').get(function(){
+soundPostSchema.virtual('aditionalTagCount').get(function(){
     return this.aditionalTags.length;
 })
 
-postSchema.virtual('followerCount').get(function(){
+soundPostSchema.virtual('followerCount').get(function(){
     return this.followers.length;
 })
 
-postSchema.virtual('commentCount').get(function(){
+soundPostSchema.virtual('commentCount').get(function(){
     return this.comments.length;
 })
 
