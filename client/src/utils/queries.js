@@ -114,3 +114,44 @@ export const GET_SINGLE_SOUND = gql`
             commentCount
         }
     }`;
+
+export const GET_SINGLE_SKILL = gql`
+    query skillPost($id: ID!){
+        skillPost(_id: $id){
+            _id
+            name
+            date
+            image
+            description
+            text
+            links {
+                _id
+                name
+                content
+            }
+            tags {
+                _id
+                name
+            }
+            aditionalTags{
+                _id
+                name
+            }
+            author {
+                _id
+                username
+            }
+            followerCount
+            followers{
+                _id
+                username
+            }
+            comments{
+                _id
+                commentBody
+                username
+                createdAt
+            }
+            commentCount
+        }
+    }`;

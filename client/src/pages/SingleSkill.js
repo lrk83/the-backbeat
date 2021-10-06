@@ -1,18 +1,26 @@
 import React, {useState, useEffect} from "react";
 import { Container,Card, Image, Header, Icon, Button, Menu, Dropdown } from "semantic-ui-react";
-import data from '../assets/skilldata.json';
+//import data from '../assets/skilldata.json';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { useQuery } from '@apollo/client';
+import {GET_SINGLE_SKILL} from '../utils/queries';
 
 const SingleSound = ({ match }) => {
     
     const [ID]=useState(match.params.skillId);
 
-    console.log(data[ID-1]);
+    const { loading, data } = useQuery(GET_SINGLE_SKILL, {
+        variables: { id: ID }
+    });
 
-    const [tagsToShow]=useState(data[ID-1].tags);
-    const [additionalToShow]=useState(data[ID-1].additional)
-    const [linkstoshow]=useState(data[ID-1].links);
+    const skillData = data?.skillPost || {};
+
+    console.log(skillData);
+
+    const tagsToShow=skillData.tags;
+    const linkstoshow=skillData.links;
+    const additionalToShow=skillData.aditionalTags;
 
     useEffect(()=>{
         AOS.init({
@@ -20,20 +28,24 @@ const SingleSound = ({ match }) => {
         })
     })
 
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
     return(
         <Container className="big-container">
             <Container id="skill-container" className="shadow-container single-post-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500">
-                <Image className="skill-photo" src={data[ID-1].image}/>
+                <Image className="skill-photo" src={skillData.image}/>
                 <Container className="single-post-content">
-                    <Header as='h1' className="single-header">{data[ID-1].name}</Header>
+                    <Header as='h1' className="single-header">{skillData.name}</Header>
                     <Container className="single-post-para">
-                        <p>{data[ID-1].description}</p>
+                        <p>{skillData.description}</p>
                         <div className="skill-buttons-div">
                         <Button circular color='facebook' icon='heart' />
                         <Button circular color='twitter' icon='mail' />
                         </div>
                     </Container>
-                    {data[ID-1].links[0] ? ( <>
+                    {skillData.links[0] ? ( <>
                     <Container className="links-container">
                     <Menu vertical className="links-menu">
                         <Header as="h2" className="links-menu-header">Links</Header>
@@ -48,8 +60,8 @@ const SingleSound = ({ match }) => {
                     </Container></> ):(<></>)}
                     <Menu secondary className="tags-menu"> 
                         <Menu.Item name={tagsToShow[0]}></Menu.Item>
-                        <Menu.Item name={tagsToShow[1]}></Menu.Item>
-                        <Menu.Item name={tagsToShow[2]}></Menu.Item>
+                        {/*<Menu.Item name={tagsToShow[1]}></Menu.Item>
+                        <Menu.Item name={tagsToShow[2]}></Menu.Item>*/}
                     
                         <Menu.Menu position="right">
                             <Dropdown item text='more'>
