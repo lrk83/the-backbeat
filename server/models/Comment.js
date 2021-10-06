@@ -1,6 +1,7 @@
 const { Schema, model } = require('mongoose');
 
-const commentSchema = new Schema({
+const commentSchema = new Schema(
+  {
     commentBody: {
       type: String,
       required: true,
@@ -14,8 +15,16 @@ const commentSchema = new Schema({
         type: Date,
         default: Date.now,
         get: createdAtVal => dateFormat(createdAtVal)
-    },
-  });
+    }
+  },
+  {
+      toJSON: {
+          virtuals: true,
+          getters: true
+      },
+      id: false
+  }
+);
 
   const Comment = model("Comment", commentSchema);
   
