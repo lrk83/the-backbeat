@@ -17,8 +17,6 @@ const HomePage = () => {
 
     const skillData = skilldata?.allSkillPosts || {};
 
-    console.log(skillData);
-
     useEffect(()=>{
         AOS.init({
             duration:200

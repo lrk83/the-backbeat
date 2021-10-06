@@ -17,6 +17,8 @@ import LoginPage from './pages/AccountPages/LoginPage';
 import SignUpPage from './pages/AccountPages/SignUpPage';
 import SingleSound from './pages/SingleSound';
 import SingleSkill from './pages/SingleSkill';
+import newSoundPostPage from './pages/AccountPages/NewSoundPost';
+import newSkillPostPage from './pages/AccountPages/NewSkillPost';
 
 //ApolloClient
 const client = new ApolloClient({
@@ -48,6 +50,8 @@ function App() {
             <Route exact path='/friends' component={FriendPage} />
             <Route exact path="/login" component={LoginPage} />
             <Route exact path='/signup' component={SignUpPage} />
+            <Route exact path='/account/sounds/new-post' component={newSoundPostPage} />
+            <Route exact path='/account/sounds/new-skill' component={newSkillPostPage} />
             <Route path="/sounds/single-sound/:soundId" component={SingleSound} />
             <Route path="/skills/single-skill/:skillId" component={SingleSkill} />
           </Switch>

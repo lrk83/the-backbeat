@@ -274,3 +274,9 @@ h2.ui.header.links-menu-header{
 .skill-button-div{
   align-self: center;
 }
+
+.new-sound-button-div{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}

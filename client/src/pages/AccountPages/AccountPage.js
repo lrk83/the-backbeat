@@ -5,11 +5,12 @@ import {GET_ME} from '../../utils/queries';
 import Auth from '../../utils/auth';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import MySounds from "../../components/Account-page-components/my-sounds";
+import MySkills from "../../components/Account-page-components/my-skills";
 
 const AccountPage = () => {
-    const {data} = useQuery(GET_ME);
-
-    const userData = data?.me || {}
+    const {loading, data} = useQuery(GET_ME);
+    const userData = data?.me || {};
 
     useEffect(()=>{
         AOS.init({
@@ -17,11 +18,26 @@ const AccountPage = () => {
         })
     });
     
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <Container className="big-container">
-            <Container className="shadow-container">
-                Here's where my data goes
+            <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
+                Account Info (Card on the left and on the right your stats, like how many posts, how many saved posts, etc
+            </Container>
+            <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
+                <MySounds data={userData.soundPosts}></MySounds>
+            </Container>
+            <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
+                <MySkills data={userData.skillPosts}></MySkills>
+            </Container>
+            <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
+                My Followed Sound Posts
+            </Container>
+            <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
+                My Followed Skill Posts
             </Container>
         </Container>
     )

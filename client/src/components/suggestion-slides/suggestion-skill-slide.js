@@ -5,7 +5,6 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 const Slides = (data) => {
-    console.log(data);
 
     const photos=data.data;
     const [cardsToShow]=useState([0,1,2]);
