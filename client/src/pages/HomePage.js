@@ -2,18 +2,22 @@ import React, {useEffect, useState} from 'react';
 import { Container } from 'semantic-ui-react';
 import SoundSuggestionSlide from '../components/suggestion-slides/suggestion-sound-slide';
 import SkillSuggestionSlide from '../components/suggestion-slides/suggestion-skill-slide';
-//import soundData from "../assets/sounddata.json";
-import skillData from "../assets/skilldata.json";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useQuery } from '@apollo/client';
-import {GET_SOUNDS_FOR_SUGGESTED } from '../utils/queries';
+import {GET_SOUNDS_FOR_SUGGESTED, GET_SKILLS_FOR_SUGGESTED } from '../utils/queries';
 
 const HomePage = () => {
 
-    const {data} = useQuery(GET_SOUNDS_FOR_SUGGESTED);
+    const {loading, data} = useQuery(GET_SOUNDS_FOR_SUGGESTED);
 
-    const soundData = data?.soundPosts || {};
+    const soundData = data?.allSoundPosts || {};
+
+    const { data: skilldata} = useQuery(GET_SKILLS_FOR_SUGGESTED);
+
+    const skillData = skilldata?.allSkillPosts || {};
+
+    console.log(skillData);
 
     useEffect(()=>{
         AOS.init({
@@ -28,7 +32,8 @@ const HomePage = () => {
                 <SoundSuggestionSlide data={soundData}></SoundSuggestionSlide>) : <></>}
             </Container>
             <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
-                <SkillSuggestionSlide data={skillData}></SkillSuggestionSlide>
+                {skillData.length ? (
+                <SkillSuggestionSlide data={skillData}></SkillSuggestionSlide>) :<></>}
             </Container>
         </Container>
     )

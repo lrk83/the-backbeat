@@ -5,7 +5,9 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 
 const Slides = (data) => {
-    const [photos]=useState(data.data);
+    console.log(data);
+
+    const photos=data.data;
     const [cardsToShow]=useState([0,1,2]);
 
     useEffect(()=>{
@@ -22,7 +24,7 @@ const Slides = (data) => {
             </Menu>
             <Container className="three-suggestions-container">
                 {cardsToShow.map((number)=> 
-                    <Link key={number} className="three-suggestions-link" to={`/skills/single-skill/${photos[number].id}`}>
+                    <Link key={number} className="three-suggestions-link" to={`/skills/single-skill/${photos[number]._id}`}>
                         <Card>
                             
                             <Image src={photos[number].image} wrapped ui={false} />

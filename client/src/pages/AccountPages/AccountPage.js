@@ -11,8 +11,6 @@ const AccountPage = () => {
 
     const userData = data?.me || {}
 
-    console.log(userData);
-
     useEffect(()=>{
         AOS.init({
             duration:200

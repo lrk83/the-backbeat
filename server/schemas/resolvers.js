@@ -37,6 +37,21 @@ const resolvers = {
               .populate('savedSoundPosts')
               .populate('posts');
           },
+          allSkillPosts: async () => {
+            return SkillPost.find()
+            .populate('comments')
+            .populate('followers')
+            .populate('tags')
+            .populate('aditionalTags')
+            .populate('links');
+          },
+          allSoundPosts: async () => {
+            return SoundPost.find()
+              .populate('comments')
+              .populate('followers')
+              .populate('tags')
+              .populate('aditionalTags');
+          },
           skillPosts: async (parent, { username }) => {
             const params = username ? { username } : {};
             return SkillPost.find(params).sort({ createdAt: -1 })

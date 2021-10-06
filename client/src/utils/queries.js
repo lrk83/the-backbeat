@@ -52,19 +52,31 @@ export const GET_ME = gql`
             }
         }
     }
-}`
+}`;
 
 export const GET_SOUNDS_FOR_SUGGESTED = gql`
-{
-    soundPosts{
-        _id
-        name
-        artist
-        date
-        image
-        followerCount
-    }
-}`;
+    {
+        allSoundPosts{
+            _id
+            name
+            artist
+            date
+            image
+            followerCount
+        }
+    }`;
+
+export const GET_SKILLS_FOR_SUGGESTED = gql`
+    {
+        allSkillPosts{
+            _id
+            name
+            date
+            image
+            followerCount
+            description
+        }
+    }`;
 
 export const GET_SINGLE_SOUND = gql`
     query soundPost($id: ID!){

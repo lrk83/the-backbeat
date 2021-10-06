@@ -95,6 +95,8 @@ const typeDefs = gql`
         me: User
         users: [User]
         user(username: String):User
+        allSkillPosts: [SkillPost]
+        allSoundPosts: [SoundPost]
         skillPosts(username: String): [SkillPost]
         soundPosts(username: String): [SoundPost]
         skillPost(_id: ID):SkillPost

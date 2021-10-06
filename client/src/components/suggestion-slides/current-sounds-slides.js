@@ -5,9 +5,7 @@ import 'aos/dist/aos.css';
 import {Link} from 'react-router-dom';
 
 function CurrentSlides ({currentPhotos}){
-
-    console.log(currentPhotos);
-
+    
     useEffect(()=>{
         AOS.init({
             duration:200
