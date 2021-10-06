@@ -1,29 +1,41 @@
 const {Schema, model} = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
-const postSchema = new Schema(
+const skillPostSchema = new Schema(
     {
-        title:{
+        name:{
             type: String,
             required: true,
-        },
-        postDescription: {
-            type: String,
-            required: true,
-            validate: [({ length }) => 1<= length <= 280, 'text should be between 1 and 280 characters.']
-        },
-        genre:{
-            type: Schema.Types.ObjectId,
-              ref: 'Genre'
-        },
-        createdAt: {
-            type: Date,
-            default: Date.now,
-            get: createdAtVal => dateFormat(createdAtVal)
         },
         author: {
             type: Schema.Types.ObjectId,
             ref: 'User'
+        },
+        date: {
+            type: Date,
+            default: Date.now,
+            get: createdAtVal => dateFormat(createdAtVal)
+        },
+        image: {
+            type: String,
+            required: true,
+        },
+        description: {
+            type: String,
+            required: true,
+            validate: [({ length }) => 1<= length <= 280, 'text should be between 1 and 280 characters.']
+        },
+        links: {
+            type: Schema.Types.ObjectId,
+            ref: 'SkillLink'
+        },
+        tags:{
+            type: Schema.Types.ObjectId,
+            ref: 'Tag'
+        },
+        aditionalTags:{
+            type:Schema.Types.ObjectId,
+            ref: 'Tag'
         },
         followers: {
             type: Schema.Types.ObjectId,
@@ -43,6 +55,10 @@ const postSchema = new Schema(
     }
 )
 
+postSchema.virtual('aditionalTagCount').get(function(){
+    return this.aditionalTags.length;
+})
+
 postSchema.virtual('followerCount').get(function(){
     return this.followers.length;
 })
@@ -51,6 +67,6 @@ postSchema.virtual('commentCount').get(function(){
     return this.comments.length;
 })
 
-const Post = model("Post", postSchema);
+const SkillPost = model("SkillPost", skillPostSchema);
 
-module.exports = Post;
+module.exports = SkillPost;

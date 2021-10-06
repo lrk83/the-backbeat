@@ -19,16 +19,28 @@ const userSchema = new Schema(
         type: String,
         required: true,
       },
-      posts: [
+      soundPosts: [
           {
               type: Schema.Types.ObjectId,
-              ref: 'Post'
+              ref: 'SoundPost'
           }
       ],
-      savedPosts: [
+      savedSoundPosts: [
           {
               type: Schema.Types.ObjectId,
-              ref: 'Post'
+              ref: 'SoundPost'
+          }
+      ],
+      skillPosts: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'SkillPost'
+        }
+      ],
+      savedSkillPosts: [
+          {
+              type: Schema.Types.ObjectId,
+              ref: 'SkillPost'
           }
       ],
       friends: [
@@ -70,12 +82,20 @@ userSchema.virtual('friendCount').get(function(){
     return this.friends.length;
 })
 
-userSchema.virtual('postCount').get(function(){
-    return this.posts.length;
+userSchema.virtual('soundPostCount').get(function(){
+    return this.soundPosts.length;
 })
 
-userSchema.virtual('savedPostCount').get(function(){
-    return this.savedPosts.length;
+userSchema.virtual('savedSoundPostCount').get(function(){
+    return this.savedSoundPosts.length;
+})
+
+userSchema.virtual('skillPostCount').get(function(){
+  return this.skillPosts.length;
+})
+
+userSchema.virtual('savedSkillPostCount').get(function(){
+  return this.savedSkillPosts.length;
 })
 
 const User = model('User', userSchema);

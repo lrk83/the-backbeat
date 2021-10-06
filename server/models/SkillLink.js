@@ -1,8 +1,12 @@
 const {Schema, model} = require('mongoose');
 
-const GenreSchema = new Schema(
+const skillLinkSchema = new Schema(
     {
         name:{
+            type: String,
+            required: true,
+        },
+        content:{
             type: String,
             required: true,
         }
@@ -16,6 +20,6 @@ const GenreSchema = new Schema(
     }
 )
 
-const Genre = model("Genre", GenreSchema);
+const SkillLink = model("SkillLink", skillLinkSchema);
 
-module.exports = Genre;
+module.exports = SkillLink;

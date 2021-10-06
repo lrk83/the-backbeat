@@ -1,6 +1,8 @@
 const User = require('./User');
-const Post = require('./Post');
-const Genre = require('./Genre');
+const SoundPost = require('./SoundPost');
+const SkillPost = require('./SkillPost');
+const Tag = require('./Tag');
+const SkillLink = require('./SkillLink');
 const Comment = require('./Comment');
 
-module.exports = {User, Post, Genre, Comment};
+module.exports = {User, SoundPost, SkillPost, Tag, SkillLink, Comment};
