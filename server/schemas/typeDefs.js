@@ -29,6 +29,7 @@ const typeDefs = gql`
         tags: [Tag]
         aditionalTags: [Tag]
         followers: [User]
+        followerCount: Int
         comments: [Comment]
     }
 
@@ -44,6 +45,7 @@ const typeDefs = gql`
         tags: [Tag]
         aditionalTags: [Tag]
         followers: [User]
+        followerCount: Int
         comments: [Comment]
     }
 
@@ -90,14 +92,15 @@ const typeDefs = gql`
     type Query{
         me: User
         users: [User]
-        user(username: String!):User
+        user(username: String):User
         skillPosts(username: String): [SkillPost]
         soundPosts(username: String): [SoundPost]
-        skillPost(_id: ID!):SkillPost
-        soundPost(_id: ID!):SoundPost
-        skillPostbyTag(tagId: ID!): [SkillPost]
-        soundPostbyTag(tagId: ID!): [SoundPost]
-        skillLink(postId: ID!): [SkillLink]
+        skillPost(_id: ID):SkillPost
+        soundPost(_id: ID):SoundPost
+        skillPostbyTag(tagId: ID): [SkillPost]
+        soundPostbyTag(tagId: ID): [SoundPost]
+        skillLink(postId: ID): [SkillLink]
+        tags: [Tag]
     }
 
     type Mutation {
@@ -105,13 +108,15 @@ const typeDefs = gql`
         addUser(username: String!, email: String!, password: String!): Auth
         addSkillPost(postData: skillPostInput): User
         addSoundPost(postData: soundPostInput): User
-        saveSkillPost(postId: ID!): User
-        saveSoundPost(postId: ID!): User
-        removeSkillPost(id: ID!): User
-        removeSoundPost(id: ID!): User
+        saveSkillPost(postId: ID): User
+        saveSoundPost(postId: ID): User
+        removeSkillPost(id: ID): User
+        removeSoundPost(id: ID): User
+        deleteSkillPost(id: String): User
+        deleteSoundPost(id: ID): User
         addTag(name: String): Tag
         addLink(name: String, content: String): SkillLink
-        addLinktoPost(linkId: ID!, postId: ID!): SkillPost
+        addLinktoPost(linkId: ID, postId: ID!): SkillPost
         addTagtoSkill(tagId: ID!, postId: ID!): SkillPost
         addTagtoSound(tagId: ID!, postId: ID!): SkillPost
         addCommentSkill(postId: ID!, commentBody: String!): SkillPost

@@ -70,16 +70,21 @@ const resolvers = {
               .populate('aditionalTags');
           },
           skillPostbyTag: async (parent, { tagId }) => {
-              const tag = await Tag.findById(tagId);
+              const tag = await Tag.findById({_id:tagId});
               return SkillPost.find({tags:{tag}}).sort({createdAt: -1});
           },
           soundPostbyTag: async (parent, { tagId }) => {
-            const tag = await Tag.findById(tagId);
+            const tag = await Tag.findById({_id:tagId});
             return SoundPost.find({tags:{tag}}).sort({createdAt: -1});
           },
           skillLink: async(parent, {postId}) => {
-            const post = await SkillPost.findById(postId);
+            const post = await SkillPost.findById({_id:postId});
             return post.links;
+          },
+          tags: async (parent, args, context) => {
+            const tags = await Tag.find();
+            
+            return tags;
           }
     },
     Mutation: {
@@ -173,7 +178,7 @@ const resolvers = {
             if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
                     {_id: context.user._id},
-                    { $pull: {savedSkillPosts: {postId: postId}}},
+                    { $pull: {savedSkillPosts: {_id: postId}}},
                     { new: true}
                 );
 
@@ -182,11 +187,11 @@ const resolvers = {
 
             throw new AuthenticationError("You need to be logged in!");
         },
-        removeSoundPost: async(parent, { postId }, context) => {
+        removeSoundPost: async(parent, { id }, context) => {
           if (context.user) {
               const updatedUser = await User.findOneAndUpdate(
                   {_id: context.user._id},
-                  { $pull: {savedSoundPosts: {postId: postId}}},
+                  { $pull: {savedSoundPosts: {_id: id}}},
                   { new: true}
               );
 
@@ -195,6 +200,37 @@ const resolvers = {
 
           throw new AuthenticationError("You need to be logged in!");
         },
+        deleteSkillPost: async(parent, { id }, context) => {
+
+          console.log(id);
+
+          if (context.user) {
+              const postToRemove = await SkillPost.findOne({_id:id})
+
+              const updatedUser = await User.findOneAndUpdate(
+                  {_id: context.user._id},
+                  { $pull: {skillPosts: {postToRemove}}},
+                  { new: true}
+              );
+
+              return updatedUser;
+          }
+
+          throw new AuthenticationError("You need to be logged in!");
+      },
+      deleteSoundPost: async(parent, { id }, context) => {
+        if (context.user) {
+            const updatedUser = await User.findOneAndUpdate(
+                {_id: context.user._id},
+                { $pull: {soundPosts: {_id: id}}},
+                { new: true}
+            );
+
+            return updatedUser;
+        }
+
+        throw new AuthenticationError("You need to be logged in!");
+      },
         addCommentSkill: async (parent, { postId, commentBody }, context) => {
             if (context.user) {
               const updatedPost = await SkillPost.findOneAndUpdate(
@@ -237,7 +273,7 @@ const resolvers = {
       },
       addLinktoPost: async (parent, {linkId, postId}, context) => {
         if (context.user){
-          const link = SkillLink.findById(linkId);
+          const link = SkillLink.findById({_id:linkId});
           return await SkillPost.findOneAndUpdate(
             {_id:postId},
             { $push: {links:link}},
@@ -249,7 +285,7 @@ const resolvers = {
       },
       addTagtoSkill: async (parent, {tagId, postId}, context) => {
         if (context.user){
-          const tag = Tag.findById(tagId);
+          const tag = Tag.findById({_id:tagId});
           return await SkillPost.findOneAndUpdate(
             {_id: postId},
             { $push: {tags: tag}},
@@ -261,7 +297,7 @@ const resolvers = {
       },
       addTagtoSound: async (parent, {tagId, postId}, context) => {
         if (context.user){
-          const tag = Tag.findById(tagId);
+          const tag = Tag.findById({_id:tagId});
           return await SoundPost.findOneAndUpdate(
             {_id: postId},
             { $push: {tags: tag}},

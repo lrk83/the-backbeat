@@ -22,7 +22,7 @@ const Slides = (data) => {
             </Menu>
             <Container className="three-suggestions-container">
                 {cardsToShow.map((number)=> 
-                    <Link className="three-suggestions-link" to={`/skills/single-skill/${photos[number].id}`}>
+                    <Link key={number} className="three-suggestions-link" to={`/skills/single-skill/${photos[number].id}`}>
                         <Card>
                             
                             <Image src={photos[number].image} wrapped ui={false} />

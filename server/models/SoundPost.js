@@ -29,26 +29,26 @@ const soundPostSchema = new Schema(
             required: true,
             validate: [({ length }) => 1<= length <= 280, 'text should be between 1 and 280 characters.']
         },
-        tags:{
+        tags:[{
             type: Schema.Types.ObjectId,
             ref: 'Tag'
-        },
-        aditionalTags:{
+        }],
+        aditionalTags:[{
             type:Schema.Types.ObjectId,
             ref: 'Tag'
-        },
+        }],
         author: {
             type: Schema.Types.ObjectId,
             ref: 'User'
         },
-        followers: {
+        followers: [{
             type: Schema.Types.ObjectId,
             ref: 'User'
-        },
-        comments: {
+        }],
+        comments: [{
             type: Schema.Types.ObjectId,
             ref: 'Comment'
-        }
+        }]
     },
     {
         toJSON: {

@@ -29,26 +29,26 @@ const skillPostSchema = new Schema(
             type: String,
             required: true
         },
-        links: {
+        links: [{
             type: Schema.Types.ObjectId,
             ref: 'SkillLink'
-        },
-        tags:{
+        }],
+        tags:[{
             type: Schema.Types.ObjectId,
             ref: 'Tag'
-        },
-        aditionalTags:{
+        }],
+        aditionalTags:[{
             type:Schema.Types.ObjectId,
             ref: 'Tag'
-        },
-        followers: {
+        }],
+        followers: [{
             type: Schema.Types.ObjectId,
             ref: 'User'
-        },
-        comments: {
+        }],
+        comments: [{
             type: Schema.Types.ObjectId,
             ref: 'Comment'
-        }
+        }]
     },
     {
         toJSON: {

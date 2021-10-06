@@ -79,6 +79,7 @@ db.once('open', async() => {
         const image = images[(Math.floor(Math.random()*10))];
         const description = faker.lorem.paragraphs(1);
         const text = faker.lorem.paragraphs(Math.round(Math.random() * 7) + 1);
+        const followers= [];
 
         const randomTagIds=[];
         for (x=0;x<3;x+=1){
@@ -87,7 +88,7 @@ db.once('open', async() => {
             randomTagIds.push(tagId);
         };
         
-        var createdSkill = await SkillPost.create({name, image, description, text, randomTagIds});
+        var createdSkill = await SkillPost.create({name, image, description, text, randomTagIds, followers});
 
         const additionalTagLength = Math.floor(Math.random()*5);
         for (y=0;y<additionalTagLength;y+=1){
@@ -129,6 +130,7 @@ db.once('open', async() => {
         const image = images[(Math.floor(Math.random()*10))];
         const description = faker.lorem.paragraphs(1);
         const link = "https://splice.com/home";
+        followers = [];
 
         const randomTagIds=[];
         for (x=0;x<3;x+=1){
@@ -137,7 +139,7 @@ db.once('open', async() => {
             randomTagIds.push(tagId);
         };
         
-        let createdSound = await SoundPost.create({name, artist, image, description, link, randomTagIds});
+        let createdSound = await SoundPost.create({name, artist, image, description, link, randomTagIds, followers});
 
         const additionalTagLength = Math.floor(Math.random()*5);
         for (y=0;y<additionalTagLength;y+=1){
@@ -207,6 +209,7 @@ db.once('open', async() => {
         const { _id: userId } = createdUsers.ops[randomUserIndex];
     
         await User.updateOne({ _id: userId }, { $addToSet: { savedSkillPosts: postId } });
+        await SkillPost.updateOne({_id:postId}, { $addToSet: {followers: userId}});
     }
 
     //save sound posts
@@ -218,6 +221,7 @@ db.once('open', async() => {
         const { _id: userId } = createdUsers.ops[randomUserIndex];
     
         await User.updateOne({ _id: userId }, { $addToSet: { savedSoundlPosts: postId } });
+        await SoundPost.updateOne({_id:postId}, { $addToSet: {followers: userId}});
     }
 
     console.log('all done!');
