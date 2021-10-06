@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Post, Genre, Comment } = require('../models');
+const { User, SkillPost, SoundPost, Tag, SkillLink, Comment } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -37,16 +37,49 @@ const resolvers = {
               .populate('savedSoundPosts')
               .populate('posts');
           },
-          posts: async (parent, { username }) => {
+          skillPosts: async (parent, { username }) => {
             const params = username ? { username } : {};
-            return Post.find(params).sort({ createdAt: -1 });
+            return SkillPost.find(params).sort({ createdAt: -1 })
+              .populate('comments')
+              .populate('followers')
+              .populate('tags')
+              .populate('aditionalTags')
+              .populate('links');
           },
-          post: async (parent, { _id }) => {
-            return Post.findOne({ _id });
+          soundPosts: async (parent, { username }) => {
+            const params = username ? { username } : {};
+            return SoundPost.find(params).sort({ createdAt: -1 })
+              .populate('comments')
+              .populate('followers')
+              .populate('tags')
+              .populate('aditionalTags');
           },
-          postbyGenre: async (parent, { genreId }) => {
-              const genre = await Genre.findById(genreId);
-              return Post.find({genre:genre}).sort({createdAt: -1});
+          skillPost: async (parent, { _id }) => {
+            return SkillPost.findOne({ _id })
+              .populate('comments')
+              .populate('followers')
+              .populate('tags')
+              .populate('aditionalTags')
+              .populate('links');
+          },
+          soundPost: async (parent, { _id }) => {
+            return SoundPost.findOne({ _id })
+              .populate('comments')
+              .populate('followers')
+              .populate('tags')
+              .populate('aditionalTags');
+          },
+          skillPostbyTag: async (parent, { tagId }) => {
+              const tag = await Tag.findById(tagId);
+              return SkillPost.find({tags:{tag}}).sort({createdAt: -1});
+          },
+          soundPostbyTag: async (parent, { tagId }) => {
+            const tag = await Tag.findById(tagId);
+            return SoundPost.find({tags:{tag}}).sort({createdAt: -1});
+          },
+          skillLink: async(parent, {postId}) => {
+            const post = await SkillPost.findById(postId);
+            return post.links;
           }
     },
     Mutation: {

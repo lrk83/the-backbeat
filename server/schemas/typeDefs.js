@@ -70,19 +70,6 @@ const typeDefs = gql`
         user: User
     }
 
-    type Query{
-        me: User
-        users: [User]
-        user(username: String!):User
-        skillPosts(author: User): [SkillPost]
-        soundPosts(author: User): [SoundPost]
-        skillPost(_id: ID!):SkillPost
-        soundPost(_id: ID!):SoundPost
-        skillPostbyTag(tagId: ID!): [SkillPost]
-        soundPostbyTag(tagId: ID!): [SoundPost]
-        skillLink(skillPost: skillPost): [SkillLink]
-    }
-
     input skillPostInput{
         name: String
         image: String
@@ -98,6 +85,19 @@ const typeDefs = gql`
         link: String
         description: String
         TagIds: [ID]
+    }
+
+    type Query{
+        me: User
+        users: [User]
+        user(username: String!):User
+        skillPosts(author: User): [SkillPost]
+        soundPosts(author: User): [SoundPost]
+        skillPost(_id: ID!):SkillPost
+        soundPost(_id: ID!):SoundPost
+        skillPostbyTag(tagId: ID!): [SkillPost]
+        soundPostbyTag(tagId: ID!): [SoundPost]
+        skillLink(postId: ID!): [SkillLink]
     }
 
     type Mutation {
