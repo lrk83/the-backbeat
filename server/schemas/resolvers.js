@@ -8,7 +8,10 @@ const resolvers = {
             if (context.user) {
                 const userData = await User.findOne({_id: context.user._id})
                     .select('-__v -password')
-                    .populate('posts')
+                    .populate('skillPosts')
+                    .populate('soundPosts')
+                    .populate('savedSkillPosts')
+                    .populate('savedSoundPosts')
                     .populate('friends');
             
                 return userData;
@@ -19,13 +22,19 @@ const resolvers = {
         users: async () => {
             return User.find()
               .select('-__v -password')
-              .populate('posts')
+              .populate('skillPosts')
+              .populate('soundPosts')
+              .populate('savedSkillPosts')
+              .populate('savedSoundPosts')
               .populate('friends');
           },
           user: async (parent, { username }) => {
             return User.findOne({ username })
               .select('-__v -password')
-              .populate('friends')
+              .populate('skillPosts')
+              .populate('soundPosts')
+              .populate('savedSkillPosts')
+              .populate('savedSoundPosts')
               .populate('posts');
           },
           posts: async (parent, { username }) => {

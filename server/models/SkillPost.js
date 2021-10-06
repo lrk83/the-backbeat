@@ -25,6 +25,10 @@ const skillPostSchema = new Schema(
             required: true,
             validate: [({ length }) => 1<= length <= 280, 'text should be between 1 and 280 characters.']
         },
+        text:{
+            type: String,
+            required: true
+        },
         links: {
             type: Schema.Types.ObjectId,
             ref: 'SkillLink'

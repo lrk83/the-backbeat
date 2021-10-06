@@ -5,20 +5,44 @@ const typeDefs = gql`
        _id: ID
        username: String
        email: String
-       posts: [Post]
-       savedPosts: [Post]
+       skillPosts: [SkillPost]
+       savedSkillPosts: [SkillPost]
+       soundPosts: [SoundPost]
+       savedSoundPosts: [SoundPost]
        friends: [User]
-       postCount: Int
-       savedPostCount: Int
+       skillPostCount: Int
+       savedSkillPostCount: Int
+       soundPostCount: Int
+       savedSoundPostCount: Int
        friendCount: Int
     }
 
-    type Post {
+    type SkillPost {
         _id: ID
-        postDescription: String
-        genre: Genre
-        createdAt: String
+        name: String
         author: User
+        date: String
+        image: String
+        description: String
+        text: String
+        links: [SkillLink]
+        tags: [Tag]
+        aditionalTags: [Tag]
+        followers: [User]
+        comments: [Comment]
+    }
+
+    type SoundPost {
+        _id: ID
+        name: String
+        artist: String
+        author: User
+        date: String
+        link: String
+        image: String
+        description: String
+        tags: [Tag]
+        aditionalTags: [Tag]
         followers: [User]
         comments: [Comment]
     }
@@ -30,9 +54,15 @@ const typeDefs = gql`
         createdAt: String
     }
 
-    type Genre {
+    type Tag {
         _id: ID
         name: String
+    }
+
+    type SkillLink{
+        _id: ID
+        name: String
+        content: String
     }
 
     type Auth {
@@ -44,17 +74,43 @@ const typeDefs = gql`
         me: User
         users: [User]
         user(username: String!):User
-        posts(username: String): [Post]
-        post(_id: ID!):Post
-        postbyGenre(genreId: ID!): [Post]
+        skillPosts(author: User): [SkillPost]
+        soundPosts(author: User): [SoundPost]
+        skillPost(_id: ID!):SkillPost
+        soundPost(_id: ID!):SoundPost
+        skillPostbyTag(tagId: ID!): [SkillPost]
+        soundPostbyTag(tagId: ID!): [SoundPost]
+        skillLink(skillPost: skillPost): [SkillLink]
+    }
+
+    input skillPostInput{
+        name: String
+        image: String
+        description: String
+        text: String
+        tagIds: [ID]
+    }
+
+    input soundPostInput{
+        name: String
+        artist: String
+        image: String
+        link: String
+        description: String
+        TagIds: [ID]
     }
 
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        addPost(postDescription: String!, genreID: ID!): User
-        followPost(postId: ID!): User
-        removePost(id: ID!): User
+        addSkillPost(postData: skillPostInput): User
+        addSoundPost(postData: soundPostInput): User
+        saveSkillPost(postId: ID!): User
+        saveSoundPost(postId: ID!): User
+        removeSkillPost(id: ID!): User
+        removeSoundPost(id: ID!): User
+        addTag(name: String): User
+        addLink(name: String, content: String): User
         addComment(postId: ID!, commentBody: String!): Post
         addFriend(friendId: ID!): User
     }
