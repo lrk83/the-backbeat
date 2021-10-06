@@ -18,7 +18,7 @@ const Slides = (data) => {
         <div className="three-suggestions">
             <Header as='h2'>Discover new Skills</Header>
             <Menu secondary className="see-all-skills"> 
-                <Menu.Item name="see all"></Menu.Item>
+                <Menu.Item name="see all" as={Link} to="/skills"></Menu.Item>
             </Menu>
             <Container className="three-suggestions-container">
                 {cardsToShow.map((number)=> 

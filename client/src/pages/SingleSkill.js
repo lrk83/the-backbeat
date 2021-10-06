@@ -33,7 +33,7 @@ const SingleSound = ({ match }) => {
                         <Button circular color='twitter' icon='mail' />
                         </div>
                     </Container>
-                    {data[ID-1].links ? ( <>
+                    {data[ID-1].links[0] ? ( <>
                     <Container className="links-container">
                     <Menu vertical className="links-menu">
                         <Header as="h2" className="links-menu-header">Links</Header>
