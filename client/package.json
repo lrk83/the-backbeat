@@ -12,6 +12,7 @@
     "aos": "^2.3.4",
     "apollo-boost": "^0.4.7",
     "bootstrap": "^4.4.1",
+    "faker": "^5.5.3",
     "graphql": "^15.6.0",
     "graphql-tag": "^2.12.5",
     "jwt-decode": "^2.2.0",

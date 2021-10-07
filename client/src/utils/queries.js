@@ -155,3 +155,11 @@ export const GET_SINGLE_SKILL = gql`
             commentCount
         }
     }`;
+
+export const GET_TAGS = gql`
+    {
+        tags{
+            _id
+            name
+        }
+    }`;

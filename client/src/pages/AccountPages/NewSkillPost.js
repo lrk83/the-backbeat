@@ -1,9 +1,12 @@
 import React, {useState, useEffect} from "react";
-import { Container, Form, Label, Button, Header } from "semantic-ui-react";
+import { Container, Form, Label, Button, Header, Menu } from "semantic-ui-react";
 import Auth from '../../utils/auth';
 import MenuTabular from '../../components/Menus/MenuTabularNewSkill';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { useQuery } from '@apollo/client';
+import {GET_TAGS} from '../../utils/queries';
+import TagSearch from "../../components/Account-page-components/tags-search";
 
 const NewSkillPost = () => {
     const loggedIn = Auth.loggedIn();
@@ -13,6 +16,11 @@ const NewSkillPost = () => {
     const [section, updateSection] = useState(sections[0]);
     const [contentData, setContentFormData] = useState({name:"",image:"",description:"",text:""});
     const [showAlert, setShowAlert] = useState(false);
+
+    const {loading, data} = useQuery(GET_TAGS);
+    const tags = data?.tags || {};
+
+    const [chosenTags, setChosenTags]=useState([]);
 
     const handleFirstFormSubmit = (event) => {
         event.preventDefault();
@@ -24,7 +32,7 @@ const NewSkillPost = () => {
         updateSection(sections[2]);
     };
 
-    const handleSecondFormSubmit = (event) => {
+    const handleThirdFormSubmit = (event) => {
         event.preventDefault();
         updateSection(sections[2]);
     };
@@ -94,18 +102,18 @@ const NewSkillPost = () => {
                     {section==="tags" ? (
                          <Form onSubmit={handleThirdFormSubmit} data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500">
                          {showAlert? (<Label basic color="red">Something went wrong. Please check your inputs and try again </Label>):(<></>)}
-                             <Form.Group widths='equal'>
-                                 {section==="text" ? (<>
-                                     <Form.TextArea label="text" name="text" placeholder="post text" required onChange={handleContentChange}/>
-                                 </>):(<>
-                                    <Form.TextArea label="text" text={contentData.text} disabled/>
-                                 </>)}
-                                 <Form.Field></Form.Field>
-                             </Form.Group>
+                             <Menu>
+                                {chosenTags.map(item=> (
+                                    <Menu.Item 
+                                    key={item.title} 
+                                    name={item.title}/>
+                                ))} 
+                             </Menu>
+                             <TagSearch tags={tags} chosenTags={chosenTags} setChosenTags={setChosenTags}/>
                              <Button
                                  type='submit'
                                  variant='success'>
-                                 Next
+                                Submit
                              </Button>
                          </Form>
                     ) : (<></>)}
