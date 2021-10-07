@@ -280,3 +280,17 @@ h2.ui.header.links-menu-header{
   justify-content: center;
   width: 100%;
 }
+
+.ui.header.new-post-header{
+  text-align: center;
+  width: 100%;
+}
+
+.ui.icon.input{
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+#tags-search{
+  width: 100%;
+}

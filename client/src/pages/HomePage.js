@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import { Container } from 'semantic-ui-react';
 import SoundSuggestionSlide from '../components/suggestion-slides/suggestion-sound-slide';
 import SkillSuggestionSlide from '../components/suggestion-slides/suggestion-skill-slide';

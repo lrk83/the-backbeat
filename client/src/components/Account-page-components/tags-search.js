@@ -84,8 +84,9 @@ function TagSearch(props) {
 
   return (
     <Grid>
-      <Grid.Column width={6}>
-        <Search
+      <Grid.Column>
+        <Search id="tags-search"
+          placeholder="search for tags"
           loading={loading}
           onResultSelect={(e, data) => {
               console.log('here');

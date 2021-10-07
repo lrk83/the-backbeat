@@ -1,6 +1,6 @@
 // see SignupForm.js for comments
 import React, { useState } from 'react';
-import {Container, Input, Label, Button, Form, Header } from 'semantic-ui-react'
+import {Container, Input, Label, Button, Form } from 'semantic-ui-react'
 
 import { validateEmail } from '../../utils/validate';
 import Auth from '../../utils/auth';
