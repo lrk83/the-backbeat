@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from "react";
 import { Container,Card, Image, Header, Icon, Button, Menu, Dropdown } from "semantic-ui-react";
-//import data from '../assets/sounddata.json';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useQuery } from '@apollo/client';
 import {GET_SINGLE_SOUND} from '../utils/queries';
+import Auth from '../utils/auth';
 
 const SingleSound = ({ match }) => {
     
@@ -18,7 +18,9 @@ const SingleSound = ({ match }) => {
     const tagsToShow=soundData.tags;
     const aditionalToShow=soundData.aditionalTags
 
-    console.log(tagsToShow);
+    console.log(soundData);
+
+    const loggedIn = Auth.loggedIn();
 
     useEffect(()=>{
         AOS.init({
@@ -53,8 +55,8 @@ const SingleSound = ({ match }) => {
                     <Header as='h1' className="single-header">{soundData.name}</Header>
                     <div className="buttons-div">
                         <Button color="blue" className="get-pack-button" href={soundData.link} target="_blank">Get Pack</Button>
-                        <Button circular color='facebook' icon='heart' />
-                        <Button circular color='twitter' icon='mail' />
+                        {loggedIn ? ( <> <Button circular color='facebook' icon='heart' />
+                        <Button circular color='twitter' icon='mail' /> </> ):(<></>)}
                     </div>
                     <Menu secondary className="tags-menu"> 
                         <Menu.Item name={tagsToShow[0].name}></Menu.Item>

@@ -41,8 +41,8 @@ export default class AppNavbar extends Component {
             {Auth.loggedIn() ? (
             <Dropdown item text='Account'>
             <Dropdown.Menu>
-              <Dropdown.Item as={Link} to='/account'>Account</Dropdown.Item>
-              <Dropdown.Item as={Link} to='/friends'>Friends </Dropdown.Item>
+              <Dropdown.Item as={Link} to='/account/profile'>Profile</Dropdown.Item>
+              <Dropdown.Item as={Link} to='/account/content'> Content </Dropdown.Item>
               <Dropdown.Item onClick={Auth.logout}>Logout</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>) : (

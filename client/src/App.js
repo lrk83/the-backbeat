@@ -46,8 +46,8 @@ function App() {
             <Route exact path='/skills' component={SkillPage} />
             <Route exact path='/sounds' component={SoundPage} />
             <Route exact path='/community' component={CommunityPage} />
-            <Route exact path='/account' component={AccountPage} />
-            <Route exact path='/friends' component={FriendPage} />
+            <Route exact path='/account/profile' component={AccountPage} />
+            <Route exact path='accound/content' component={FriendPage} />
             <Route exact path="/login" component={LoginPage} />
             <Route exact path='/signup' component={SignUpPage} />
             <Route exact path='/account/sounds/new-post' component={newSoundPostPage} />
