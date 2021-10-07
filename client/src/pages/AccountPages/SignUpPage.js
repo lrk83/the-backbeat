@@ -1,6 +1,6 @@
 // see SignupForm.js for comments
 import React, { useState } from 'react';
-import {Container, Input, Button, Form, Label } from 'semantic-ui-react'
+import {Container, Input, Label, Button, Form, Header } from 'semantic-ui-react'
 
 import { validateEmail } from '../../utils/validate';
 import Auth from '../../utils/auth';
@@ -13,8 +13,7 @@ const LoginPage = () => {
 
   // set initial form state
   const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
-  // set state for form validation
-  const [validated] = useState(false);
+  
   // set state for alert
   const [showEmailAlert, setShowEmailAlert] = useState(false);
   const [showPasswordAlert, setShowPassWordAlert] = useState(false);
@@ -84,6 +83,8 @@ const LoginPage = () => {
 
            <MenuTabular choice='login'></MenuTabular>
             <Form onSubmit={handleFormSubmit}>
+                {showAlert? (<Label basic color="red">Something went wrong. Please check your inputs and try again </Label>):(<></>)}
+
                 <Form.Group widths='equal'>
                     
                 <Form.Field
@@ -113,6 +114,7 @@ const LoginPage = () => {
                     control={Input}
                     name='password'
                     label='Password'
+                    type='password'
                     placeholder='Your password'
                     onChange={handleInputChange}
                     required
