@@ -11,6 +11,7 @@ import MySkills from "../../components/Account-page-components/my-skills";
 const AccountPage = () => {
     const {loading, data} = useQuery(GET_ME);
     const userData = data?.me || {};
+    const loggedIn = Auth.loggedIn();
 
     useEffect(()=>{
         AOS.init({
@@ -21,6 +22,10 @@ const AccountPage = () => {
     if (loading) {
         return <div>Loading...</div>;
     }
+
+    if (!loggedIn) {
+        return <div>Please login</div>
+    };
 
     return (
         <Container className="big-container">

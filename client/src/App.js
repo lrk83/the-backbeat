@@ -50,8 +50,8 @@ function App() {
             <Route exact path='accound/content' component={FriendPage} />
             <Route exact path="/login" component={LoginPage} />
             <Route exact path='/signup' component={SignUpPage} />
-            <Route exact path='/account/sounds/new-post' component={newSoundPostPage} />
-            <Route exact path='/account/sounds/new-skill' component={newSkillPostPage} />
+            <Route exact path='/account/sounds/new-sound' component={newSoundPostPage} />
+            <Route exact path='/account/skills/new-skill' component={newSkillPostPage} />
             <Route path="/sounds/single-sound/:soundId" component={SingleSound} />
             <Route path="/skills/single-skill/:skillId" component={SingleSkill} />
           </Switch>

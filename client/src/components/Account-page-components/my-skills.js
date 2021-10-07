@@ -48,7 +48,7 @@ const MySkillSlides = (data) => {
             </Menu>
             <CurrentSlide currentPhotos={currentPhotos}></CurrentSlide>
             <div className="new-sound-button-div">
-                <Button as={Link} to="/account/sounds/new-skill" color="blue" className="get-pack-button">New</Button>
+                <Button as={Link} to="/account/skills/new-skill" color="blue" className="get-pack-button">New</Button>
             </div>
         </div>
     )

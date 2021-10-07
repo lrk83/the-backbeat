@@ -79,7 +79,6 @@ const typeDefs = gql`
         image: String
         description: String
         text: String
-        tagIds: [ID]
     }
 
     input soundPostInput{
@@ -88,7 +87,6 @@ const typeDefs = gql`
         image: String
         link: String
         description: String
-        TagIds: [ID]
     }
 
     type Query{
