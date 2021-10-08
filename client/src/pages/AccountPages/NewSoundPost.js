@@ -15,7 +15,9 @@ const NewSoundPost = () => {
     const sections=["post-content","tags"]
 
     const [section, updateSection] = useState(sections[0]);
-    const [contentData, setContentFormData] = useState({name:"",artist:"",image:"",description:"",link:"",tags:[],aditionalTags:[]});
+    const [contentData, setContentFormData] = useState({name:"",artist:"",image:"",description:"",link:""});
+    const [submissionData, setSubmissionData] = useState({})
+    const [readyToSubmit, setReadyToSubmit] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
 
     const {loading, data} = useQuery(GET_TAGS);
@@ -39,35 +41,22 @@ const NewSoundPost = () => {
         for(let x=0;x<chosenTags.length;x=x+1){
             
             if (x<3){
-                tagsToAdd.push(chosenTags[x]);
+                const tagToAdd=chosenTags[x].id;
+                tagsToAdd.push(tagToAdd);
             } else{
-                aditionalTagsToAdd.push(chosenTags[x]);
+                const chosenTagToAdd = chosenTags[x].id;
+                aditionalTagsToAdd.push(chosenTagToAdd);
             }
         };
 
-        console.log(tagsToAdd);
+        setSubmissionData({
+            ...contentData,
+            tags:tagsToAdd,
+            aditionalTags:aditionalTagsToAdd
+        });
 
-        setContentFormData(
-            {name:contentData.name,
-            artist: contentData.artist,
-            image: contentData.image,
-            description: contentData.description,
-            link: contentData.link,
-            tags: tagsToAdd, 
-            aditionalTags: aditionalTagsToAdd});
-
-        console.log(contentData);
-
-        try {
-            const { data } = await createSound({
-                variables: {postData: {...contentData}}
-            });
-        } catch (err) {
-            console.log(err);
-            setShowAlert(true);
-        }
-
-        setContentFormData({name:"",artist:"",image:"",description:"",link:"",tags:[],aditionalTags:[]})
+        //Set up submission
+        setReadyToSubmit(true);
     };
 
     const handleContentChange = (event) => {
@@ -80,11 +69,31 @@ const NewSoundPost = () => {
         updateSection("back-to-basics");
     }
 
+    const sendToBackEnd = async () => {
+        setReadyToSubmit(false);
+        
+        try {
+            console.log(submissionData);
+            const { data } = await createSound({
+                variables: {postData: {...submissionData}}
+            });
+        } catch (err) {
+            console.log(err);
+            setShowAlert(true);
+        }
+    }
+
     //Fade in elements
     useEffect(()=>{
         AOS.init({
             duration:200
         })
+    });
+
+    useEffect(() => {
+        if (readyToSubmit){
+            sendToBackEnd();
+        }
     });
 
     if (!loggedIn) {
@@ -151,7 +160,7 @@ const NewSoundPost = () => {
                                  variant='success'>
                                 Submit
                              </Button> </> ):(<>
-                                <TagSearch tags={tags} chosenTags={chosenTags} setChosenTags={setChosenTags} contentData={contentData} setContentFormData={setContentFormData}/>
+                                <TagSearch contentData={contentData} setContentFormData={setContentFormData}tags={tags} chosenTags={chosenTags} setChosenTags={setChosenTags}/>
                              <Container className='chosen-tags-container'>
                                 {chosenTags.map(item=> (
                                     <div className="chosen-tag" key={item.id} >

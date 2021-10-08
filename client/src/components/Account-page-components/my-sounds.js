@@ -8,8 +8,6 @@ const MySoundSlides = (data) => {
     const [currentPhotos, updateCurrentPhotos] = useState(photos.data.slice(0, 4));
     const [currentIndex, updateCurrentIndex] = useState(4);
 
-    console.log(currentPhotos);
-
     const forwardPhotos = () => {
         let upperbound = currentIndex+4;
         if (upperbound>20){

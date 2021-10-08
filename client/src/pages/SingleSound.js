@@ -40,7 +40,7 @@ const SingleSound = ({ match }) => {
                     <Card.Content>
                         <Card.Header>{soundData.artist}</Card.Header>
                         <Card.Meta>
-                            <span className='date'>Posted Date</span>
+                            <span className='date'>Posted {soundData.date}</span>
                         </Card.Meta>
                         <Card.Description>
                             Here is a description of {soundData.artist}
@@ -60,14 +60,14 @@ const SingleSound = ({ match }) => {
                     </div>
                     <Menu secondary className="tags-menu"> 
                         <Menu.Item name={tagsToShow[0].name}></Menu.Item>
-                        {/*<Menu.Item name={tagsToShow[1]}></Menu.Item>
-                        <Menu.Item name={tagsToShow[2]}></Menu.Item>*/}
+                        <Menu.Item name={tagsToShow[1].name}></Menu.Item>
+                        <Menu.Item name={tagsToShow[2].name}></Menu.Item>
                     
                         <Menu.Menu position="right">
                             <Dropdown item text='more'>
                                 <Dropdown.Menu>
                                     {aditionalToShow.map(item=> (
-                                        <Dropdown.Item key={item}>{item}</Dropdown.Item>
+                                        <Dropdown.Item key={item._id}>{item.name}</Dropdown.Item>
                                     ))}
                                 </Dropdown.Menu>
                             </Dropdown>
