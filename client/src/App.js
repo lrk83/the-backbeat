@@ -12,7 +12,7 @@ import SkillPage from './pages/SkillPage';
 import SoundPage from './pages/SoundPage';
 import CommunityPage from './pages/CommunityPage';
 import AccountPage from './pages/AccountPages/AccountPage';
-import FriendPage from './pages/AccountPages/FriendPage';
+import ContentPage from './pages/AccountPages/ContentPage';
 import LoginPage from './pages/AccountPages/LoginPage';
 import SignUpPage from './pages/AccountPages/SignUpPage';
 import SingleSound from './pages/SingleSound';
@@ -47,7 +47,7 @@ function App() {
             <Route exact path='/sounds' component={SoundPage} />
             <Route exact path='/community' component={CommunityPage} />
             <Route exact path='/account/profile' component={AccountPage} />
-            <Route exact path='accound/content' component={FriendPage} />
+            <Route exact path='/account/content' component={ContentPage} />
             <Route exact path="/login" component={LoginPage} />
             <Route exact path='/signup' component={SignUpPage} />
             <Route exact path='/account/sounds/new-sound' component={newSoundPostPage} />
