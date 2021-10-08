@@ -115,8 +115,8 @@ const typeDefs = gql`
         addUser(username: String!, email: String!, password: String!): Auth
         addSkillPost(postData: skillPostInput): User
         addSoundPost(postData: soundPostInput): User
-        saveSkillPost(postId: ID): User
-        saveSoundPost(postId: ID): User
+        saveSkillPost(postId: ID): SkillPost
+        saveSoundPost(postId: ID): SoundPost
         removeSkillPost(id: ID): User
         removeSoundPost(id: ID): User
         deleteSkillPost(id: String): User

@@ -5,6 +5,7 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
     Query: {
         me: async (parent, args, context) => {
+
             if (context.user) {
                 const userData = await User.findOne({_id: context.user._id})
                     .select('-__v -password')
@@ -13,7 +14,7 @@ const resolvers = {
                     .populate('savedSkillPosts')
                     .populate('savedSoundPosts')
                     .populate('friends');
-            
+
                 return userData;
             }
 
@@ -87,7 +88,6 @@ const resolvers = {
               .populate('tags')
               .populate('aditionalTags');
 
-            console.log(post);
             return post;
           },
           skillPostbyTag: async (parent, { tagId }) => {
@@ -180,8 +180,14 @@ const resolvers = {
                     { $push: { savedSkillPosts:  post  } },
                     { new: true }
                 );
+
+                const updatedPost = await SkillPost.findOneAndUpdate(
+                  {_id:postId},
+                  { $push: { followers:updatedUser } },
+                  { new: true }
+                );
                 
-                return updatedUser;
+                return updatedPost.populate('followers');
             }
 
             throw new AuthenticationError("You need to be logged in!");
@@ -196,8 +202,14 @@ const resolvers = {
                   { $push: { savedSoundPosts:  post  } },
                   { new: true }
               );
+
+              const updatedPost = await SoundPost.findOneAndUpdate(
+                {_id:postId},
+                { $push: { followers:updatedUser } },
+                { new: true }
+              )
               
-              return updatedUser;
+              return updatedPost.populate('followers');
           }
 
           throw new AuthenticationError("You need to be logged in!");
@@ -229,8 +241,6 @@ const resolvers = {
           throw new AuthenticationError("You need to be logged in!");
         },
         deleteSkillPost: async(parent, { id }, context) => {
-
-          console.log(id);
 
           if (context.user) {
               const postToRemove = await SkillPost.findOne({_id:id})

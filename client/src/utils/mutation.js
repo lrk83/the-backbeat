@@ -111,3 +111,27 @@ mutation addTag($name: String) {
     name
   }
 }`;
+
+export const SAVE_SKILL = gql`
+mutation saveSkillPost($postId: ID) {
+  saveSkillPost(postId: $postId){
+    _id
+    name
+    followers{
+      _id
+      username
+    }
+  }
+}`;
+
+export const SAVE_SOUND = gql`
+mutation saveSoundPost($postId: ID) {
+  saveSoundPost(postId: $postId){
+    _id
+    name
+    followers{
+      _id
+      username
+    }
+  }
+}`;
