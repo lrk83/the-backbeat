@@ -103,3 +103,11 @@ mutation addSkillPost($postData: skillPostInput!) {
     }
   }
 }`;
+
+export const ADD_TAG = gql`
+mutation addTag($name: String) {
+  addTag(name: $name){
+    _id
+    name
+  }
+}`;

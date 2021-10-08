@@ -6,7 +6,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useQuery, useMutation } from '@apollo/client';
 import {GET_TAGS} from '../../utils/queries';
-import {ADD_SKILL} from '../../utils/mutation';
+import {ADD_SKILL, ADD_TAG} from '../../utils/mutation';
 import TagSearch from "../../components/Account-page-components/tags-search";
 
 const NewSkillPost = () => {
@@ -19,13 +19,20 @@ const NewSkillPost = () => {
     const [submissionData, setSubmissionData] = useState({})
     const [readyToSubmit, setReadyToSubmit] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
+    const [addTagForm, setAddTagForm] = useState('');
+    const [tagSearchContent, updateTagSearchContent] = useState([]);
 
     const {loading, data} = useQuery(GET_TAGS);
     const tags = data?.tags || {};
 
+    useEffect(() => {
+        updateTagSearchContent(tags);
+    });
+
     const [chosenTags, setChosenTags]=useState([]);
 
-    const [createSkill, {error}] = useMutation(ADD_SKILL)
+    const [createSkill, {error}] = useMutation(ADD_SKILL);
+    const [createTag] = useMutation(ADD_TAG);
 
     //Handle which form sections are disabled
     const handleFirstFormSubmit = (event) => {
@@ -69,6 +76,37 @@ const NewSkillPost = () => {
         setContentFormData({ ...contentData, [name]: value });
     };
 
+    const handleAddTagFormContentChange = (event) => {
+        const {name, value } = event.target;
+        setAddTagForm(value);
+    }
+
+    const handleAddTag = async (event) => {
+        event.preventDefault();
+
+        const updatedTags = [];
+        for (let x=0; x<chosenTags.length;x=x+1){
+            updatedTags.push(chosenTags[x]);
+        }
+
+        console.log(addTagForm);
+        const newTagFromBackEnd = await createTag(
+            {variables: {name: addTagForm}}
+        );
+
+        console.log(newTagFromBackEnd.data.addTag._id);
+
+        const newFormatedTag = {...newTagFromBackEnd.data.addTag, id: newTagFromBackEnd.data.addTag._id};
+
+        console.log(newFormatedTag);
+
+        updatedTags.push(newFormatedTag);
+
+        setChosenTags(updatedTags);
+
+        setAddTagForm('');
+    }
+
     const textBackButton = (event) => {
         event.preventDefault();
         if (section==="back-to-text"){
@@ -91,6 +129,9 @@ const NewSkillPost = () => {
             const { data } = await createSkill({
                 variables: {postData: {...submissionData}}
             });
+            setContentFormData({name:"",image:"",description:"",text:"",links:[]});
+            setChosenTags([]);
+            updateSection("post-content");
         } catch (err) {
             console.log(err);
             setShowAlert(true);
@@ -190,11 +231,15 @@ const NewSkillPost = () => {
                          {showAlert? (<Label basic color="red">Something went wrong. Please check your inputs and try again </Label>):(<></>)}
                              {section==="tags" ? ( <>
                              <TagSearch tags={tags} chosenTags={chosenTags} setChosenTags={setChosenTags} contentData={contentData} setContentFormData={setContentFormData}/>
+                             <Form.Group>
+                             <Form.Input fluid label = "Add Tag" name="add-tag" placeholder="Don't see what you're looking for?" value={addTagForm} onChange={handleAddTagFormContentChange}/>
+                             <Button onClick={handleAddTag}>Add Tag</Button>
+                             </Form.Group>
                              <Container className='chosen-tags-container'>
                                 {chosenTags.map(item=> (
                                     <div className="chosen-tag" key={item.id} >
                                     {item.title}</div>
-                                ))} 
+                                ))}
                              </Container >
 
                              <Button
@@ -207,12 +252,12 @@ const NewSkillPost = () => {
                                  variant='success'>
                                 Submit
                              </Button> </> ):(<>
-                                <TagSearch tags={tags} chosenTags={chosenTags} setChosenTags={setChosenTags}/>
+                                <TagSearch tags={tagSearchContent} chosenTags={chosenTags} setChosenTags={setChosenTags}/>
                              <Container className='chosen-tags-container'>
                                 {chosenTags.map(item=> (
                                     <div className="chosen-tag" key={item.id} >
                                     {item.title}</div>
-                                ))} 
+                                ))} {console.log(chosenTags)}
                              </Container >
 
                              <Button

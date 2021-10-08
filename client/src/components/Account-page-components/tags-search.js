@@ -101,4 +101,4 @@ function TagSearch(props) {
   )
 }
 
-export default TagSearch
+export default TagSearch;
