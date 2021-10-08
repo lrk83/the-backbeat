@@ -59,15 +59,15 @@ const SingleSound = ({ match }) => {
                         </Menu> 
                     </Container></> ):(<></>)}
                     <Menu secondary className="tags-menu"> 
-                        <Menu.Item name={tagsToShow[0]}></Menu.Item>
-                        {/*<Menu.Item name={tagsToShow[1]}></Menu.Item>
-                        <Menu.Item name={tagsToShow[2]}></Menu.Item>*/}
+                        <Menu.Item name={tagsToShow[0].name}></Menu.Item>
+                        <Menu.Item name={tagsToShow[1].name}></Menu.Item>
+                        <Menu.Item name={tagsToShow[2].name}></Menu.Item>
                     
                         <Menu.Menu position="right">
                             <Dropdown item text='more'>
                                 <Dropdown.Menu>
-                                    {additionalToShow.map(item=> (
-                                        <Dropdown.Item key={item}>{item}</Dropdown.Item>
+                                {additionalToShow.map(item=> (
+                                        <Dropdown.Item key={item._id}>{item.name}</Dropdown.Item>
                                     ))}
                                 </Dropdown.Menu>
                             </Dropdown>

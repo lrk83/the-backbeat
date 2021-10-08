@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {Button, Menu, Header, Icon} from "semantic-ui-react"; 
-import CurrentSlide from '../suggestion-slides/current-sounds-slides';
+import CurrentSkillSlide from '../suggestion-slides/current-skills-slides';
 
 const MySkillSlides = (data) => {
     const [photos]=useState(data);
@@ -46,7 +46,7 @@ const MySkillSlides = (data) => {
                     </Button>
                 </Menu.Menu>
             </Menu>
-            <CurrentSlide currentPhotos={currentPhotos}></CurrentSlide>
+            <CurrentSkillSlide currentPhotos={currentPhotos}></CurrentSkillSlide>
             <div className="new-sound-button-div">
                 <Button as={Link} to="/account/skills/new-skill" color="blue" className="get-pack-button">New</Button>
             </div>
