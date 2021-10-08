@@ -84,7 +84,7 @@ const SingleSound = ({ match }) => {
                         <Button color="blue" className="get-pack-button" href={soundData.link} target="_blank">Get Pack</Button>
                         {loggedIn && ( <> 
                             {soundIsSaved===true ? (<>
-                            <Button circular icon='heart' color="twitter" />
+                            <Button circular icon='heart' disabled color="twitter" />
                             <Button circular icon='mail' /> 
                             </> ):( <>
                             <Button circular icon='heart' onClick={saveSound} />

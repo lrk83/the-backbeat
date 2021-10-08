@@ -6,6 +6,7 @@ import 'aos/dist/aos.css';
 import { useQuery, useMutation } from '@apollo/client';
 import {GET_SINGLE_SKILL} from '../utils/queries';
 import { SAVE_SKILL } from "../utils/mutation";
+import Auth from '../utils/auth';
 
 const SingleSound = ({ match }) => {
     
@@ -17,16 +18,39 @@ const SingleSound = ({ match }) => {
 
     const skillData = data?.skillPost || {};
 
-    console.log(skillData);
-
     const tagsToShow=skillData.tags;
     const linkstoshow=skillData.links;
     const additionalToShow=skillData.aditionalTags;
+
+    const loggedIn = Auth.loggedIn();
+
+    if (loggedIn){
+        var userId = Auth.getProfile().data._id;
+    }
+
+    const [skillIsSaved, setSkillIsSaved] = useState(false);
+    const [addSkill] = useMutation(SAVE_SKILL);
+
+    const saveSkill = async () => {
+        await addSkill(
+            {variables: {postId: ID}}
+        )
+    };
 
     useEffect(()=>{
         AOS.init({
             duration:200
         })
+    })
+
+    useEffect(()=>{
+        if(skillData.followers){
+            for(let x=0;x<skillData.followers.length;x=x+1){
+                if (userId===skillData.followers[x]._id){
+                    setSkillIsSaved(true);
+                }
+            }
+        }
     })
 
     if (loading) {
@@ -42,8 +66,15 @@ const SingleSound = ({ match }) => {
                     <Container className="single-post-para">
                         <p>{skillData.description}</p>
                         <div className="skill-buttons-div">
-                        <Button circular color='facebook' icon='heart' />
-                        <Button circular color='twitter' icon='mail' />
+                        {loggedIn && ( <> 
+                            {skillIsSaved===true ? (<>
+                            <Button circular icon='heart' disabled color="twitter" />
+                            <Button circular icon='mail' /> 
+                            </> ):( <>
+                            <Button circular icon='heart' onClick={saveSkill} />
+                            <Button circular icon='mail' /> 
+                            </>)}
+                        </> )}
                         </div>
                     </Container>
                     {skillData.links[0] ? ( <>
