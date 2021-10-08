@@ -79,6 +79,9 @@ const typeDefs = gql`
         image: String
         description: String
         text: String
+        tags: [ID]
+        aditionalTags: [ID]
+        links: [ID]
     }
 
     input soundPostInput{

@@ -294,3 +294,7 @@ h2.ui.header.links-menu-header{
 #tags-search{
   width: 100%;
 }
+
+.ui.form .fields{
+  flex-direction: column;
+}

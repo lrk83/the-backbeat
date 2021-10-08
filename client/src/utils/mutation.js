@@ -61,3 +61,45 @@ mutation addSoundPost($postData: soundPostInput!) {
     }
   }
 }`;
+
+export const ADD_SKILL = gql`
+mutation addSkillPost($postData: skillPostInput!) {
+  addSkillPost(postData: $postData) {
+    _id
+    username
+    skillPosts{
+      _id
+      name
+      text
+      author{
+        _id
+        username
+      }
+      date
+      links {
+        _id
+        name
+        content
+      }
+      image
+      description
+      tags{
+          _id
+          name
+      }
+      aditionalTags{
+          _id
+          name
+      }
+      followers{
+        _id
+        username
+      }
+      comments {
+        commentBody
+        username
+        createdAt
+      }
+    }
+  }
+}`;

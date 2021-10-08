@@ -133,19 +133,23 @@ const resolvers = {
         },
         addSkillPost: async (parent, {postData}, context) => {
 
-            if (context.user) {
-              const post = await SkillPost.create({ postData });
-      
-              const updatedUser = await User.findOneAndUpdate(
-                {_id: context.user._id},
-                { $push: {skillPosts: post}},
-                {new: true}
-              )
+          if (context.user) {
+            const author = await User.findOne(
+              {_id: context.user._id}
+            );
 
-              return updatedUser;
-            }
-      
-            throw new AuthenticationError('You need to be logged in!');
+            const post = await SkillPost.create({ ...postData, author: author });
+
+            const updatedUser = await User.findOneAndUpdate(
+              {_id: context.user._id},
+              { $push: {skillPosts: post}},
+              {new: true}
+            )
+
+            return updatedUser;
+          }
+    
+          throw new AuthenticationError('You need to be logged in!');
         },
         addSoundPost: async (parent, {postData}, context) => {
             if (context.user) {
@@ -153,11 +157,7 @@ const resolvers = {
                 {_id: context.user._id}
               );
 
-              console.log(author);
-
               const post = await SoundPost.create({ ...postData, author: author });
-      
-              console.log(post);
 
               const updatedUser = await User.findOneAndUpdate(
                 {_id: context.user._id},

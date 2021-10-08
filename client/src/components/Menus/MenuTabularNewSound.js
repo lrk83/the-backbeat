@@ -16,13 +16,13 @@ export default class MenuTabular extends Component {
           name='sound'
           active={activeItem === 'sound'}
           onClick={this.handleItemClick}
-          as={Link} to='sound'
+          as={Link} to='/account/sounds/new-sound'
         />
         <Menu.Item
           name='skill'
           active={activeItem === 'skill'}
           onClick={this.handleItemClick}
-          as={Link} to='skill'
+          as={Link} to='/account/skills/new-skill'
         />
       </Menu>
     )

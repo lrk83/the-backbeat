@@ -4,8 +4,9 @@ import Auth from '../../utils/auth';
 import MenuTabular from '../../components/Menus/MenuTabularNewSkill';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import {GET_TAGS} from '../../utils/queries';
+import {ADD_SKILL} from '../../utils/mutation';
 import TagSearch from "../../components/Account-page-components/tags-search";
 
 const NewSkillPost = () => {
@@ -14,13 +15,17 @@ const NewSkillPost = () => {
     const sections=["post-content","text","tags"]
 
     const [section, updateSection] = useState(sections[0]);
-    const [contentData, setContentFormData] = useState({name:"",image:"",description:"",text:"",tags:[],links:[],aditionalTags:[]});
+    const [contentData, setContentFormData] = useState({name:"",image:"",description:"",text:"",links:[]});
+    const [submissionData, setSubmissionData] = useState({})
+    const [readyToSubmit, setReadyToSubmit] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
 
     const {loading, data} = useQuery(GET_TAGS);
     const tags = data?.tags || {};
 
     const [chosenTags, setChosenTags]=useState([]);
+
+    const [createSkill, {error}] = useMutation(ADD_SKILL)
 
     //Handle which form sections are disabled
     const handleFirstFormSubmit = (event) => {
@@ -35,7 +40,28 @@ const NewSkillPost = () => {
 
     const handleThirdFormSubmit = (event) => {
         event.preventDefault();
-        updateSection(sections[2]);
+        
+        const tagsToAdd = [];
+        const aditionalTagsToAdd = [];
+        for(let x=0;x<chosenTags.length;x=x+1){
+            
+            if (x<3){
+                const tagToAdd=chosenTags[x].id;
+                tagsToAdd.push(tagToAdd);
+            } else{
+                const chosenTagToAdd = chosenTags[x].id;
+                aditionalTagsToAdd.push(chosenTagToAdd);
+            }
+        };
+
+        setSubmissionData({
+            ...contentData,
+            tags:tagsToAdd,
+            aditionalTags:aditionalTagsToAdd
+        });
+
+        //Set up submission
+        setReadyToSubmit(true);
     };
 
     const handleContentChange = (event) => {
@@ -57,11 +83,31 @@ const NewSkillPost = () => {
         updateSection("back-to-text");
     }
 
+    const sendToBackEnd = async () => {
+        setReadyToSubmit(false);
+        
+        try {
+            console.log(submissionData);
+            const { data } = await createSkill({
+                variables: {postData: {...submissionData}}
+            });
+        } catch (err) {
+            console.log(err);
+            setShowAlert(true);
+        }
+    }
+
     //Fade in elements
     useEffect(()=>{
         AOS.init({
             duration:200
         })
+    });
+
+    useEffect(() => {
+        if (readyToSubmit){
+            sendToBackEnd();
+        }
     });
 
     if (!loggedIn) {
