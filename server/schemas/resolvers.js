@@ -64,6 +64,7 @@ const resolvers = {
           soundPosts: async (parent, { username }) => {
             const params = username ? { username } : {};
             return SoundPost.find(params).sort({ createdAt: -1 })
+              .populate('author')
               .populate('comments')
               .populate('followers')
               .populate('tags')
@@ -71,6 +72,7 @@ const resolvers = {
           },
           skillPost: async (parent, { _id }) => {
             return SkillPost.findOne({ _id })
+              .populate('author')
               .populate('comments')
               .populate('followers')
               .populate('tags')
@@ -78,11 +80,15 @@ const resolvers = {
               .populate('links');
           },
           soundPost: async (parent, { _id }) => {
-            return SoundPost.findOne({ _id })
+            const post = await SoundPost.findOne({ _id })
+              .populate('author')  
               .populate('comments')
               .populate('followers')
               .populate('tags')
               .populate('aditionalTags');
+
+            console.log(post);
+            return post;
           },
           skillPostbyTag: async (parent, { tagId }) => {
               const tag = await Tag.findById({_id:tagId});
@@ -142,12 +148,17 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!');
         },
         addSoundPost: async (parent, {postData}, context) => {
-
-            console.log(postData.tags);
-
             if (context.user) {
-              const post = await SoundPost.create({ ...postData });
+              const author = await User.findOne(
+                {_id: context.user._id}
+              );
+
+              console.log(author);
+
+              const post = await SoundPost.create({ ...postData, author: author });
       
+              console.log(post);
+
               const updatedUser = await User.findOneAndUpdate(
                 {_id: context.user._id},
                 { $push: {soundPosts: post}},

@@ -5,6 +5,7 @@ import 'aos/dist/aos.css';
 import { useQuery } from '@apollo/client';
 import {GET_SINGLE_SOUND} from '../utils/queries';
 import Auth from '../utils/auth';
+import {Link} from 'react-router-dom';
 
 const SingleSound = ({ match }) => {
     
@@ -47,8 +48,10 @@ const SingleSound = ({ match }) => {
                         </Card.Description>
                     </Card.Content>
                     <Card.Content extra>
-                        <Icon name='user' />
-                        Posted by Name
+                        <Link to={'/'}>
+                        <Icon name='user'/>
+                        Posted by {soundData.author.username}
+                        </Link>
                     </Card.Content>
                 </Card>
                 <Container className="single-post-content">
