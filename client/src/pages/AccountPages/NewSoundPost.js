@@ -115,7 +115,7 @@ const NewSoundPost = () => {
                             <Header as ="h2" className="new-post-header">Basic Info</Header>
                             {section==="post-content" || section==="back-to-basics" ? (<>
                                 <Form.Input fluid label="Name" name="name" placeholder="Name" required onChange={handleContentChange}/>
-                                <Form.Input fluid label="Image" name="image" placeholder="Image URL" required onChange={handleContentChange}/>
+                                <Form.Input fluid label="Image" name="image" placeholder="Image URL (You can use right click - image adress)" required onChange={handleContentChange}/>
                                 <Form.Input fluid label = "Description" name="description" placeholder="Description" required onChange={handleContentChange}/>
                                 <Form.Input fluid label = "Artist" name="artist" placeholder="Artist" required onChange={handleContentChange}/>
                                 <Form.Input fluid label = "Link" name="link" placeholder="Link" required onChange={handleContentChange}/>
