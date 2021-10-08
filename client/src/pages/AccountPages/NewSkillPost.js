@@ -14,7 +14,7 @@ const NewSkillPost = () => {
     const sections=["post-content","text","tags"]
 
     const [section, updateSection] = useState(sections[0]);
-    const [contentData, setContentFormData] = useState({name:"",image:"",description:"",text:""});
+    const [contentData, setContentFormData] = useState({name:"",image:"",description:"",text:"",tags:[],links:[],aditionalTags:[]});
     const [showAlert, setShowAlert] = useState(false);
 
     const {loading, data} = useQuery(GET_TAGS);
