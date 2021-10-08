@@ -23,3 +23,41 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const ADD_SOUND = gql`
+mutation addSoundPost($postData: soundPostInput!) {
+  addSoundPost(postData: $postData) {
+    _id
+    username
+    soundPosts{
+      _id
+      name
+      artist
+      author{
+        _id
+        username
+      }
+      date
+      link
+      image
+      description
+      tags{
+          _id
+          name
+      }
+      aditionalTags{
+          _id
+          name
+      }
+      followers{
+        _id
+        username
+      }
+      comments {
+        commentBody
+        username
+        createdAt
+      }
+    }
+  }
+}`;

@@ -143,7 +143,7 @@ const NewSkillPost = () => {
                          <Header as ="h2" className="new-post-header">Tags</Header>
                          {showAlert? (<Label basic color="red">Something went wrong. Please check your inputs and try again </Label>):(<></>)}
                              {section==="tags" ? ( <>
-                             <TagSearch tags={tags} chosenTags={chosenTags} setChosenTags={setChosenTags}/>
+                             <TagSearch tags={tags} chosenTags={chosenTags} setChosenTags={setChosenTags} contentData={contentData} setContentFormData={setContentFormData}/>
                              <Container className='chosen-tags-container'>
                                 {chosenTags.map(item=> (
                                     <div className="chosen-tag" key={item.id} >

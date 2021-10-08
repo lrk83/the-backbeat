@@ -8,6 +8,8 @@ const MySoundSlides = (data) => {
     const [currentPhotos, updateCurrentPhotos] = useState(photos.data.slice(0, 4));
     const [currentIndex, updateCurrentIndex] = useState(4);
 
+    console.log(currentPhotos);
+
     const forwardPhotos = () => {
         let upperbound = currentIndex+4;
         if (upperbound>20){
@@ -48,7 +50,7 @@ const MySoundSlides = (data) => {
             </Menu>
             <CurrentSlide currentPhotos={currentPhotos}></CurrentSlide>
             <div className="new-sound-button-div">
-                <Button as={Link} to="/account/sounds/new-post" color="blue" className="get-pack-button">New</Button>
+                <Button as={Link} to="/account/sounds/new-sound" color="blue" className="get-pack-button">New</Button>
             </div>
         </div>
     )

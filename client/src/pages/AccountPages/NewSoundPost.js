@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from "react";
 import { Container, Form, Label, Button, Header, Menu } from "semantic-ui-react";
 import Auth from '../../utils/auth';
-import MenuTabular from '../../components/Menus/MenuTabularNewSkill';
+import MenuTabular from '../../components/Menus/MenuTabularNewSound';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import {GET_TAGS} from '../../utils/queries';
+import {ADD_SOUND} from '../../utils/mutation';
 import TagSearch from "../../components/Account-page-components/tags-search";
 
 const NewSoundPost = () => {
@@ -14,7 +15,7 @@ const NewSoundPost = () => {
     const sections=["post-content","tags"]
 
     const [section, updateSection] = useState(sections[0]);
-    const [contentData, setContentFormData] = useState({name:"",artist:"",image:"",description:"",link:""});
+    const [contentData, setContentFormData] = useState({name:"",artist:"",image:"",description:"",link:"",tags:[],aditionalTags:[]});
     const [showAlert, setShowAlert] = useState(false);
 
     const {loading, data} = useQuery(GET_TAGS);
@@ -22,15 +23,51 @@ const NewSoundPost = () => {
 
     const [chosenTags, setChosenTags]=useState([]);
 
+    const [createSound, {error}] = useMutation(ADD_SOUND)
+
     //Handle which form sections are disabled
     const handleFirstFormSubmit = (event) => {
         event.preventDefault();
         updateSection(sections[1]);
     };
 
-    const handleSecondFormSubmit = (event) => {
+    const handleSecondFormSubmit = async (event) => {
         event.preventDefault();
-        updateSection(sections[2]);
+        
+        const tagsToAdd = [];
+        const aditionalTagsToAdd = [];
+        for(let x=0;x<chosenTags.length;x=x+1){
+            
+            if (x<3){
+                tagsToAdd.push(chosenTags[x]);
+            } else{
+                aditionalTagsToAdd.push(chosenTags[x]);
+            }
+        };
+
+        console.log(tagsToAdd);
+
+        setContentFormData(
+            {name:contentData.name,
+            artist: contentData.artist,
+            image: contentData.image,
+            description: contentData.description,
+            link: contentData.link,
+            tags: tagsToAdd, 
+            aditionalTags: aditionalTagsToAdd});
+
+        console.log(contentData);
+
+        try {
+            const { data } = await createSound({
+                variables: {postData: {...contentData}}
+            });
+        } catch (err) {
+            console.log(err);
+            setShowAlert(true);
+        }
+
+        setContentFormData({name:"",artist:"",image:"",description:"",link:"",tags:[],aditionalTags:[]})
     };
 
     const handleContentChange = (event) => {
@@ -114,7 +151,7 @@ const NewSoundPost = () => {
                                  variant='success'>
                                 Submit
                              </Button> </> ):(<>
-                                <TagSearch tags={tags} chosenTags={chosenTags} setChosenTags={setChosenTags}/>
+                                <TagSearch tags={tags} chosenTags={chosenTags} setChosenTags={setChosenTags} contentData={contentData} setContentFormData={setContentFormData}/>
                              <Container className='chosen-tags-container'>
                                 {chosenTags.map(item=> (
                                     <div className="chosen-tag" key={item.id} >

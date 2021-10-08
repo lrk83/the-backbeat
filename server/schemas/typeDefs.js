@@ -87,6 +87,8 @@ const typeDefs = gql`
         image: String
         link: String
         description: String
+        tags: [ID]
+        aditionalTags: [ID]
     }
 
     type Query{

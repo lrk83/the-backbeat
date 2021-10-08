@@ -143,8 +143,10 @@ const resolvers = {
         },
         addSoundPost: async (parent, {postData}, context) => {
 
+            console.log(postData.tags);
+
             if (context.user) {
-              const post = await SoundPost.create({ postData });
+              const post = await SoundPost.create({ ...postData });
       
               const updatedUser = await User.findOneAndUpdate(
                 {_id: context.user._id},

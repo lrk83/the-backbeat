@@ -14,11 +14,21 @@ export const GET_ME = gql`
         soundPostCount
         soundPosts{
             _id
+            link
             name
+            description
             artist
             date
             image
             followerCount
+            tags {
+                _id
+                name
+            }
+            aditionalTags {
+                _id
+                name
+            }
         }
         skillPostCount
         skillPosts{

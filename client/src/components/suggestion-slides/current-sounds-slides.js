@@ -12,9 +12,11 @@ function CurrentSlides ({currentPhotos}){
         })
     })
 
+    const max = currentPhotos.length;
+
     return (
         <Container className="suggested-container">
-            {currentPhotos[3] ? ( <>
+            {currentPhotos[0] && ( <>
             
             <Card data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" id="suggested-card-1">
             <Link to={`/sounds/single-sound/${currentPhotos[0]._id}`}>
@@ -25,9 +27,9 @@ function CurrentSlides ({currentPhotos}){
                     <Card.Description>{currentPhotos[0].artist}</Card.Description>
                 </Card.Content>
             </Link>
-            </Card>
+            </Card> </> )}
             
-            
+            {currentPhotos[1] && ( <>
             <Card data-aos="fade-in" data-aos-delay="300" data-aos-duration="1500" id="suggested-card-2">
             <Link to={`/sounds/single-sound/${currentPhotos[1]._id}`}>
                 <Image src={currentPhotos[1].image}/>
@@ -37,9 +39,9 @@ function CurrentSlides ({currentPhotos}){
                     <Card.Description>{currentPhotos[1].artist}</Card.Description>
                 </Card.Content>
             </Link>
-            </Card>
+            </Card> </> )}
             
-            
+            {currentPhotos[2] && ( <>
             <Card data-aos="fade-in" data-aos-delay="500" data-aos-duration="1500" id="suggested-card-3">
             <Link to={`/sounds/single-sound/${currentPhotos[2]._id}`}>
                 <Image src={currentPhotos[2].image}/>
@@ -49,9 +51,9 @@ function CurrentSlides ({currentPhotos}){
                     <Card.Description>{currentPhotos[2].artist}</Card.Description>
                 </Card.Content>
             </Link>
-            </Card>
+            </Card> </> )}
             
-            
+            {currentPhotos[3] && ( <>
             <Card data-aos="fade-in" data-aos-delay="700" data-aos-duration="1500" id="suggested-card-2">
             <Link to={`/sounds/single-sound/${currentPhotos[3]._id}`}>
                 <Image src={currentPhotos[3].image}/>
@@ -61,9 +63,7 @@ function CurrentSlides ({currentPhotos}){
                     <Card.Description>{currentPhotos[3].artist}</Card.Description>
                 </Card.Content>
             </Link>
-            </Card>
-            
-            </>):(<></>)}
+            </Card> </>)}
         </Container>
     )
 }

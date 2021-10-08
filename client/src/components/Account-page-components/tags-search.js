@@ -26,10 +26,14 @@ function exampleReducer(state, action) {
 
 function TagSearch(props) {
     const {
+        contentData,
+        setContentFormData,
         tags,
         chosenTags,
         setChosenTags
     }=props;
+
+    console.log(props);
 
   const [state, dispatch] = React.useReducer(exampleReducer, initialState)
   const { loading, results, value } = state
@@ -46,6 +50,8 @@ function TagSearch(props) {
 
     updatedTags.push(data.result);
     setChosenTags(updatedTags);
+
+    setContentFormData({...contentData, tags:chosenTags});
 
     dispatch({ type: 'CLEAN_QUERY' });
   };
@@ -89,7 +95,6 @@ function TagSearch(props) {
           placeholder="search for tags"
           loading={loading}
           onResultSelect={(e, data) => {
-              console.log('here');
             dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title });
             handleSelection(data) }
           }
