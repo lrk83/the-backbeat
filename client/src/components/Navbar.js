@@ -43,6 +43,7 @@ export default class AppNavbar extends Component {
             <Dropdown.Menu>
               <Dropdown.Item as={Link} to='/account/profile'>Profile</Dropdown.Item>
               <Dropdown.Item as={Link} to='/account/content'> Content </Dropdown.Item>
+              <Dropdown.Item as={Link} to="/account/preferences" > Preferences </Dropdown.Item>
               <Dropdown.Item onClick={Auth.logout}>Logout</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>) : (

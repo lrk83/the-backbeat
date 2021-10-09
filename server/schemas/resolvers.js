@@ -359,7 +359,7 @@ const resolvers = {
       
             throw new AuthenticationError('You need to be logged in!');
           },
-          updateUser: async (parent, {image, description, tags}, contect) => {
+          updateUser: async (parent, {image, description, tags}, context) => {
             if (context.user) {
               const updatedUser = await User.findOneAndUpdate(
                 { _id: context.user._id},
@@ -368,7 +368,7 @@ const resolvers = {
                 { new: true }
               )
 
-              return updatedUser
+              return updatedUser;
             }
 
             throw new AuthenticationError('You need to be logged in!');

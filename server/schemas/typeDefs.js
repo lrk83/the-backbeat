@@ -132,7 +132,7 @@ const typeDefs = gql`
         addCommentSkill(postId: ID!, commentBody: String!): SkillPost
         addCommentSound(postId: ID!, commentBody: String!): SoundPost
         addFriend(friendId: ID!): User
-        updateUser(photo: String, description: String, tags: [ID]): User
+        updateUser(image: String, description: String, followedTags: [ID]): User
     }
 `;
 

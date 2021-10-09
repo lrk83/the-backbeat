@@ -35,7 +35,7 @@ const AccountPage = ({ match }) => {
     }
 
     if (!loggedIn) {
-        return <div>Please login</div>
+        return <div>Please login to continue</div>
     };
 
     return (
