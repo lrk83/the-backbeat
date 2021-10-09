@@ -5,6 +5,9 @@ const typeDefs = gql`
        _id: ID
        username: String
        email: String
+       description: String
+       image: String
+       followedTags: [Tag]
        skillPosts: [SkillPost]
        savedSkillPosts: [SkillPost]
        soundPosts: [SoundPost]
@@ -129,6 +132,7 @@ const typeDefs = gql`
         addCommentSkill(postId: ID!, commentBody: String!): SkillPost
         addCommentSound(postId: ID!, commentBody: String!): SoundPost
         addFriend(friendId: ID!): User
+        updateUser(photo: String, description: String, tags: [ID]): User
     }
 `;
 

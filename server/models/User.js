@@ -19,6 +19,18 @@ const userSchema = new Schema(
         type: String,
         required: true,
       },
+      image: {
+        type: String
+      },
+      description: {
+        type: String
+      },
+      followedTags: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Tag"
+        }
+      ],
       soundPosts: [
           {
               type: Schema.Types.ObjectId,

@@ -135,3 +135,14 @@ mutation saveSoundPost($postId: ID) {
     }
   }
 }`;
+
+export const UPDATE_USER = gql`
+mutation updateUser($image: image, $description: description, $followedTags: tags) {
+  updateUser(image: $image, description: $description, followedTags: $followedTags){
+    _id
+    username
+    image
+    followedTags
+    description
+  }
+}`;
