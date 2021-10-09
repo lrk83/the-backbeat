@@ -359,12 +359,12 @@ const resolvers = {
       
             throw new AuthenticationError('You need to be logged in!');
           },
-          updateUser: async (parent, {image, description, tags}, context) => {
+          updateUser: async (parent, {image, description, followedTags}, context) => {
+            
             if (context.user) {
               const updatedUser = await User.findOneAndUpdate(
                 { _id: context.user._id},
-                { image: image, description: description},
-                { $push : { tags: tags }},
+                { image: image, description: description, followedTags: followedTags },
                 { new: true }
               )
 
