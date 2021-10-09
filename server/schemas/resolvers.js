@@ -29,8 +29,8 @@ const resolvers = {
               .populate('savedSoundPosts')
               .populate('friends');
           },
-          user: async (parent, { username }) => {
-            return User.findOne({ username })
+          user: async (parent, { userId }) => {
+            return User.findOne({ _id:userId })
               .select('-__v -password')
               .populate('skillPosts')
               .populate('soundPosts')

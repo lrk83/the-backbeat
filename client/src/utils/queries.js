@@ -237,3 +237,67 @@ export const GET_USERS = gql`
         }
     }
 }`;
+
+export const GET_SINGLE_USER = gql`
+query user($userId: ID!){
+    user(userId: $userId){
+        _id
+        username
+        email
+        friendCount
+        friends {
+            _id
+            username
+        }
+        soundPostCount
+        soundPosts{
+            _id
+            link
+            name
+            description
+            artist
+            date
+            image
+            followerCount
+            tags {
+                _id
+                name
+            }
+            aditionalTags {
+                _id
+                name
+            }
+        }
+        skillPostCount
+        skillPosts{
+            _id
+            name
+            date
+            description
+            image
+            followerCount
+        }
+        savedSoundPostCount
+        savedSoundPosts{
+            _id
+            name
+            artist
+            date
+            image
+            followerCount
+        }
+        savedSkillPostCount
+        savedSkillPosts{
+            _id
+            name
+            date
+            description
+            image
+            followerCount
+            author {
+                _id
+                username
+            }
+        }
+    }
+}`;

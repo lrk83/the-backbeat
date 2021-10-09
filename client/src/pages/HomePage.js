@@ -19,9 +19,7 @@ const HomePage = () => {
     const skillData = skilldata?.allSkillPosts || {};
 
     const { data: userdata } = useQuery(GET_USERS);
-
-    console.log(userdata);
-
+    
     const userData = userdata?.users || {};
 
     useEffect(()=>{

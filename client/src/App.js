@@ -17,6 +17,7 @@ import LoginPage from './pages/AccountPages/LoginPage';
 import SignUpPage from './pages/AccountPages/SignUpPage';
 import SingleSound from './pages/SingleSound';
 import SingleSkill from './pages/SingleSkill';
+import SingleUser from './pages/SingleUser';
 import newSoundPostPage from './pages/AccountPages/NewSoundPost';
 import newSkillPostPage from './pages/AccountPages/NewSkillPost';
 
@@ -54,6 +55,7 @@ function App() {
             <Route exact path='/account/skills/new-skill' component={newSkillPostPage} />
             <Route path="/sounds/single-sound/:soundId" component={SingleSound} />
             <Route path="/skills/single-skill/:skillId" component={SingleSkill} />
+            <Route path="/users/single-user/:userId" component={SingleUser} />
           </Switch>
         </main>
       </Router>
