@@ -25,6 +25,7 @@ const NewSoundPost = () => {
     const tags = data?.tags || {};
 
     const [chosenTags, setChosenTags]=useState([]);
+    const [addedTags, setAddedTags]=useState([]);
 
     const [createSound, {error}] = useMutation(ADD_SOUND);
     const [createTag] = useMutation(ADD_TAG);
@@ -90,6 +91,11 @@ const NewSoundPost = () => {
         setAddTagForm(value);
     }
 
+    const doTheThing = (info) => {
+        console.log(info);
+        setAddedTags(info);
+    }
+
     const handleAddTag = async (event) => {
         event.preventDefault();
 
@@ -98,7 +104,6 @@ const NewSoundPost = () => {
             updatedTags.push(chosenTags[x]);
         }
 
-        console.log(addTagForm);
         const newTagFromBackEnd = await createTag(
             {variables: {name: addTagForm}}
         );
@@ -107,9 +112,7 @@ const NewSoundPost = () => {
 
         updatedTags.push(newFormatedTag);
 
-        setChosenTags(updatedTags);
-
-        console.log(chosenTags);
+        doTheThing(updatedTags);
 
         setAddTagForm('');
     }
@@ -202,6 +205,10 @@ const NewSoundPost = () => {
                              <Container className='chosen-tags-container'>
                                  {console.log(chosenTags)}
                                 {chosenTags.map(item=> (
+                                    <div className="chosen-tag" key={item.id} >
+                                    {item.title}</div>
+                                ))}
+                                {addedTags.map(item=> (
                                     <div className="chosen-tag" key={item.id} >
                                     {item.title}</div>
                                 ))}

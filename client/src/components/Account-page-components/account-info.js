@@ -17,17 +17,17 @@ const SingleSound = (data) => {
 
 
     return(
-        <>
-                <Card className="single-post-card">
-                    <Image icon="user" wrapped ui={false} />
-                    <Card.Content>
-                        <Card.Header>{userData.username}</Card.Header>
-                    </Card.Content>
+        <Container className="user-profile-data">
+            <Card className="single-post-card">
+                <Image src="https://splice-res.cloudinary.com/image/upload/f_auto,q_auto,w_auto/c_limit,w_450/v1578500471/1578500465.jpg" wrapped ui={false} />
+            </Card>
+            <Container className="single-post-content">
+                <Header as='h1' className="single-header">My Info</Header>
+                <Card>
+                    <Header></Header>
                 </Card>
-                <Container className="single-post-content">
-                    <Header as='h1' className="single-header">My Info</Header>
-                </Container>
-        </>
+            </Container>
+        </Container>
     )
 }
 

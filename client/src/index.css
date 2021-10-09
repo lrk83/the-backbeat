@@ -322,3 +322,9 @@ h2.ui.header.links-menu-header{
   align-self: center;
   border-radius: 20px;
 }
+
+.ui.container.user-profile-data{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
