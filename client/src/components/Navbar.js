@@ -50,7 +50,7 @@ export default class AppNavbar extends Component {
               name='login'
               active={activeItem === 'login'}
               onClick={this.handleItemClick}
-              as={Link} to='login'
+              as={Link} to='/login'
             />
             )}
           </Menu.Menu>
