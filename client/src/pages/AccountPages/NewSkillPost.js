@@ -20,14 +20,9 @@ const NewSkillPost = () => {
     const [readyToSubmit, setReadyToSubmit] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
     const [addTagForm, setAddTagForm] = useState('');
-    const [tagSearchContent, updateTagSearchContent] = useState([]);
 
     const {loading, data} = useQuery(GET_TAGS);
     const tags = data?.tags || {};
-
-    useEffect(() => {
-        updateTagSearchContent(tags);
-    });
 
     const [chosenTags, setChosenTags]=useState([]);
 
@@ -231,7 +226,7 @@ const NewSkillPost = () => {
                              <TagSearch tags={tags} chosenTags={chosenTags} setChosenTags={setChosenTags} contentData={contentData} setContentFormData={setContentFormData}/>
                              <Form.Group widths="equal">
                              <Form.Input fluid label = "Don't see what you're looking for?" name="add-tag" placeholder="Add tag" value={addTagForm} onChange={handleAddTagFormContentChange}/>
-                             <Button onClick={handleAddTag}>Add Tag</Button>
+                             <Button onClick={handleAddTag} id="add-tag-button">Add Tag</Button>
                              <Container className='chosen-tags-container'>
                                 {chosenTags.map(item=> (
                                     <div className="chosen-tag" key={item.id} >
@@ -253,7 +248,7 @@ const NewSkillPost = () => {
                                 <TagSearch tags={tags} chosenTags={chosenTags} setChosenTags={setChosenTags} contentData={contentData} setContentFormData={setContentFormData}/>
                              <Form.Group widths="equal">
                              <Form.Input disabled fluid label = "Don't see what you're looking for?" name="add-tag" placeholder="Add tag" value={addTagForm} onChange={handleAddTagFormContentChange}/>
-                             <Button disabled onClick={handleAddTag}>Add Tag</Button>
+                             <Button disabled onClick={handleAddTag} id="add-tag-button">Add Tag</Button>
                              <Container className='chosen-tags-container'>
                                  {console.log(chosenTags)}
                                 {chosenTags.map(item=> (

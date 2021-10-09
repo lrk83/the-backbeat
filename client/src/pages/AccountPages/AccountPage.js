@@ -7,6 +7,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import MySounds from "../../components/Account-page-components/my-sounds";
 import MySkills from "../../components/Account-page-components/my-skills";
+import AccountInfo from "../../components/Account-page-components/account-info";
 
 const AccountPage = () => {
     const {loading, data} = useQuery(GET_ME);
@@ -30,7 +31,7 @@ const AccountPage = () => {
     return (
         <Container className="big-container">
             <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
-                Account Info (Card on the left and on the right your stats, like how many posts, how many saved posts, etc
+                <AccountInfo data={userData}></AccountInfo>
             </Container>
             <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
                 <MySounds data={userData.soundPosts}></MySounds>

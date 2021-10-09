@@ -310,3 +310,15 @@ h2.ui.header.links-menu-header{
 .ui.button{
   margin-top: 1rem;
 }
+
+.ui.container.chosen-tags-container{
+  padding: 1rem;
+  font-size: 1rem;
+  min-height: 2.5rem;
+}
+
+#add-tag-button{
+  width: 30%;
+  align-self: center;
+  border-radius: 20px;
+}

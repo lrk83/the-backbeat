@@ -6,7 +6,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useMutation, useQuery } from '@apollo/client';
 import {GET_TAGS} from '../../utils/queries';
-import {ADD_SOUND} from '../../utils/mutation';
+import {ADD_SOUND, ADD_TAG} from '../../utils/mutation';
 import TagSearch from "../../components/Account-page-components/tags-search";
 
 const NewSoundPost = () => {
@@ -19,13 +19,15 @@ const NewSoundPost = () => {
     const [submissionData, setSubmissionData] = useState({})
     const [readyToSubmit, setReadyToSubmit] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
+    const [addTagForm, setAddTagForm] = useState('');
 
     const {loading, data} = useQuery(GET_TAGS);
     const tags = data?.tags || {};
 
     const [chosenTags, setChosenTags]=useState([]);
 
-    const [createSound, {error}] = useMutation(ADD_SOUND)
+    const [createSound, {error}] = useMutation(ADD_SOUND);
+    const [createTag] = useMutation(ADD_TAG);
 
     //Handle which form sections are disabled
     const handleFirstFormSubmit = (event) => {
@@ -81,6 +83,35 @@ const NewSoundPost = () => {
             console.log(err);
             setShowAlert(true);
         }
+    }
+
+    const handleAddTagFormContentChange = (event) => {
+        const {name, value } = event.target;
+        setAddTagForm(value);
+    }
+
+    const handleAddTag = async (event) => {
+        event.preventDefault();
+
+        const updatedTags = [];
+        for (let x=0; x<chosenTags.length;x=x+1){
+            updatedTags.push(chosenTags[x]);
+        }
+
+        console.log(addTagForm);
+        const newTagFromBackEnd = await createTag(
+            {variables: {name: addTagForm}}
+        );
+
+        const newFormatedTag = {...newTagFromBackEnd.data.addTag, id: newTagFromBackEnd.data.addTag._id};
+
+        updatedTags.push(newFormatedTag);
+
+        setChosenTags(updatedTags);
+
+        console.log(chosenTags);
+
+        setAddTagForm('');
     }
 
     //Fade in elements
@@ -142,44 +173,51 @@ const NewSoundPost = () => {
                          <Header as ="h2" className="new-post-header">Tags</Header>
                          {showAlert? (<Label basic color="red">Something went wrong. Please check your inputs and try again </Label>):(<></>)}
                              {section==="tags" ? ( <>
-                             <TagSearch tags={tags} chosenTags={chosenTags} setChosenTags={setChosenTags}/>
+                             <TagSearch tags={tags} chosenTags={chosenTags} setChosenTags={setChosenTags} contentData={contentData} setContentFormData={setContentFormData}/>
+                             <Form.Group widths="equal">
+                             <Form.Input fluid label = "Don't see what you're looking for?" name="add-tag" placeholder="Add tag" value={addTagForm} onChange={handleAddTagFormContentChange}/>
+                             <Button onClick={handleAddTag} id="add-tag-button">Add Tag</Button>
                              <Container className='chosen-tags-container'>
                                 {chosenTags.map(item=> (
                                     <div className="chosen-tag" key={item.id} >
                                     {item.title}</div>
-                                ))} 
+                                ))}
                              </Container >
-
                              <Button
                                  onClick={tagsBackButton}>
                                  Back
                              </Button>
-                             
                              <Button
                                  type='submit'
                                  variant='success'>
                                 Submit
-                             </Button> </> ):(<>
-                                <TagSearch contentData={contentData} setContentFormData={setContentFormData}tags={tags} chosenTags={chosenTags} setChosenTags={setChosenTags}/>
+                             </Button>
+                             </Form.Group>
+                             
+                              </> ):(<>
+                                <TagSearch tags={tags} chosenTags={chosenTags} setChosenTags={setChosenTags} contentData={contentData} setContentFormData={setContentFormData}/>
+                             <Form.Group widths="equal">
+                             <Form.Input disabled fluid label = "Don't see what you're looking for?" name="add-tag" placeholder="Add tag" value={addTagForm} onChange={handleAddTagFormContentChange}/>
+                             <Button disabled onClick={handleAddTag} id="add-tag-button">Add Tag</Button>
                              <Container className='chosen-tags-container'>
+                                 {console.log(chosenTags)}
                                 {chosenTags.map(item=> (
                                     <div className="chosen-tag" key={item.id} >
                                     {item.title}</div>
-                                ))} 
+                                ))}
                              </Container >
-
                              <Button
                              disabled
                                  onClick={tagsBackButton}>
                                  Back
                              </Button>
-                             
                              <Button
                              disabled
                                  type='submit'
                                  variant='success'>
                                 Submit
                              </Button>
+                             </Form.Group>
                              
                              </>)}
                          </Form>
