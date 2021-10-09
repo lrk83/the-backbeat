@@ -94,15 +94,13 @@ const NewSkillPost = () => {
             {variables: {name: addTagForm}}
         );
 
-        console.log(newTagFromBackEnd.data.addTag._id);
-
         const newFormatedTag = {...newTagFromBackEnd.data.addTag, id: newTagFromBackEnd.data.addTag._id};
-
-        console.log(newFormatedTag);
 
         updatedTags.push(newFormatedTag);
 
         setChosenTags(updatedTags);
+
+        console.log(chosenTags);
 
         setAddTagForm('');
     }
@@ -181,7 +179,7 @@ const NewSkillPost = () => {
                                 <Form.Input fluid label="Name" disabled/>
                                 <Form.Input fluid label="Image" disabled/>
                                 <Form.Input fluid label = "Description" disabled/>
-                                <Button
+                                <Button className="new-from-submit-one"
                                     type='submit'
                                     disabled
                                     variant='success'>
@@ -231,47 +229,50 @@ const NewSkillPost = () => {
                          {showAlert? (<Label basic color="red">Something went wrong. Please check your inputs and try again </Label>):(<></>)}
                              {section==="tags" ? ( <>
                              <TagSearch tags={tags} chosenTags={chosenTags} setChosenTags={setChosenTags} contentData={contentData} setContentFormData={setContentFormData}/>
-                             <Form.Group>
-                             <Form.Input fluid label = "Add Tag" name="add-tag" placeholder="Don't see what you're looking for?" value={addTagForm} onChange={handleAddTagFormContentChange}/>
+                             <Form.Group widths="equal">
+                             <Form.Input fluid label = "Don't see what you're looking for?" name="add-tag" placeholder="Add tag" value={addTagForm} onChange={handleAddTagFormContentChange}/>
                              <Button onClick={handleAddTag}>Add Tag</Button>
-                             </Form.Group>
                              <Container className='chosen-tags-container'>
                                 {chosenTags.map(item=> (
                                     <div className="chosen-tag" key={item.id} >
                                     {item.title}</div>
                                 ))}
                              </Container >
-
                              <Button
                                  onClick={tagsBackButton}>
                                  Back
                              </Button>
-                             
                              <Button
                                  type='submit'
                                  variant='success'>
                                 Submit
-                             </Button> </> ):(<>
-                                <TagSearch tags={tagSearchContent} chosenTags={chosenTags} setChosenTags={setChosenTags}/>
+                             </Button>
+                             </Form.Group>
+                             
+                              </> ):(<>
+                                <TagSearch tags={tags} chosenTags={chosenTags} setChosenTags={setChosenTags} contentData={contentData} setContentFormData={setContentFormData}/>
+                             <Form.Group widths="equal">
+                             <Form.Input disabled fluid label = "Don't see what you're looking for?" name="add-tag" placeholder="Add tag" value={addTagForm} onChange={handleAddTagFormContentChange}/>
+                             <Button disabled onClick={handleAddTag}>Add Tag</Button>
                              <Container className='chosen-tags-container'>
+                                 {console.log(chosenTags)}
                                 {chosenTags.map(item=> (
                                     <div className="chosen-tag" key={item.id} >
                                     {item.title}</div>
-                                ))} {console.log(chosenTags)}
+                                ))}
                              </Container >
-
                              <Button
                              disabled
                                  onClick={tagsBackButton}>
                                  Back
                              </Button>
-                             
                              <Button
                              disabled
                                  type='submit'
                                  variant='success'>
                                 Submit
                              </Button>
+                             </Form.Group>
                              
                              </>)}
                          </Form>

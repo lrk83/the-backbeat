@@ -298,3 +298,15 @@ h2.ui.header.links-menu-header{
 .ui.form .fields{
   flex-direction: column;
 }
+
+.new-form-submit-one{
+  margin-bottom: 1rem;
+}
+
+.ui.form{
+  padding-bottom: 1rem;
+}
+
+.ui.button{
+  margin-top: 1rem;
+}
