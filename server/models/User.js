@@ -55,12 +55,18 @@ const userSchema = new Schema(
               ref: 'SkillPost'
           }
       ],
-      friends: [
+      followers: [
           {
               type: Schema.Types.ObjectId,
               ref: 'User'
           }
-      ]
+      ],
+      followedUsers: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    ]
     },
     // set this to use virtual below
     {
@@ -90,8 +96,8 @@ userSchema.methods.isCorrectPassWord = async function (password) {
     return bcrypt.compare(password, this.password);
 };
 
-userSchema.virtual('friendCount').get(function(){
-    return this.friends.length;
+userSchema.virtual('followerCount').get(function(){
+    return this.followers.length;
 })
 
 userSchema.virtual('soundPostCount').get(function(){

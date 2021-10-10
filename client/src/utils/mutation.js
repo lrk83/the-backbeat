@@ -149,3 +149,15 @@ mutation saveSoundPost($postId: ID) {
     }
   }
 }`;
+
+export const FOLLOW_USER = gql`
+mutation followUser($userId: ID) {
+  followUser(userId: $userId) {
+    _id
+    username
+    followers {
+      _id
+      username
+    }
+  }
+}`;

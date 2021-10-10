@@ -27,8 +27,6 @@ const LoginPage = () => {
     setUserFormData({ ...userFormData, [name]: value });
 
     if (name==='email') {
-        console.log(value);
-        console.log(validateEmail(value));
         if (validateEmail(value)===null){
             setShowEmailAlert(true);
         } else {
@@ -60,7 +58,7 @@ const LoginPage = () => {
       const { data } = await createUser({
         variables: {...userFormData}
       });
-      Auth.login(data.addUser.token);
+      //Auth.loginFromSignUp(data.addUser.token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);

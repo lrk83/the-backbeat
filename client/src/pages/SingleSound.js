@@ -26,8 +26,6 @@ const SingleSound = ({ match }) => {
         var userId = Auth.getProfile().data._id;
     }
 
-    console.log(soundData);
-
     const [soundIsSaved, setSoundIsSaved] = useState(false);
     const [addSound] = useMutation(SAVE_SOUND);
 
@@ -72,7 +70,7 @@ const SingleSound = ({ match }) => {
                         </Card.Description>
                     </Card.Content>
                     <Card.Content extra>
-                        <Link to={'/'}>
+                        <Link to={`/users/single-user/${soundData.author._id}`}>
                         <Icon name='user'/>
                         Posted by {soundData.author.username}
                         </Link>

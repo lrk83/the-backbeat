@@ -12,12 +12,13 @@ const typeDefs = gql`
        savedSkillPosts: [SkillPost]
        soundPosts: [SoundPost]
        savedSoundPosts: [SoundPost]
-       friends: [User]
+       followers: [User]
+       followedUsers: [User]
        skillPostCount: Int
        savedSkillPostCount: Int
        soundPostCount: Int
        savedSoundPostCount: Int
-       friendCount: Int
+       followerCount: Int
     }
 
     type SkillPost {
@@ -131,7 +132,7 @@ const typeDefs = gql`
         addTagtoSound(tagId: ID!, postId: ID!): SkillPost
         addCommentSkill(postId: ID!, commentBody: String!): SkillPost
         addCommentSound(postId: ID!, commentBody: String!): SoundPost
-        addFriend(friendId: ID!): User
+        followUser(userId: ID): User
         updateUser(image: String, description: String, followedTags: [ID]): User
     }
 `;

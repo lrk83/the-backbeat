@@ -4,6 +4,7 @@ import {Button, Menu, Header, Icon} from "semantic-ui-react";
 import CurrentSlide from './current-sounds-slides';
 
 const Slides = (data) => {
+
     const [photos]=useState(data);
     const [currentPhotos, updateCurrentPhotos] = useState(photos.data.slice(0, 4));
     const [currentIndex, updateCurrentIndex] = useState(4);
