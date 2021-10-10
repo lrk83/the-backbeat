@@ -1,8 +1,7 @@
-import React, {useState, useEffect} from "react";
-import { Container,Card, Image, Header, Icon, Button, Menu, Dropdown } from "semantic-ui-react";
+import React, {useEffect} from "react";
+import { Container,Card, Image, Header} from "semantic-ui-react";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import {Link} from 'react-router-dom';
 
 const SingleSound = (data) => {
 

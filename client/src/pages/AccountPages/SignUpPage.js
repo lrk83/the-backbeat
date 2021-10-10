@@ -20,7 +20,7 @@ const LoginPage = () => {
   const [showUsernameAlert, setShowUsernameAlert] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
 
-  const [createUser, {error}]=useMutation(ADD_USER)
+  const [createUser]=useMutation(ADD_USER)
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -55,9 +55,6 @@ const LoginPage = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
-    // check if form has everything (as per react-bootstrap docs)
-    const form = event.currentTarget;
 
     try {
       const { data } = await createUser({

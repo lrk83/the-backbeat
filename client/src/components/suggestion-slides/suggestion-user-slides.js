@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
-import {Container, Header, Icon, Card, Image, Menu} from "semantic-ui-react";
+import {Container, Header, Card, Image, Menu} from "semantic-ui-react";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 

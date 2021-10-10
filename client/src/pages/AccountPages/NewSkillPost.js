@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { Container, Form, Label, Button, Header, Menu } from "semantic-ui-react";
+import { Container, Form, Label, Button, Header} from "semantic-ui-react";
 import Auth from '../../utils/auth';
 import MenuTabular from '../../components/Menus/MenuTabularNewSkill';
 import AOS from 'aos';
@@ -30,7 +30,7 @@ const NewSkillPost = () => {
 
     const [chosenTags, setChosenTags]=useState([]);
 
-    const [createSkill, {error}] = useMutation(ADD_SKILL);
+    const [createSkill] = useMutation(ADD_SKILL);
     const [createTag] = useMutation(ADD_TAG);
 
     //Handle which form sections are disabled
@@ -88,7 +88,7 @@ const NewSkillPost = () => {
     };
 
     const handleAddTagFormContentChange = (event) => {
-        const {name, value} = event.target;
+        const {value} = event.target;
         setAddTagForm(value);
     }
 
@@ -130,7 +130,7 @@ const NewSkillPost = () => {
         
         try {
             console.log(submissionData);
-            const { data } = await createSkill({
+            await createSkill({
                 variables: {postData: {...submissionData}}
             });
             setContentFormData({name:"",image:"",description:"",text:"",links:[]});
@@ -156,6 +156,12 @@ const NewSkillPost = () => {
             sendToBackEnd();
         }
     });
+
+    if (loading) {
+        return(
+            <div>Loading...</div>
+        )
+    }
 
     if (!loggedIn) {
         return (

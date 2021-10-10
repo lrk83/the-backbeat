@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import {Button, Menu, Header, Icon} from "semantic-ui-react"; 
 import CurrentSlide from '../suggestion-slides/current-sounds-slides';
 

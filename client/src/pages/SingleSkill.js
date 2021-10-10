@@ -51,7 +51,7 @@ const SingleSound = ({ match }) => {
                 }
             }
         }
-    })
+    },[skillData.followers, userId])
 
     if (loading) {
         return <div>Loading...</div>;

@@ -20,10 +20,9 @@ const AccountPreferences = () => {
 
     const [submitUserData] = useMutation(UPDATE_USER);
 
-    const [userFormData, setUserFormData] = useState({ image: data?.me.image || "", description: data?.me.description || "", followedTags: data?.me.followedTags || []});
+    const [userFormData, setUserFormData] = useState({ image: userData?.me?.image || "", description: userData?.me?.description || "", followedTags: userData?.me?.followedTags || []});
     const [showAlert, setShowAlert] = useState(false);
     const [showSucess, setShowSuccess] = useState(false);
-    const [chosenTags, setChosenTags] = useState([]);
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -31,7 +30,7 @@ const AccountPreferences = () => {
         setUserFormData({...userFormData,followedTags:JSON.parse(localStorage.getItem("preferenceTags"))})
 
         try { 
-            const updatedUser = await submitUserData (
+            await submitUserData (
             {varibales: {...userFormData}}
         );
 

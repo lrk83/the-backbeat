@@ -28,6 +28,12 @@ const HomePage = () => {
         })
     });
 
+    if (loading){
+        return(
+            <div>Loading...</div>
+        )
+    }
+
     return (
         <Container className="big-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
             <Container className="shadow-container">
