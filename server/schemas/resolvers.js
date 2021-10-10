@@ -361,12 +361,11 @@ const resolvers = {
           },
           updateUser: async (parent, args, context) => {
             
-            console.log(args);
-
             if (context.user) {
+              console.log(args);
               const updatedUser = await User.findOneAndUpdate(
                 { _id: context.user._id},
-                { image: image, description: description, followedTags: followedTags },
+                { image: args.image, description: args.description, followedTags: args.followedTags },
                 { new: true }
               )
 

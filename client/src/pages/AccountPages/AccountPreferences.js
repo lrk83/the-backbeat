@@ -24,28 +24,32 @@ const AccountPreferences = () => {
     const [showAlert, setShowAlert] = useState(false);
     const [showSucess, setShowSuccess] = useState(false);
 
+    const handleContentChange = (event) => {
+        const { name, value } = event.target;
+        setUserFormData({ ...userFormData, [name]: value });
+    }
+
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        setUserFormData({...userFormData,followedTags:JSON.parse(localStorage.getItem("preferenceTags"))})
+        setUserFormData({...userFormData,followedTags:JSON.parse(localStorage.getItem("preferenceTags"))});
+
+        
 
         try { 
-            await submitUserData (
-            {varibales: {...userFormData}}
-        );
-
-        setShowSuccess(true);
+            console.log({...userFormData});
+            
+            await submitUserData ({
+            variables: {image: userFormData.image, description: userFormData.description, followedTags: userFormData.followedTags} 
+            });
+            
+            setShowSuccess(true);
         }catch (err) {
             console.error(err);
             setShowAlert(true);
           }
 
         localStorage.setItem("preferenceTags",JSON.stringify([]));
-    }
-
-    const handleContentChange = (event) => {
-        const { name, value } = event.target;
-        setUserFormData({ ...userFormData, [name]: value });
     }
 
     //Fade in elements
