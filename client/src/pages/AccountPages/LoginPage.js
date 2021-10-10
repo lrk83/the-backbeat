@@ -44,7 +44,7 @@ const LoginPage = () => {
     event.preventDefault();
 
     try {
-
+      console.log({...userFormData});
       const { data } = await loginUser({
         variables: {...userFormData}
       });

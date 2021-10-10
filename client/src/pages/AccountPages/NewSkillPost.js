@@ -10,6 +10,10 @@ import {ADD_SKILL, ADD_TAG} from '../../utils/mutation';
 import TagSearch from "../../components/Account-page-components/tags-search";
 
 const NewSkillPost = () => {
+    if (localStorage.getItem("newTags")===null){
+        localStorage.setItem("newTags",JSON.stringify([]));
+    }
+
     const loggedIn = Auth.loggedIn();
 
     const sections=["post-content","text","tags"]
@@ -47,7 +51,7 @@ const NewSkillPost = () => {
         const aditionalTagsToAdd = [];
         for(let x=0;x<chosenTags.length;x=x+1){
             
-            if (x<3){
+            if (tagsToAdd.length<3){
                 const tagToAdd=chosenTags[x].id;
                 tagsToAdd.push(tagToAdd);
             } else{
@@ -55,6 +59,17 @@ const NewSkillPost = () => {
                 aditionalTagsToAdd.push(chosenTagToAdd);
             }
         };
+
+        const localTags = JSON.parse(localStorage.getItem("newTags"));
+        for(let x=0;x<localTags.length;x=x+1){
+            if (tagsToAdd.length<3){
+                const tagToAdd=localTags[x].id;
+                tagsToAdd.push(tagToAdd);
+            } else {
+                const chosenTagToAdd = localTags[x].id;
+                aditionalTagsToAdd.push(chosenTagToAdd);
+            }
+        }
 
         setSubmissionData({
             ...contentData,
@@ -64,6 +79,7 @@ const NewSkillPost = () => {
 
         //Set up submission
         setReadyToSubmit(true);
+        localStorage.setItem("addTags",JSON.stringify([]));
     };
 
     const handleContentChange = (event) => {
@@ -72,19 +88,15 @@ const NewSkillPost = () => {
     };
 
     const handleAddTagFormContentChange = (event) => {
-        const {name, value } = event.target;
+        const {name, value} = event.target;
         setAddTagForm(value);
     }
 
     const handleAddTag = async (event) => {
         event.preventDefault();
 
-        const updatedTags = [];
-        for (let x=0; x<chosenTags.length;x=x+1){
-            updatedTags.push(chosenTags[x]);
-        }
+        const updatedTags=JSON.parse(localStorage.getItem('newTags'));
 
-        console.log(addTagForm);
         const newTagFromBackEnd = await createTag(
             {variables: {name: addTagForm}}
         );
@@ -93,9 +105,8 @@ const NewSkillPost = () => {
 
         updatedTags.push(newFormatedTag);
 
-        setChosenTags(updatedTags);
-
-        console.log(chosenTags);
+        localStorage.setItem('newTags',JSON.stringify(updatedTags));
+        console.log(JSON.parse(localStorage.getItem('newTags')));
 
         setAddTagForm('');
     }
@@ -125,6 +136,8 @@ const NewSkillPost = () => {
             setContentFormData({name:"",image:"",description:"",text:"",links:[]});
             setChosenTags([]);
             updateSection("post-content");
+
+        window.location.assign('/account/profile')
         } catch (err) {
             console.log(err);
             setShowAlert(true);
@@ -232,6 +245,10 @@ const NewSkillPost = () => {
                                     <div className="chosen-tag" key={item.id} >
                                     {item.title}</div>
                                 ))}
+                                {JSON.parse(localStorage.getItem("newTags")).map(item=>(
+                                    <div className="new-tag" key={item.id} >
+                                    {item.name}</div>
+                                ))}
                              </Container >
                              <Button
                                  onClick={tagsBackButton}>
@@ -250,11 +267,14 @@ const NewSkillPost = () => {
                              <Form.Input disabled fluid label = "Don't see what you're looking for?" name="add-tag" placeholder="Add tag" value={addTagForm} onChange={handleAddTagFormContentChange}/>
                              <Button disabled onClick={handleAddTag} id="add-tag-button">Add Tag</Button>
                              <Container className='chosen-tags-container'>
-                                 {console.log(chosenTags)}
                                 {chosenTags.map(item=> (
                                     <div className="chosen-tag" key={item.id} >
                                     {item.title}</div>
                                 ))}
+                                {JSON.parse(localStorage.getItem("newTags")).map(item=>(
+                                    <div className="new-tag" key={item.id} >
+                                    {item.name}</div>
+                              ))}
                              </Container >
                              <Button
                              disabled

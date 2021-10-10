@@ -7,11 +7,22 @@ export const GET_ME = gql`
         username
         email
         friendCount
+        image
+        description
+        followedTags {
+            _id
+            name
+        }
         friends {
             _id
             username
         }
         soundPostCount
+        image
+        followedTags {
+            _id
+            name
+        }
         soundPosts{
             _id
             link
@@ -181,6 +192,11 @@ export const GET_USERS = gql`
         username
         email
         friendCount
+        image
+        followedTags {
+            _id
+            name
+        }
         friends {
             _id
             username
@@ -245,6 +261,12 @@ query user($userId: ID!){
         username
         email
         friendCount
+        description
+        image
+        followedTags {
+            _id
+            name
+        }
         friends {
             _id
             username

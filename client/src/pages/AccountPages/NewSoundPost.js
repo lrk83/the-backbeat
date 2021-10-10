@@ -10,6 +10,10 @@ import {ADD_SOUND, ADD_TAG} from '../../utils/mutation';
 import TagSearch from "../../components/Account-page-components/tags-search";
 
 const NewSoundPost = () => {
+    if (localStorage.getItem("newTags")===null){
+        localStorage.setItem("newTags",JSON.stringify([]));
+    }
+
     const loggedIn = Auth.loggedIn();
 
     const sections=["post-content","tags"]
@@ -25,7 +29,6 @@ const NewSoundPost = () => {
     const tags = data?.tags || {};
 
     const [chosenTags, setChosenTags]=useState([]);
-    const [addedTags, setAddedTags]=useState([]);
 
     const [createSound, {error}] = useMutation(ADD_SOUND);
     const [createTag] = useMutation(ADD_TAG);
@@ -36,14 +39,14 @@ const NewSoundPost = () => {
         updateSection(sections[1]);
     };
 
-    const handleSecondFormSubmit = async (event) => {
+    const handleSecondFormSubmit = (event) => {
         event.preventDefault();
         
         const tagsToAdd = [];
         const aditionalTagsToAdd = [];
         for(let x=0;x<chosenTags.length;x=x+1){
             
-            if (x<3){
+            if (tagsToAdd.length<3){
                 const tagToAdd=chosenTags[x].id;
                 tagsToAdd.push(tagToAdd);
             } else{
@@ -51,6 +54,17 @@ const NewSoundPost = () => {
                 aditionalTagsToAdd.push(chosenTagToAdd);
             }
         };
+
+        const localTags = JSON.parse(localStorage.getItem("newTags"));
+        for(let x=0;x<localTags.length;x=x+1){
+            if (tagsToAdd.length<3){
+                const tagToAdd=localTags[x].id;
+                tagsToAdd.push(tagToAdd);
+            } else {
+                const chosenTagToAdd = localTags[x].id;
+                aditionalTagsToAdd.push(chosenTagToAdd);
+            }
+        }
 
         setSubmissionData({
             ...contentData,
@@ -60,7 +74,9 @@ const NewSoundPost = () => {
 
         //Set up submission
         setReadyToSubmit(true);
+        localStorage.setItem("addTags",JSON.stringify([]));
     };
+
 
     const handleContentChange = (event) => {
         const { name, value } = event.target;
@@ -80,6 +96,9 @@ const NewSoundPost = () => {
             const { data } = await createSound({
                 variables: {postData: {...submissionData}}
             });
+
+
+        window.location.assign('/account/profile')
         } catch (err) {
             console.log(err);
             setShowAlert(true);
@@ -91,18 +110,10 @@ const NewSoundPost = () => {
         setAddTagForm(value);
     }
 
-    const doTheThing = (info) => {
-        console.log(info);
-        setAddedTags(info);
-    }
-
     const handleAddTag = async (event) => {
         event.preventDefault();
 
-        const updatedTags = [];
-        for (let x=0; x<chosenTags.length;x=x+1){
-            updatedTags.push(chosenTags[x]);
-        }
+        const updatedTags=JSON.parse(localStorage.getItem('newTags'));
 
         const newTagFromBackEnd = await createTag(
             {variables: {name: addTagForm}}
@@ -112,7 +123,8 @@ const NewSoundPost = () => {
 
         updatedTags.push(newFormatedTag);
 
-        doTheThing(updatedTags);
+        localStorage.setItem('newTags',JSON.stringify(updatedTags));
+        console.log(JSON.parse(localStorage.getItem('newTags')));
 
         setAddTagForm('');
     }
@@ -185,6 +197,10 @@ const NewSoundPost = () => {
                                     <div className="chosen-tag" key={item.id} >
                                     {item.title}</div>
                                 ))}
+                                {JSON.parse(localStorage.getItem("newTags")).map(item=>(
+                                    <div className="new-tag" key={item.id} >
+                                    {item.name}</div>
+                              ))}
                              </Container >
                              <Button
                                  onClick={tagsBackButton}>
@@ -203,15 +219,14 @@ const NewSoundPost = () => {
                              <Form.Input disabled fluid label = "Don't see what you're looking for?" name="add-tag" placeholder="Add tag" value={addTagForm} onChange={handleAddTagFormContentChange}/>
                              <Button disabled onClick={handleAddTag} id="add-tag-button">Add Tag</Button>
                              <Container className='chosen-tags-container'>
-                                 {console.log(chosenTags)}
                                 {chosenTags.map(item=> (
                                     <div className="chosen-tag" key={item.id} >
                                     {item.title}</div>
                                 ))}
-                                {addedTags.map(item=> (
-                                    <div className="chosen-tag" key={item.id} >
-                                    {item.title}</div>
-                                ))}
+                                {JSON.parse(localStorage.getItem("newTags")).map(item=>(
+                                    <div className="new-tag" key={item.id} >
+                                    {item.name}</div>
+                              ))}
                              </Container >
                              <Button
                              disabled
