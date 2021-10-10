@@ -74,7 +74,7 @@ const NewSoundPost = () => {
 
         //Set up submission
         setReadyToSubmit(true);
-        localStorage.setItem("addTags",JSON.stringify([]));
+        localStorage.setItem("newTags",JSON.stringify([]));
     };
 
 

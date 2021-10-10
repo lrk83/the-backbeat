@@ -7,7 +7,7 @@ import 'aos/dist/aos.css';
 import { useQuery, useMutation } from '@apollo/client';
 import {GET_ME, GET_TAGS} from '../../utils/queries';
 import {UPDATE_USER} from '../../utils/mutation';
-import TagSearch from "../../components/Account-page-components/tags-search";
+import TagSearch from "../../components/Account-page-components/preference-page-tag-search";
 
 const AccountPreferences = () => {
 
@@ -28,8 +28,9 @@ const AccountPreferences = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
+        setUserFormData({...userFormData,followedTags:JSON.parse(localStorage.getItem("preferenceTags"))})
+
         try { 
-            console.log({...userFormData});
             const updatedUser = await submitUserData (
             {varibales: {...userFormData}}
         );
@@ -39,6 +40,8 @@ const AccountPreferences = () => {
             console.error(err);
             setShowAlert(true);
           }
+
+        localStorage.setItem("preferenceTags",JSON.stringify([]));
     }
 
     const handleContentChange = (event) => {
@@ -79,14 +82,7 @@ const AccountPreferences = () => {
                         <Form.Input fluid label = "User Description" name="description" required onChange={handleContentChange} value={userFormData.description}/>
 
                         <Header>What topics are you interested in?</Header>
-                        <TagSearch tags={tags} chosenTags={chosenTags} setChosenTags={setChosenTags}> </TagSearch>
-                        
-                        {/*<Container className='chosen-tags-container'>
-                                {chosenTags.map(item=> (
-                                    <div className="chosen-tag" key={item.id} >
-                                    {item.title}</div>
-                                ))}
-                                </Container >*/}
+                        <TagSearch tags={tags} />
 
                         <Button
                             type='submit'

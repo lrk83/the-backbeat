@@ -79,7 +79,7 @@ const NewSkillPost = () => {
 
         //Set up submission
         setReadyToSubmit(true);
-        localStorage.setItem("addTags",JSON.stringify([]));
+        localStorage.setItem("newTags",JSON.stringify([]));
     };
 
     const handleContentChange = (event) => {
