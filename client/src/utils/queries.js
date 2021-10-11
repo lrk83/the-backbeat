@@ -88,9 +88,14 @@ export const GET_SOUNDS_FOR_SUGGESTED = gql`
             date
             image
             followerCount
-            author{
+            description
+            tags{
                 _id
-                username
+                name
+            }
+            aditionalTags{
+                _id
+                name
             }
         }
     }`;
@@ -104,9 +109,13 @@ export const GET_SKILLS_FOR_SUGGESTED = gql`
             image
             followerCount
             description
-            author{
+            tags{
                 _id
-                username
+                name
+            }
+            aditionalTags{
+                _id
+                name
             }
         }
     }`;

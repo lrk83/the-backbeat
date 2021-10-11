@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import { useQuery } from '@apollo/client';
 import {Container} from "semantic-ui-react";
-import {GET_SINGLE_USER} from '../utils/queries';
-import Auth from '../utils/auth';
+import {GET_SINGLE_USER} from '../../utils/queries';
+import Auth from '../../utils/auth';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import AccountInfo from '../components/Account-page-components/account-info';
-import Sounds from '../components/suggestion-slides/suggestion-sound-slide';
-import Skills from '../components/suggestion-slides/suggestion-skill-slide';
+import AccountInfo from '../../components/Account-page-components/account-info';
+import Sounds from '../../components/suggestion-slides/suggestion-sound-slide';
+import Skills from '../../components/suggestion-slides/suggestion-skill-slide';
 
 const AccountPage = ({ match }) => {
 

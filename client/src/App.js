@@ -8,16 +8,16 @@ import Navbar from './components/Navbar';
 
 //Pages
 import HomePage from './pages/HomePage';
-import SkillPage from './pages/SkillPage';
-import SoundPage from './pages/SoundPage';
-import CommunityPage from './pages/CommunityPage';
+import SkillPage from './pages/SkillPages/SkillPage';
+import SoundPage from './pages/SoundPages/SoundPage';
+import CommunityPage from './pages/UserPages/CommunityPage';
 import AccountPage from './pages/AccountPages/AccountPage';
 import ContentPage from './pages/AccountPages/ContentPage';
 import LoginPage from './pages/AccountPages/LoginPage';
 import SignUpPage from './pages/AccountPages/SignUpPage';
-import SingleSound from './pages/SingleSound';
-import SingleSkill from './pages/SingleSkill';
-import SingleUser from './pages/SingleUser';
+import SingleSound from './pages/SoundPages/SingleSound';
+import SingleSkill from './pages/SkillPages/SingleSkill';
+import SingleUser from './pages/UserPages/SingleUser';
 import newSoundPostPage from './pages/AccountPages/NewSoundPost';
 import newSkillPostPage from './pages/AccountPages/NewSkillPost';
 import accountPreferences from './pages/AccountPages/AccountPreferences';

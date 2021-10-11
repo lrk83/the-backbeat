@@ -3,9 +3,9 @@ import { Container,Card, Image, Header, Icon, Button, Menu, Dropdown } from "sem
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useQuery, useMutation } from '@apollo/client';
-import {GET_SINGLE_SOUND} from '../utils/queries';
-import { SAVE_SOUND } from "../utils/mutation";
-import Auth from '../utils/auth';
+import {GET_SINGLE_SOUND} from '../../utils/queries';
+import { SAVE_SOUND } from "../../utils/mutation";
+import Auth from '../../utils/auth';
 import {Link} from 'react-router-dom';
 
 const SingleSound = ({ match }) => {

@@ -340,6 +340,7 @@ h2.ui.header.links-menu-header{
 
 #most-popular-container{
   background-color: black;
+  width: 100%;
 }
 
 #top-ten-header{
@@ -348,4 +349,18 @@ h2.ui.header.links-menu-header{
 
 #top-ten-shadow-container{
   background-color: #d4d4d5;
+}
+
+.ui.celled.list>.item{
+  display: flex;
+  align-items: center;
+}
+
+#image-preview{
+  align-self: center;
+  margin-bottom: 1rem;
+}
+
+#image-preview-header{
+  margin-top: 0;
 }

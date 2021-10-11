@@ -369,12 +369,22 @@ const resolvers = {
           },
           updateUser: async (parent, args, context) => {
             
+            followedTags =[];
+            for (let x=0;x<args.followedTags.length;x++){
+              let tag = await Tag.findOne(
+                {_id: args.followedTags[x]}
+              );
+
+              console.log(tag);
+              followedTags.push(tag);
+            }
+
             if (context.user) {
               const updatedUser = await User.findOneAndUpdate(
                 { _id: context.user._id},
-                { image: args.image, description: args.description, followedTags: args.followedTags },
+                { image: args.image, description: args.description, followedTags: followedTags },
                 { new: true }
-              )
+              ).populate("followedTags")
 
               return updatedUser;
             }

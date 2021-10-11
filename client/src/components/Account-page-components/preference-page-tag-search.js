@@ -24,7 +24,9 @@ function exampleReducer(state, action) {
   };
 };
 
-function TagSearch(tags) {
+function TagSearch(props) {
+  
+  const {tags} = props
 
   if (localStorage.getItem("preferenceTags")===null){
     localStorage.setItem("preferenceTags", JSON.stringify([]));
@@ -33,7 +35,7 @@ function TagSearch(tags) {
   const [state, dispatch] = React.useReducer(exampleReducer, initialState);
   const { loading, results, value } = state;
 
-  const tagData=tags?.tags;
+  const tagData=tags;
 
   const source = [];
 

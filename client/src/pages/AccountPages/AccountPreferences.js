@@ -4,10 +4,9 @@ import { Container, Form, Label, Button, Header} from "semantic-ui-react";
 import Auth from '../../utils/auth';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery} from '@apollo/client';
 import {GET_ME, GET_TAGS} from '../../utils/queries';
-import {UPDATE_USER} from '../../utils/mutation';
-import TagSearch from "../../components/Account-page-components/preference-page-tag-search";
+import PreferencesForm from '../../components/Account-page-components/account-preferences-form';
 
 const AccountPreferences = () => {
 
@@ -18,39 +17,7 @@ const AccountPreferences = () => {
     const tags = tagData?.tags || {};
     const userData = data?.me || {};
 
-    const [submitUserData] = useMutation(UPDATE_USER);
-
-    const [userFormData, setUserFormData] = useState({ image: userData?.me?.image || "", description: userData?.me?.description || "", followedTags: userData?.me?.followedTags || []});
-    const [showAlert, setShowAlert] = useState(false);
-    const [showSucess, setShowSuccess] = useState(false);
-
-    const handleContentChange = (event) => {
-        const { name, value } = event.target;
-        setUserFormData({ ...userFormData, [name]: value });
-    }
-
-    const handleFormSubmit = async (event) => {
-        event.preventDefault();
-
-        setUserFormData({...userFormData,followedTags:JSON.parse(localStorage.getItem("preferenceTags"))});
-
-        
-
-        try { 
-            console.log({...userFormData});
-            
-            await submitUserData ({
-            variables: {image: userFormData.image, description: userFormData.description, followedTags: userFormData.followedTags} 
-            });
-            
-            setShowSuccess(true);
-        }catch (err) {
-            console.error(err);
-            setShowAlert(true);
-          }
-
-        localStorage.setItem("preferenceTags",JSON.stringify([]));
-    }
+    console.log(userData);
 
     //Fade in elements
     useEffect(()=>{
@@ -73,28 +40,7 @@ const AccountPreferences = () => {
 
     return (
         <Container className='big-container'>
-            <Container className='shadow-container'>
-                <Header as ="h1" className="new-post-header">Account Preferences</Header>
-                <Form onSubmit={handleFormSubmit}>
-                {showAlert? (<Label basic color="red">Something went wrong. Please check your inputs and try again </Label>):(<></>)}
-                {showSucess && (<Label basic color="green">Succesfully updated!</Label>)}
-                    <Form.Group widths='equal' data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500">
-                        <Header as ="h2" className="new-post-header">Account Info</Header>
-
-                        <Form.Input fluid label="Profile Image" name="image" required onChange={handleContentChange} value={userFormData.image}/>
-                        <Form.Input fluid label = "User Description" name="description" required onChange={handleContentChange} value={userFormData.description}/>
-
-                        <Header>What topics are you interested in?</Header>
-                        <TagSearch tags={tags} />
-
-                        <Button
-                            type='submit'
-                            variant='success'>
-                            Submit
-                        </Button>
-                    </Form.Group>
-                </Form>
-            </Container>
+            <PreferencesForm tags={tags} userData={userData}></PreferencesForm>
         </Container>
     )
 }
