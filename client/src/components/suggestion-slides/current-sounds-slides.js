@@ -12,8 +12,6 @@ function CurrentSlides ({currentPhotos}){
         })
     })
 
-    const max = currentPhotos.length;
-
     return (
         <Container className="suggested-container">
             {currentPhotos[0] && ( <>

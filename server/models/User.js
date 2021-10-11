@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+const dateFormat = require('../utils/dateFormat');
 
 const userSchema = new Schema(
     {
@@ -25,6 +26,11 @@ const userSchema = new Schema(
       description: {
         type: String
       },
+      date: {
+        type: Date,
+        default: Date.now,
+        get: createdAtVal => dateFormat(createdAtVal)
+    },
       followedTags: [
         {
             type: Schema.Types.ObjectId,
@@ -55,12 +61,18 @@ const userSchema = new Schema(
               ref: 'SkillPost'
           }
       ],
-      friends: [
+      followers: [
           {
               type: Schema.Types.ObjectId,
               ref: 'User'
           }
-      ]
+      ],
+      followedUsers: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    ]
     },
     // set this to use virtual below
     {
@@ -90,8 +102,8 @@ userSchema.methods.isCorrectPassWord = async function (password) {
     return bcrypt.compare(password, this.password);
 };
 
-userSchema.virtual('friendCount').get(function(){
-    return this.friends.length;
+userSchema.virtual('followerCount').get(function(){
+    return this.followers.length;
 })
 
 userSchema.virtual('soundPostCount').get(function(){

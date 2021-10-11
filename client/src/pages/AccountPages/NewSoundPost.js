@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { Container, Form, Label, Button, Header, Menu } from "semantic-ui-react";
+import { Container, Form, Label, Button, Header } from "semantic-ui-react";
 import Auth from '../../utils/auth';
 import MenuTabular from '../../components/Menus/MenuTabularNewSound';
 import AOS from 'aos';
@@ -30,7 +30,7 @@ const NewSoundPost = () => {
 
     const [chosenTags, setChosenTags]=useState([]);
 
-    const [createSound, {error}] = useMutation(ADD_SOUND);
+    const [createSound] = useMutation(ADD_SOUND);
     const [createTag] = useMutation(ADD_TAG);
 
     //Handle which form sections are disabled
@@ -93,7 +93,7 @@ const NewSoundPost = () => {
         
         try {
             console.log(submissionData);
-            const { data } = await createSound({
+            await createSound({
                 variables: {postData: {...submissionData}}
             });
 
@@ -106,7 +106,7 @@ const NewSoundPost = () => {
     }
 
     const handleAddTagFormContentChange = (event) => {
-        const {name, value } = event.target;
+        const {value } = event.target;
         setAddTagForm(value);
     }
 
@@ -141,6 +141,12 @@ const NewSoundPost = () => {
             sendToBackEnd();
         }
     });
+
+    if(loading){
+        return (
+            <div>Loading...</div>
+        )
+    }
 
     if (!loggedIn) {
         return (

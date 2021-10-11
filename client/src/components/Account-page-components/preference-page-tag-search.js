@@ -6,7 +6,7 @@ const initialState = {
   loading: false,
   results: [],
   value: '',
-}
+};
 
 function exampleReducer(state, action) {
   switch (action.type) {
@@ -21,17 +21,17 @@ function exampleReducer(state, action) {
 
     default:
       throw new Error()
-  }
-}
+  };
+};
 
 function TagSearch(tags) {
 
   if (localStorage.getItem("preferenceTags")===null){
     localStorage.setItem("preferenceTags", JSON.stringify([]));
-  }
+  };
 
-  const [state, dispatch] = React.useReducer(exampleReducer, initialState)
-  const { loading, results, value } = state
+  const [state, dispatch] = React.useReducer(exampleReducer, initialState);
+  const { loading, results, value } = state;
 
   const tagData=tags?.tags;
 
@@ -54,30 +54,31 @@ function TagSearch(tags) {
 
   const timeoutRef = React.useRef()
   const handleSearchChange = React.useCallback((e, data) => {
-    clearTimeout(timeoutRef.current)
-    dispatch({ type: 'START_SEARCH', query: data.value })
+    clearTimeout(timeoutRef.current);
+    dispatch({ type: 'START_SEARCH', query: data.value });
 
     timeoutRef.current = setTimeout(() => {
       if (data.value.length === 0) {
-        dispatch({ type: 'CLEAN_QUERY' })
-        return
-      }
+        dispatch({ type: 'CLEAN_QUERY' });
+        return;
+      };
 
-      const re = new RegExp(_.escapeRegExp(data.value), 'i')
+      const re = new RegExp(_.escapeRegExp(data.value), 'i');
 
-      const isMatch = (result) => re.test(result.title)
+      const isMatch = (result) => re.test(result.title);
 
       dispatch({
         type: 'FINISH_SEARCH',
         results: _.filter(source, isMatch),
-      })
-    }, 300)
-  }, [])
+      });
+    }, 300);
+  }, []);
+
   React.useEffect(() => {
     return () => {
-      clearTimeout(timeoutRef.current)
+      clearTimeout(timeoutRef.current);
     }
-  }, [])
+  }, []);
 
   return (
     <Grid>
@@ -94,11 +95,11 @@ function TagSearch(tags) {
           value={value}
         />
         <Container className='chosen-tags-container'>
-                                {JSON.parse(localStorage.getItem("preferenceTags")).map(item=> (
-                                    <div className="preference-tags" key={item.id} >
-                                    {item.title}</div>
-                                ))}
-                                </Container >
+          {JSON.parse(localStorage.getItem("preferenceTags")).map(item=> (
+            <div className="preference-tags" key={item.id} >
+              {item.title}</div>
+            ))}
+        </Container >
       </Grid.Column>
     </Grid>
   )

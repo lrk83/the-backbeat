@@ -3,7 +3,7 @@ import { Container,Card, Image, Header, Icon, Button, Menu, Dropdown } from "sem
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useQuery, useMutation } from '@apollo/client';
-import {GET_SINGLE_SOUND, GET_ME} from '../utils/queries';
+import {GET_SINGLE_SOUND} from '../utils/queries';
 import { SAVE_SOUND } from "../utils/mutation";
 import Auth from '../utils/auth';
 import {Link} from 'react-router-dom';
@@ -25,8 +25,6 @@ const SingleSound = ({ match }) => {
     if (loggedIn){
         var userId = Auth.getProfile().data._id;
     }
-
-    console.log(soundData);
 
     const [soundIsSaved, setSoundIsSaved] = useState(false);
     const [addSound] = useMutation(SAVE_SOUND);
@@ -51,7 +49,7 @@ const SingleSound = ({ match }) => {
                 }
             }
         }
-    })
+    },[soundData.followers,userId])
 
     if (loading) {
         return <div>Loading...</div>;
@@ -72,7 +70,7 @@ const SingleSound = ({ match }) => {
                         </Card.Description>
                     </Card.Content>
                     <Card.Content extra>
-                        <Link to={'/'}>
+                        <Link to={`/users/single-user/${soundData.author._id}`}>
                         <Icon name='user'/>
                         Posted by {soundData.author.username}
                         </Link>

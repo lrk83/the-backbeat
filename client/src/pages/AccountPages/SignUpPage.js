@@ -20,15 +20,13 @@ const LoginPage = () => {
   const [showUsernameAlert, setShowUsernameAlert] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
 
-  const [createUser, {error}]=useMutation(ADD_USER)
+  const [createUser]=useMutation(ADD_USER)
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setUserFormData({ ...userFormData, [name]: value });
 
     if (name==='email') {
-        console.log(value);
-        console.log(validateEmail(value));
         if (validateEmail(value)===null){
             setShowEmailAlert(true);
         } else {
@@ -56,14 +54,11 @@ const LoginPage = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    // check if form has everything (as per react-bootstrap docs)
-    const form = event.currentTarget;
-
     try {
       const { data } = await createUser({
         variables: {...userFormData}
       });
-      Auth.login(data.addUser.token);
+      //Auth.loginFromSignUp(data.addUser.token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);

@@ -6,14 +6,18 @@ export const GET_ME = gql`
         _id
         username
         email
-        friendCount
+        followerCount
         image
         description
         followedTags {
             _id
             name
         }
-        friends {
+        followers {
+            _id
+            username
+        }
+        followedUsers{
             _id
             username
         }
@@ -84,6 +88,10 @@ export const GET_SOUNDS_FOR_SUGGESTED = gql`
             date
             image
             followerCount
+            author{
+                _id
+                username
+            }
         }
     }`;
 
@@ -96,6 +104,10 @@ export const GET_SKILLS_FOR_SUGGESTED = gql`
             image
             followerCount
             description
+            author{
+                _id
+                username
+            }
         }
     }`;
 
@@ -191,13 +203,14 @@ export const GET_USERS = gql`
         _id
         username
         email
-        friendCount
+        followerCount
         image
+        date
         followedTags {
             _id
             name
         }
-        friends {
+        followers {
             _id
             username
         }
@@ -260,14 +273,14 @@ query user($userId: ID!){
         _id
         username
         email
-        friendCount
+        followerCount
         description
         image
         followedTags {
             _id
             name
         }
-        friends {
+        followers {
             _id
             username
         }

@@ -5,24 +5,22 @@ import {GET_SINGLE_USER} from '../utils/queries';
 import Auth from '../utils/auth';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import MySounds from "../components/Account-page-components/my-sounds";
-import MySkills from "../components/Account-page-components/my-skills";
-import AccountInfo from "../components/Account-page-components/account-info";
+import AccountInfo from '../components/Account-page-components/account-info';
+import Sounds from '../components/suggestion-slides/suggestion-sound-slide';
+import Skills from '../components/suggestion-slides/suggestion-skill-slide';
 
 const AccountPage = ({ match }) => {
 
     const [ID]=useState(match.params.userId);
 
-    console.log(ID);
-
     const { loading, data } = useQuery(GET_SINGLE_USER, {
         variables: { userId: ID }
     });
 
-    console.log(data);
-
     const userData = data?.user || {};
     const loggedIn = Auth.loggedIn();
+
+    console.log(userData);
 
     useEffect(()=>{
         AOS.init({
@@ -40,15 +38,15 @@ const AccountPage = ({ match }) => {
 
     return (
         <Container className="big-container">
-            {/*<Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
+            <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
                 <AccountInfo data={userData}></AccountInfo>
             </Container>
             <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
-                <MySounds data={userData.soundPosts}></MySounds>
+                <Sounds data={userData.soundPosts}></Sounds>
             </Container>
             <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
-                <MySkills data={userData.skillPosts}></MySkills>
-    </Container>*/}
+                <Skills data={userData.skillPosts}></Skills>
+            </Container>
         </Container>
     )
 }

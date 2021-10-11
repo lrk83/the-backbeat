@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import {Menu, Dropdown} from "semantic-ui-react";
 import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
@@ -7,7 +7,7 @@ export default class AppNavbar extends Component {
   
   //Navbar active item
   state = { activeItem: '' }
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  handleItemClick = ({ name }) => this.setState({ activeItem: name })
   render() {
     const { activeItem } = this.state
 

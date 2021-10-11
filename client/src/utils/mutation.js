@@ -24,6 +24,20 @@ export const ADD_USER = gql`
   }
 `;
 
+export const UPDATE_USER = gql`
+  mutation updateUser($image: String, $description: String, $followedTags: [ID]) {
+    updateUser(image: $image, description: $description, followedTags: $followedTags) {
+      _id
+      image
+      description
+      followedTags{
+        _id
+        name
+      }
+    }
+  }
+`;
+
 export const ADD_SOUND = gql`
 mutation addSoundPost($postData: soundPostInput!) {
   addSoundPost(postData: $postData) {
@@ -136,16 +150,14 @@ mutation saveSoundPost($postId: ID) {
   }
 }`;
 
-export const UPDATE_USER = gql`
-mutation updateUser($image: String!, $description: String!, $followedTags: [ID]!) {
-  updateUser(image: $image, description: $description, followedTags: $followedTags){
+export const FOLLOW_USER = gql`
+mutation followUser($userId: ID) {
+  followUser(userId: $userId) {
     _id
     username
-    image
-    followedTags{
+    followers {
       _id
-      name
+      username
     }
-    description
   }
 }`;

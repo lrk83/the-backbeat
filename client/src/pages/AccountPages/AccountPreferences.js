@@ -20,33 +20,36 @@ const AccountPreferences = () => {
 
     const [submitUserData] = useMutation(UPDATE_USER);
 
-    const [userFormData, setUserFormData] = useState({ image: data?.me.image || "", description: data?.me.description || "", followedTags: data?.me.followedTags || []});
+    const [userFormData, setUserFormData] = useState({ image: userData?.me?.image || "", description: userData?.me?.description || "", followedTags: userData?.me?.followedTags || []});
     const [showAlert, setShowAlert] = useState(false);
     const [showSucess, setShowSuccess] = useState(false);
-    const [chosenTags, setChosenTags] = useState([]);
+
+    const handleContentChange = (event) => {
+        const { name, value } = event.target;
+        setUserFormData({ ...userFormData, [name]: value });
+    }
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        setUserFormData({...userFormData,followedTags:JSON.parse(localStorage.getItem("preferenceTags"))})
+        setUserFormData({...userFormData,followedTags:JSON.parse(localStorage.getItem("preferenceTags"))});
+
+        
 
         try { 
-            const updatedUser = await submitUserData (
-            {varibales: {...userFormData}}
-        );
-
-        setShowSuccess(true);
+            console.log({...userFormData});
+            
+            await submitUserData ({
+            variables: {image: userFormData.image, description: userFormData.description, followedTags: userFormData.followedTags} 
+            });
+            
+            setShowSuccess(true);
         }catch (err) {
             console.error(err);
             setShowAlert(true);
           }
 
         localStorage.setItem("preferenceTags",JSON.stringify([]));
-    }
-
-    const handleContentChange = (event) => {
-        const { name, value } = event.target;
-        setUserFormData({ ...userFormData, [name]: value });
     }
 
     //Fade in elements
