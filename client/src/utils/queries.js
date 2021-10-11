@@ -88,6 +88,10 @@ export const GET_SOUNDS_FOR_SUGGESTED = gql`
             date
             image
             followerCount
+            author{
+                _id
+                username
+            }
         }
     }`;
 
@@ -100,6 +104,10 @@ export const GET_SKILLS_FOR_SUGGESTED = gql`
             image
             followerCount
             description
+            author{
+                _id
+                username
+            }
         }
     }`;
 
