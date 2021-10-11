@@ -5,6 +5,7 @@ import 'aos/dist/aos.css';
 import { useQuery } from '@apollo/client';
 import {GET_SKILLS_FOR_SUGGESTED} from '../utils/queries';
 import Sort from "../utils/sort";
+import {Link} from 'react-router-dom';
 
 const SkillPage = () => {
 
@@ -42,19 +43,36 @@ const SkillPage = () => {
                 <Grid columns={2} divided>
                     <Grid.Column>
                     {sortedSkillData.length &&
-                        <List celled size="huge">
+                        <List celled size="massive">
                             {firstHalf.map(num=>(
                             <List.Item key={sortedSkillData[num]._id}>
-                                <Image avatar size="tiny" src={sortedSkillData[num].image}/>
+                                
+                                <Image avatar src={sortedSkillData[num].image}/>
                                 <List.Content>
+                                    <Link to={`skills/single-skill/${sortedSkillData[num]._id}`}>
                                     <List.Header>{sortedSkillData[num].name}</List.Header>
                                     {sortedSkillData[num].author}
+                                    </Link>
                                 </List.Content>
                             </List.Item>) ) }
+                            
                         </List>}
                     </Grid.Column>
                     <Grid.Column>
-
+                    {sortedSkillData.length &&
+                        <List celled size="massive">
+                            {secondHalf.map(num=>(
+                            <List.Item key={sortedSkillData[num]._id}>
+                                
+                                <Image avatar src={sortedSkillData[num].image}/>
+                                <List.Content>
+                                    <Link to={`skills/single-skill/${sortedSkillData[num]._id}`}>
+                                    <List.Header>{sortedSkillData[num].name}</List.Header>
+                                    {sortedSkillData[num].author}
+                                    </Link>
+                                </List.Content>
+                            </List.Item>) ) }
+                        </List>}
                     </Grid.Column>
                 </Grid>
             </Container>

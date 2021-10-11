@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 import { Container, Image, Header, Button, Menu, Dropdown } from "semantic-ui-react";
-//import data from '../assets/skilldata.json';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useQuery, useMutation } from '@apollo/client';
