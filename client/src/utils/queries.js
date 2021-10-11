@@ -88,6 +88,15 @@ export const GET_SOUNDS_FOR_SUGGESTED = gql`
             date
             image
             followerCount
+            description
+            tags{
+                _id
+                name
+            }
+            aditionalTags{
+                _id
+                name
+            }
         }
     }`;
 
