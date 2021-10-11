@@ -328,3 +328,24 @@ h2.ui.header.links-menu-header{
   justify-content: space-between;
   flex-direction: row;
 }
+
+.ui.header.top-ten-subheader {
+  text-align: center;
+  margin-top: 0;
+}
+
+.ui.container.header-container{
+  margin-bottom: 1rem;
+}
+
+#most-popular-container{
+  background-color: black;
+}
+
+#top-ten-header{
+  color: #d4d4d5;
+}
+
+#top-ten-shadow-container{
+  background-color: #d4d4d5;
+}

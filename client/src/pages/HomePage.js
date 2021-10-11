@@ -7,7 +7,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useQuery } from '@apollo/client';
 import {GET_SOUNDS_FOR_SUGGESTED, GET_SKILLS_FOR_SUGGESTED, GET_USERS } from '../utils/queries';
-import Sort from "../utils/sort"
+import Sort from "../utils/sort";
 
 const HomePage = () => {
 
