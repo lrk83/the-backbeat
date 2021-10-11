@@ -1,11 +1,6 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
-import {Button, Container, Header, Icon, Card, Image, Menu} from "semantic-ui-react";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import { useQuery } from '@apollo/client';
-import {GET_SKILLS_FOR_SUGGESTED, GET_ME} from '../../utils/queries';
-import Sort from "../../utils/sort";
+import {Button, Header, Icon, Menu} from "semantic-ui-react";
 import CurrentSlide from "../suggestion-slides/current-skills-slides";
 
 const RecomendedSkills = (props) => {
