@@ -8,23 +8,12 @@ import {GET_SKILLS_FOR_SUGGESTED, GET_ME} from '../../utils/queries';
 import Sort from "../../utils/sort";
 import CurrentSlide from "../suggestion-slides/current-skills-slides";
 
-const RecomendedSkills = () => {
+const RecomendedSkills = (props) => {
+    const {data}=props
 
-    const {loading, data} = useQuery(GET_SKILLS_FOR_SUGGESTED);
-    const {loading:userLoading, data:userData} = useQuery(GET_ME);
+    const photos=data;
 
-    const [photos, setSortedSkillData] = useState([]);
-    const [haveFormatted, setHaveFormatted] = useState(false);
-
-    useEffect(()=>{
-        if (!loading && !userLoading){
-            if (haveFormatted===false){
-                let formattingResult = Sort.recomendedByTags(data.allSkillPosts, userData.me);
-                setSortedSkillData(formattingResult);
-                setHaveFormatted(true);
-            }
-        }
-    });
+    console.log(photos);
 
     const [currentPhotos, updateCurrentPhotos] = useState(photos.slice(0, 4));
     const [currentIndex, updateCurrentIndex] = useState(4);
