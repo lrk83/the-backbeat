@@ -31,17 +31,23 @@ const AccountPreferences = () => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+        let localStorageItem=JSON.parse(localStorage.getItem("preferenceTags"))
 
-        setUserFormData({...userFormData,followedTags:JSON.parse(localStorage.getItem("preferenceTags"))});
+        console.log(localStorageItem);
 
-        
+        var tagIds=[];
+        for(let x=0;x<localStorageItem.length;x++){
+            let tagId=localStorageItem[x].id;
+            tagIds.push(tagId);
+        }
 
         try { 
-            console.log({...userFormData});
             
-            await submitUserData ({
-            variables: {image: userFormData.image, description: userFormData.description, followedTags: userFormData.followedTags} 
+            const submitElemnt = await submitUserData ({
+            variables: {image: userFormData.image, description: userFormData.description, followedTags: tagIds} 
             });
+
+            console.log(submitElemnt);
             
             setShowSuccess(true);
         }catch (err) {
@@ -49,7 +55,7 @@ const AccountPreferences = () => {
             setShowAlert(true);
           }
 
-        localStorage.setItem("preferenceTags",JSON.stringify([]));
+        {/*localStorage.setItem("preferenceTags",JSON.stringify([]));*/}
     }
 
     //Fade in elements

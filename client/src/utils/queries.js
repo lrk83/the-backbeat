@@ -100,6 +100,14 @@ export const GET_SKILLS_FOR_SUGGESTED = gql`
             image
             followerCount
             description
+            tags{
+                _id
+                name
+            }
+            aditionalTags{
+                _id
+                name
+            }
         }
     }`;
 

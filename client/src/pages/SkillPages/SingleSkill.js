@@ -3,9 +3,9 @@ import { Container, Image, Header, Button, Menu, Dropdown } from "semantic-ui-re
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useQuery, useMutation } from '@apollo/client';
-import {GET_SINGLE_SKILL} from '../utils/queries';
-import { SAVE_SKILL } from "../utils/mutation";
-import Auth from '../utils/auth';
+import {GET_SINGLE_SKILL} from '../../utils/queries';
+import { SAVE_SKILL } from "../../utils/mutation";
+import Auth from '../../utils/auth';
 
 const SingleSound = ({ match }) => {
     
