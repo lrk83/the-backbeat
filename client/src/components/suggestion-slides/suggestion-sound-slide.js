@@ -31,7 +31,7 @@ const Slides = (data) => {
         <div className="slide-show">
             <Header as='h2'>Discover new Sounds</Header>
             <Menu secondary>
-                <Menu.Item><Header as='h4' className="discover-menu-subheader">Discover popular sounds</Header></Menu.Item>
+                <Menu.Item><Header as='h4' className="discover-menu-subheader">Recently posted sound packs</Header></Menu.Item>
                 <Menu.Item as={Link} to='/sounds' >See all</Menu.Item>
                 <Menu.Menu className="discover-menu-buttons" position='right'>
                     <Button animated="vertical" onClick={()=>backPhotos()}>
