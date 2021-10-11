@@ -355,3 +355,12 @@ h2.ui.header.links-menu-header{
   display: flex;
   align-items: center;
 }
+
+#image-preview{
+  align-self: center;
+  margin-bottom: 1rem;
+}
+
+#image-preview-header{
+  margin-top: 0;
+}

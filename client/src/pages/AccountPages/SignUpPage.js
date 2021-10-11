@@ -58,7 +58,7 @@ const LoginPage = () => {
       const { data } = await createUser({
         variables: {...userFormData}
       });
-      //Auth.loginFromSignUp(data.addUser.token);
+      Auth.loginFromSignUp(data.addUser.token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);

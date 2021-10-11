@@ -1,9 +1,11 @@
 //Have user choose profile picture, choose tags they are interested in, write a short description about themselves
-import React, {useState} from "react";
-import { Container, Form, Label, Button, Header} from "semantic-ui-react";
+import React, {useState, useEffect} from "react";
+import { Container, Form, Label, Button, Header, Image} from "semantic-ui-react";
 import TagSearch from "../../components/Account-page-components/preference-page-tag-search";
 import { useMutation } from "@apollo/client";
 import {UPDATE_USER} from '../../utils/mutation';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const AccountPreferences = (props) => {
     const {tags,userData} = props
@@ -44,6 +46,12 @@ const AccountPreferences = (props) => {
           }
     }
 
+    useEffect(()=>{
+        AOS.init({
+            duration:200
+        })
+    });
+
 
     return (
             <Container className='shadow-container'>
@@ -53,6 +61,8 @@ const AccountPreferences = (props) => {
                         <Header as ="h2" className="new-post-header">Account Info</Header>
 
                         <Form.Input fluid label="Profile Image" name="image" required onChange={handleContentChange} value={userFormData.image}/>
+                        <Header as="h3" className="new-post-header" id="image-preview-header">Preview</Header>
+                        <Image size="small" id="image-preview" src={userFormData.image} data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500"/>
                         <Form.Input fluid label = "User Description" name="description" required onChange={handleContentChange} value={userFormData.description}/>
 
                         <Header>What topics are you interested in?</Header>
