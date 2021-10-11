@@ -14,25 +14,47 @@ const HomePage = () => {
     const {loading, data} = useQuery(GET_SOUNDS_FOR_SUGGESTED);
     const soundData = data?.allSoundPosts || {};
 
-    const [hasntHappened, setHasntHappened] = useState(true);
-
+    const [haventSortedSounds, setSortedSounds] = useState(true);
     const [sortedSoundData, setSortedSoundData]=useState([]);
 
     useEffect(()=>{
         if (!loading){
-            if (hasntHappened===true){
-                setSortedSoundData(Sort.mostRecentSound(soundData));
-                setHasntHappened(true);
+            if (haventSortedSounds===true){
+                setSortedSoundData(Sort.mostRecentPost(soundData));
+                setSortedSounds(true);
             }
         }
     });
 
-
-    const { data: skilldata} = useQuery(GET_SKILLS_FOR_SUGGESTED);
+    const { loading: skillloading, data: skilldata} = useQuery(GET_SKILLS_FOR_SUGGESTED);
     const skillData = skilldata?.allSkillPosts || {};
 
-    const { data: userdata } = useQuery(GET_USERS);
+    const [haventSortedSkills, setSortedSkills] = useState(true);
+    const [sortedSkillData, setSortedSkillData]=useState([]);
+
+    useEffect(()=>{
+        if (!skillloading){
+            if (haventSortedSkills===true){
+                setSortedSkillData(Sort.mostRecentPost(skillData));
+                setSortedSkills(true);
+            }
+        }
+    });
+
+    const { loading: userloading, data: userdata } = useQuery(GET_USERS);
     const userData = userdata?.users || {};
+
+    const [haventSortedUsers, setSortedUsers] = useState(true);
+    const [sortedUserData, setSortedUserData]=useState([]);
+
+    useEffect(()=>{
+        if (!userloading){
+            if (haventSortedUsers===true){
+                setSortedUserData(Sort.mostRecentPost(userData));
+                setSortedUsers(true);
+            }
+        }
+    });
 
     useEffect(()=>{
         AOS.init({
@@ -53,12 +75,12 @@ const HomePage = () => {
                 <SoundSuggestionSlide data={sortedSoundData}></SoundSuggestionSlide>) : <></>}
             </Container>
             <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
-                {skillData.length ? (
-                <SkillSuggestionSlide data={skillData}></SkillSuggestionSlide>) :<></>}
+                {sortedSkillData.length ? (
+                <SkillSuggestionSlide data={sortedSkillData}></SkillSuggestionSlide>) :<></>}
             </Container>
             <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
                 {skillData.length ? (
-                <UserSuggestionSlide data={userData}></UserSuggestionSlide>) :<></>}
+                <UserSuggestionSlide data={sortedUserData}></UserSuggestionSlide>) :<></>}
             </Container>
         </Container>
     )

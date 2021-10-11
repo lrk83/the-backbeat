@@ -197,6 +197,7 @@ export const GET_USERS = gql`
         email
         followerCount
         image
+        date
         followedTags {
             _id
             name

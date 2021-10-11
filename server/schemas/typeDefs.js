@@ -7,6 +7,7 @@ const typeDefs = gql`
        email: String
        description: String
        image: String
+       date: String
        followedTags: [Tag]
        skillPosts: [SkillPost]
        savedSkillPosts: [SkillPost]

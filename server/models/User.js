@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+const dateFormat = require('../utils/dateFormat');
 
 const userSchema = new Schema(
     {
@@ -25,6 +26,11 @@ const userSchema = new Schema(
       description: {
         type: String
       },
+      date: {
+        type: Date,
+        default: Date.now,
+        get: createdAtVal => dateFormat(createdAtVal)
+    },
       followedTags: [
         {
             type: Schema.Types.ObjectId,
