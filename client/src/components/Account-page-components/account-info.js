@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { Container,Card, Image, Header, Button} from "semantic-ui-react";
+import { Icon, Container,Card, Image, Header, Button} from "semantic-ui-react";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Auth from "../../utils/auth";
@@ -50,24 +50,72 @@ const SingleSound = (data) => {
 
     return(
         <Container className="user-profile-data">
-            <Card className="single-post-card">
-                <Image src={userData.image} wrapped ui={false} />
-            </Card>
-            <Container className="single-post-content">
-                <Header as='h1' className="single-header">My Info</Header>
-                {loggedIn && ( <>
-                    {IAmUser? ( <> <Button color="blue" className="get-pack-button">Edit Profile</Button> </> ):( <> 
-                        {userIsSaved? ( <>
-                            <Button color="blue" disabled className="get-pack-button">Followed</Button>
-                        </> ):( <>
-                            <Button className="get-pack-button" onClick={saveUser}>Follow User</Button>
-                        </>)}
-                    </>)}
-                </> ) }
-                <Card>
-                    <Header></Header>
-                </Card>
-            </Container>
+
+            {window.screen.width<=540 ? (
+                        <Container className="single-post-content">
+                        <Card className="user-info-card">
+                            <Image src={userData.image}/>
+                            <Header as='h1' className="single-header">{userData.username}</Header>
+                            <Card.Content>{userData.description}</Card.Content>
+                            <Card.Content extra className="account-stats">
+                                <div>
+                                <Icon name='user'/>
+                                Followers: {userData.followerCount}
+                                </div>
+                                <div>
+                                <Icon name="industry" />
+                                Skill posts: {userData.skillPostCount}
+                                </div>
+                                <div>
+                                <Icon name='bandcamp' />
+                                Sound posts: {userData.skillPostCount}
+                                </div>
+                            </Card.Content>
+                        </Card>
+                        {loggedIn && ( <>
+                            {IAmUser? ( <> <Button color="blue" className="get-pack-button">Edit Profile</Button> </> ):( <> 
+                                {userIsSaved? ( <>
+                                    <Button color="blue" disabled className="get-pack-button">Followed</Button>
+                                </> ):( <>
+                                    <Button className="follow-user-button" onClick={saveUser}>Follow User</Button>
+                                </>)}
+                            </>)}
+                        </> ) } 
+                    </Container>
+                ) : ( <>
+                    <Card className="single-post-card">
+                        <Image src={userData.image} wrapped ui={false} />
+                    </Card>
+                    <Container className="single-post-content">
+                        <Card className="user-info-card">
+                            <Header as='h1' className="single-header">My Info</Header>
+                            <Card.Content>{userData.description}</Card.Content>
+                            <Card.Content extra className="account-stats">
+                                <div>
+                                <Icon name='user'/>
+                                Followers: {userData.followerCount}
+                                </div>
+                                <div>
+                                <Icon name="industry" />
+                                Skill posts: {userData.skillPostCount}
+                                </div>
+                                <div>
+                                <Icon name='bandcamp' />
+                                Sound posts: {userData.skillPostCount}
+                                </div>
+                            </Card.Content>
+                        </Card>
+                        {loggedIn && ( <>
+                            {IAmUser? ( <> <Button color="blue" className="get-pack-button">Edit Profile</Button> </> ):( <> 
+                                {userIsSaved? ( <>
+                                    <Button color="blue" disabled className="get-pack-button">Followed</Button>
+                                </> ):( <>
+                                    <Button className="get-pack-button" onClick={saveUser}>Follow User</Button>
+                                </>)}
+                            </>)}
+                        </> ) }
+                    </Container> 
+                </>)}
         </Container>
     )
 }

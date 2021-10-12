@@ -453,6 +453,17 @@ h2.ui.header.links-menu-header{
   .ui.header.single-header{
     margin-top: 0.5rem;
   }
+
+  .ui.container .single-post-container{
+    flex-direction: column;
+  }
+
+  .small-screen-sound-author a{
+    color: black;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 }
 
 

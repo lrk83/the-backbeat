@@ -43,7 +43,7 @@ const MostPopularSkills = () => {
                 
                 {window.screen.width<smallscreen ? (<>
 
-<Header as="h3" className="top-ten-subheader">Our top five most popular skills</Header>
+                    <Header as="h3" className="top-ten-subheader">Our top five most popular skills</Header>
 
                     <Grid columns={1}>
                         <Grid.Column>
