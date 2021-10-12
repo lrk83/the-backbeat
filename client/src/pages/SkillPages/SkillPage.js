@@ -39,11 +39,13 @@ const SkillPage = () => {
     const [haveFormattedSuggested, setHaveFormattedSuggested] = useState(false);
 
     useEffect(()=>{
-        if (!skillloading && !userLoading){
-            if (haveFormattedSuggested===false){
-                let formattingResult = Sort.recomendedByTags(unformatedSkillData, userData.me);
-                setSuggestedSkillData(formattingResult);
-                setHaveFormattedSuggested(true);
+        if (loggedIn){
+            if (!skillloading && !userLoading){
+                if (haveFormattedSuggested===false){
+                    let formattingResult = Sort.recomendedByTags(unformatedSkillData, userData.me);
+                    setSuggestedSkillData(formattingResult);
+                    setHaveFormattedSuggested(true);
+                }
             }
         }
     });
@@ -65,9 +67,11 @@ const SkillPage = () => {
         <MostPopularSkills></MostPopularSkills>
         {/*{sortedSkillData.length && <SkillSearch data={sortedSkillData}></SkillSearch>}*/}
         <Container className="big-container">
-            <Container className="shadow-container">
-                {loggedIn && suggestedSkillData.length && <RecomendedSkills data={suggestedSkillData}></RecomendedSkills>}
-            </Container>
+            {loggedIn && suggestedSkillData.length &&
+                <Container className="shadow-container">
+                    <RecomendedSkills data={suggestedSkillData}></RecomendedSkills>
+                </Container>
+            }
         </Container>
         
         </>

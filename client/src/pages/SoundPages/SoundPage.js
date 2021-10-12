@@ -39,11 +39,13 @@ const SoundPage = () => {
     const [haveFormattedSuggested, setHaveFormattedSuggested] = useState(false);
 
     useEffect(()=>{
-        if (!soundloading && !userLoading){
-            if (haveFormattedSuggested===false){
-                let formattingResult = Sort.recomendedByTags(unformatedSoundData, userData.me);
-                setSuggestedSoundData(formattingResult);
-                setHaveFormattedSuggested(true);
+        if (loggedIn) {
+            if (!soundloading && !userLoading){
+                if (haveFormattedSuggested===false){
+                    let formattingResult = Sort.recomendedByTags(unformatedSoundData, userData.me);
+                    setSuggestedSoundData(formattingResult);
+                    setHaveFormattedSuggested(true);
+                }
             }
         }
     });
@@ -65,9 +67,11 @@ const SoundPage = () => {
         <MostPopularSounds></MostPopularSounds>
         {/*{sortedSkillData.length && <SkillSearch data={sortedSkillData}></SkillSearch>}*/}
         <Container className="big-container">
-            <Container className="shadow-container">
-                {loggedIn && suggestedSoundData.length && <RecomendedSounds data={suggestedSoundData}></RecomendedSounds>}
-            </Container>
+            {loggedIn && suggestedSoundData.length && 
+                <Container className="shadow-container">
+                    <RecomendedSounds data={suggestedSoundData}></RecomendedSounds>
+                </Container>
+            }
         </Container>
         
         </>

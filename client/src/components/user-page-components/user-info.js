@@ -12,8 +12,6 @@ const SingleSound = (data) => {
 
     const userData = data?.data || {};
 
-    console.log(userData);
-
     const [followUser] = useMutation(FOLLOW_USER);
 
     const [userIsSaved, setUserIsSaved] = useState(false);
