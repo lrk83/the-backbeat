@@ -14,6 +14,8 @@ const MostPopularSounds = () => {
 
     const { loading, data} = useQuery(GET_SOUNDS_FOR_SUGGESTED);
     const soundData = data?.allSoundPosts || {};
+    
+    const smallscreen = 540;
 
     const [haventSortedSounds, setSortedSounds] = useState(true);
     const [sortedSoundData, setSortedSoundData]=useState([]);
@@ -35,34 +37,61 @@ const MostPopularSounds = () => {
 
     return (
         <Container className="big-container" id="most-popular-container">
-            <Container className="header-container"><Header as="h1" className="single-header" id="top-ten-header">Top Packs</Header></Container>
+            <Container className="header-container"><Header as="h1" className="single-header" id="top-ten-header">Top All Time</Header></Container>
             <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" id="top-ten-shadow-container">
-                <Header as="h3" className="top-ten-subheader">Our most popular sound packs</Header>
+                
+                {window.screen.width<smallscreen ? (<>
+
+                    <Header as="h3" className="top-ten-subheader">Our top five most popular sounds</Header>
+
+                    <Grid columns={1}>
+                        <Grid.Column>
+                        {sortedSoundData.length &&
+                            <List celled>
+                            {firstHalf.map(num=>(
+                                <div>
+                                    <Link to={`sounds/single-sound/${sortedSoundData[num]._id}`}>
+                                    <List.Item >
+                                        
+                                        <Image avatar src={sortedSoundData[num].image} className="top-post-icon"/>
+                                        <List.Content>
+                                            <List.Header>{sortedSoundData[num].name}</List.Header>
+                                            
+                                        </List.Content>
+                                    </List.Item></Link>
+                                </div>) ) }
+                            </List>}
+                        </Grid.Column>
+                    </Grid>
+
+                </>):(<>
+
+                    <Header as="h3" className="top-ten-subheader">Our top ten most popular sounds</Header>
+                
+                
                 <Grid columns={2} divided>
                     <Grid.Column>
                     {sortedSoundData.length &&
-                        <List celled size="massive">
-                            {firstHalf.map(num=>(
-                            <List.Item key={sortedSoundData[num]._id}>
-                                
-                                <Image avatar src={sortedSoundData[num].image}/>
-                                <List.Content>
-                                    <Link to={`sounds/single-sound/${sortedSoundData[num]._id}`}>
-                                    <List.Header>{sortedSoundData[num].name}</List.Header>
-                                    {sortedSoundData[num].author}
-                                    </Link>
-                                </List.Content>
-                            </List.Item>) ) }
-                            
-                        </List>}
+                        <List celled>
+                        {firstHalf.map(num=>(
+                        <List.Item key={sortedSoundData[num]._id}>
+                            {console.log(sortedSoundData)}
+                            <Image avatar src={sortedSoundData[num].image} className="top-post-icon"/>
+                            <List.Content>
+                                <Link to={`sounds/single-sound/${sortedSoundData[num]._id}`}>
+                                <List.Header>{sortedSoundData[num].name}</List.Header>
+                                </Link>
+                            </List.Content>
+                        </List.Item>) ) }
+                    </List>}
                     </Grid.Column>
                     <Grid.Column>
                     {sortedSoundData.length &&
-                        <List celled size="massive">
+                        <List celled>
                             {secondHalf.map(num=>(
                             <List.Item key={sortedSoundData[num]._id}>
                                 
-                                <Image avatar src={sortedSoundData[num].image}/>
+                                <Image avatar src={sortedSoundData[num].image} className="top-post-icon"/>
                                 <List.Content>
                                     <Link to={`sounds/single-sound/${sortedSoundData[num]._id}`}>
                                     <List.Header>{sortedSoundData[num].name}</List.Header>
@@ -72,7 +101,7 @@ const MostPopularSounds = () => {
                             </List.Item>) ) }
                         </List>}
                     </Grid.Column>
-                </Grid>
+                </Grid></>)}
             </Container>
         </Container>
     )

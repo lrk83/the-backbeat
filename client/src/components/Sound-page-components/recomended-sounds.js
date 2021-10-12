@@ -35,7 +35,7 @@ const RecomendedSkills = (props) => {
         <div className="slide-show">
             <Header as='h2'>Recomended for you</Header>
             <Menu secondary>
-                <Menu.Item><Header as='h4' className="discover-menu-subheader">Recomendations based on your interests</Header></Menu.Item>
+                {window.screen.width>540 && <Menu.Item><Header as='h4' className="discover-menu-subheader">Recomendations based on your interests</Header></Menu.Item>}
                 <Menu.Item as={Link} to='/account/preferences' >Update Preferences</Menu.Item>
                 <Menu.Menu className="discover-menu-buttons" position='right'>
                     <Button animated="vertical" onClick={()=>backPhotos()}>

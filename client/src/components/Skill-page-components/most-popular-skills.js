@@ -50,16 +50,18 @@ const MostPopularSkills = () => {
                         {sortedSkillData.length &&
                             <List celled>
                             {firstHalf.map(num=>(
-                                <Link to={`skills/single-skill/${sortedSkillData[num]._id}`} key={sortedSkillData[num]._id}>
-                            <List.Item >
-                                
-                                <Image avatar src={sortedSkillData[num].image} className="top-post-icon"/>
-                                <List.Content>
-                                    <List.Header>{sortedSkillData[num].name}</List.Header>
-                                    
-                                </List.Content>
-                            </List.Item></Link>) ) }
-                        </List>}
+                                <div>
+                                    <Link to={`skills/single-skill/${sortedSkillData[num]._id}`}>
+                                    <List.Item >
+                                        
+                                        <Image avatar src={sortedSkillData[num].image} className="top-post-icon"/>
+                                        <List.Content>
+                                            <List.Header>{sortedSkillData[num].name}</List.Header>
+                                            
+                                        </List.Content>
+                                    </List.Item></Link>
+                                </div>) ) }
+                            </List>}
                         </Grid.Column>
                     </Grid>
 
@@ -74,7 +76,7 @@ const MostPopularSkills = () => {
                         <List celled>
                         {firstHalf.map(num=>(
                         <List.Item key={sortedSkillData[num]._id}>
-                            
+                            {console.log(sortedSkillData)}
                             <Image avatar src={sortedSkillData[num].image} className="top-post-icon"/>
                             <List.Content>
                                 <Link to={`skills/single-skill/${sortedSkillData[num]._id}`}>
