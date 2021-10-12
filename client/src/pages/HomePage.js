@@ -9,6 +9,8 @@ import { useQuery } from '@apollo/client';
 import {GET_SOUNDS_FOR_SUGGESTED, GET_SKILLS_FOR_SUGGESTED, GET_USERS } from '../utils/queries';
 import Sort from "../utils/sort";
 import HomePageHero from '../components/home-page-hero';
+import SmallSoundSuggestionSlide from '../components/small-screen/small-sound-suggestion-slide';
+import SmallSkillSuggestionSlide from '../components/small-screen/small-skill-suggestion-slide'
 
 const HomePage = () => {
 
@@ -72,6 +74,23 @@ const HomePage = () => {
     return (
         <>
         <HomePageHero></HomePageHero>
+        {window.screen.width<=540? (<>
+            <Container className="big-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
+            <Container className="shadow-container">
+                {sortedSoundData.length ? (
+                <SmallSoundSuggestionSlide data={sortedSoundData}></SmallSoundSuggestionSlide>) : <></>}
+            </Container>
+            <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
+                {sortedSkillData.length ? (
+                <SmallSkillSuggestionSlide data={sortedSkillData} length={sortedSkillData.length}></SmallSkillSuggestionSlide>) :<></>}
+            </Container>
+            <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
+                {skillData.length ? (
+                <UserSuggestionSlide data={sortedUserData}></UserSuggestionSlide>) :<></>}
+            </Container>
+        </Container>
+        
+        </>):(<>
         <Container className="big-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
             <Container className="shadow-container">
                 {sortedSoundData.length ? (
@@ -86,6 +105,7 @@ const HomePage = () => {
                 <UserSuggestionSlide data={sortedUserData}></UserSuggestionSlide>) :<></>}
             </Container>
         </Container>
+        </>)}
         </>
     )
 }

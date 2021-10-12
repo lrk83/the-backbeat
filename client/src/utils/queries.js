@@ -89,6 +89,10 @@ export const GET_SOUNDS_FOR_SUGGESTED = gql`
             image
             followerCount
             description
+            author{
+                _id
+                username
+            }
             tags{
                 _id
                 name
@@ -109,6 +113,10 @@ export const GET_SKILLS_FOR_SUGGESTED = gql`
             image
             followerCount
             description
+            author{
+                _id
+                username
+            }
             tags{
                 _id
                 name

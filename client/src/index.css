@@ -464,6 +464,10 @@ h2.ui.header.links-menu-header{
     display: flex;
     justify-content: center;
   }
+
+  .suggested-container .ui.card{
+    width: 30%;
+  }
 }
 
 

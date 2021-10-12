@@ -1,0 +1,52 @@
+import React, {useEffect} from "react";
+import { Container, Card, Image } from "semantic-ui-react";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import {Link} from 'react-router-dom';
+
+function CurrentSlides ({currentPhotos}){
+    
+    useEffect(()=>{
+        AOS.init({
+            duration:200
+        })
+    })
+
+    return (
+        <Container className="suggested-container">
+            {currentPhotos[0] && ( <>
+            
+            <Card data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" id="suggested-card-1">
+            <Link to={`/sounds/single-sound/${currentPhotos[0]._id}`}>
+                <Image src={currentPhotos[0].image}/>
+                <Card.Content>
+                    <Card.Header>{currentPhotos[0].name}</Card.Header>
+                </Card.Content>
+            </Link>
+            </Card> </> )}
+            
+            {currentPhotos[1] && ( <>
+            <Card data-aos="fade-in" data-aos-delay="300" data-aos-duration="1500" id="suggested-card-2">
+            <Link to={`/sounds/single-sound/${currentPhotos[1]._id}`}>
+                <Image src={currentPhotos[1].image}/>
+                <Card.Content>
+                    <Card.Header>{currentPhotos[1].name}</Card.Header>
+                </Card.Content>
+            </Link>
+            </Card> </> )}
+            
+            {currentPhotos[2] && ( <>
+            <Card data-aos="fade-in" data-aos-delay="500" data-aos-duration="1500" id="suggested-card-3">
+            <Link to={`/sounds/single-sound/${currentPhotos[2]._id}`}>
+                <Image src={currentPhotos[2].image}/>
+                <Card.Content>
+                    <Card.Header>{currentPhotos[2].name}</Card.Header>
+                </Card.Content>
+            </Link>
+            </Card> </> )}
+            
+        </Container>
+    )
+}
+
+export default CurrentSlides;
