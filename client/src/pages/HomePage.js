@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { Container } from 'semantic-ui-react';
-import SoundSuggestionSlide from '../components/suggestion-slides/suggestion-sound-slide';
-import SkillSuggestionSlide from '../components/suggestion-slides/suggestion-skill-slide';
+import SoundSuggestionSlide from '../components/suggestion-slides/home-page-sound-slides';
+import SkillSuggestionSlide from '../components/suggestion-slides/home-page-skill-suggestion-slide';
 import UserSuggestionSlide from '../components/suggestion-slides/suggestion-user-slides';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -39,7 +39,7 @@ const HomePage = () => {
                 setSortedSkills(true);
             }
         }
-    });
+    },);
 
     const { loading: userloading, data: userdata } = useQuery(GET_USERS);
     const userData = userdata?.users || {};
@@ -76,7 +76,7 @@ const HomePage = () => {
             </Container>
             <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
                 {sortedSkillData.length ? (
-                <SkillSuggestionSlide data={sortedSkillData}></SkillSuggestionSlide>) :<></>}
+                <SkillSuggestionSlide data={sortedSkillData} length={sortedSkillData.length}></SkillSuggestionSlide>) :<></>}
             </Container>
             <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
                 {skillData.length ? (

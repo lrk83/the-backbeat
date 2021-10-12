@@ -4,10 +4,12 @@ import {Container, Header, Icon, Card, Image, Menu} from "semantic-ui-react";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-const Slides = (data) => {
+const Slides = (props) => {
 
-    const photos=data.data;
-    const [cardsToShow]=useState([0,1,2]);
+    const {data, length} = props;
+
+    const photos=data;
+    const [cardsToShow]=useState([length-1,length-2,length-3]);
 
     useEffect(()=>{
         AOS.init({

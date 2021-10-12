@@ -1,6 +1,8 @@
+import moment from "moment";
+
 class SortService {
     mostRecentPost = (data) => {
-        const sorted = data.sort((a,b)=>(a.date<b.date) ? 1 : -1);
+        const sorted = data.sort((a,b)=>(moment(a.date).from(moment[2021, 6, 20],true).split(' ')<moment(b.date).from(moment[2021, 6, 20],true).split(' ')) ? 1 : -1);
         return sorted;
     }
 

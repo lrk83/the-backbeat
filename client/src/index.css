@@ -364,3 +364,18 @@ h2.ui.header.links-menu-header{
 #image-preview-header{
   margin-top: 0;
 }
+
+.ui.card.user-info-card{
+  align-self:center;
+}
+
+.ui.card>.extra.account-stats{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ui.button.follow-user-button{
+  align-self: center;
+}
