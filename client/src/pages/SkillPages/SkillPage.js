@@ -9,6 +9,7 @@ import Sort from '../../utils/sort';
 import Auth from '../../utils/auth'
 import RecomendedSkills from '../../components/Skill-page-components/recomended-skills';
 import { Container } from 'semantic-ui-react';
+import SkillPageHero from '../../components/Skill-page-components/skill-page-hero';
 
 
 const SkillPage = () => {
@@ -64,6 +65,7 @@ const SkillPage = () => {
 
     return (
         <>
+        <SkillPageHero></SkillPageHero>
         <MostPopularSkills></MostPopularSkills>
         {/*{sortedSkillData.length && <SkillSearch data={sortedSkillData}></SkillSearch>}*/}
         <Container className="big-container">

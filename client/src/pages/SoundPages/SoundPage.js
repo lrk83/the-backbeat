@@ -3,6 +3,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import MostPopularSounds from '../../components/Sound-page-components/most-popular-sounds';
 import SoundSearch from '../../components/Sound-page-components/sound-search';
+import SoundPageHero from '../../components/Sound-page-components/sound-page-hero';
 import { useQuery } from '@apollo/client';
 import { GET_SOUNDS_FOR_SUGGESTED, GET_ME } from '../../utils/queries';
 import Sort from '../../utils/sort';
@@ -64,6 +65,7 @@ const SoundPage = () => {
 
     return (
         <>
+        <SoundPageHero></SoundPageHero>
         <MostPopularSounds></MostPopularSounds>
         {/*{sortedSkillData.length && <SkillSearch data={sortedSkillData}></SkillSearch>}*/}
         <Container className="big-container">
