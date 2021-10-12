@@ -32,15 +32,12 @@ const Slides = (props) => {
                             <Card.Content>
                             <Card.Header>{photos[number].name}</Card.Header>
                             <Card.Meta>
-                                <span className='date'>{photos[number].date}</span>
+                                <span className='date'>{photos[number].date.split('at')[0]}</span>
                             </Card.Meta>
-                            <Card.Description>
-                                {photos[number].description}
-                            </Card.Description>
                             </Card.Content>
                             <Card.Content extra>
                                 <Icon name='user' />
-                                {photos[number].author}
+                                followers: {photos[number].followerCount}
                             </Card.Content>  
                         </Card>   
                     </Link>

@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import { Container, Card, Image } from "semantic-ui-react";
+import { Container, Card, Image, Icon } from "semantic-ui-react";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import {Link} from 'react-router-dom';
@@ -21,8 +21,6 @@ function CurrentSlides ({currentPhotos}){
                 <Image src={currentPhotos[0].image}/>
                 <Card.Content>
                     <Card.Header>{currentPhotos[0].name}</Card.Header>
-                    <Card.Meta><span className='author'>{currentPhotos[0].name}</span></Card.Meta>
-                    <Card.Description>{currentPhotos[0].artist}</Card.Description>
                 </Card.Content>
             </Link>
             </Card> </> )}
@@ -33,8 +31,6 @@ function CurrentSlides ({currentPhotos}){
                 <Image src={currentPhotos[1].image}/>
                 <Card.Content>
                     <Card.Header>{currentPhotos[1].name}</Card.Header>
-                    <Card.Meta><span className='author'>{currentPhotos[1].name}</span></Card.Meta>
-                    <Card.Description>{currentPhotos[1].artist}</Card.Description>
                 </Card.Content>
             </Link>
             </Card> </> )}
@@ -45,8 +41,6 @@ function CurrentSlides ({currentPhotos}){
                 <Image src={currentPhotos[2].image}/>
                 <Card.Content>
                     <Card.Header>{currentPhotos[2].name}</Card.Header>
-                    <Card.Meta><span className='author'>{currentPhotos[2].name}</span></Card.Meta>
-                    <Card.Description>{currentPhotos[2].artist}</Card.Description>
                 </Card.Content>
             </Link>
             </Card> </> )}
@@ -57,8 +51,6 @@ function CurrentSlides ({currentPhotos}){
                 <Image src={currentPhotos[3].image}/>
                 <Card.Content>
                     <Card.Header>{currentPhotos[3].name}</Card.Header>
-                    <Card.Meta><span className='author'>{currentPhotos[3].name}</span></Card.Meta>
-                    <Card.Description>{currentPhotos[3].artist}</Card.Description>
                 </Card.Content>
             </Link>
             </Card> </>)}
