@@ -428,3 +428,66 @@ h2.ui.header.links-menu-header{
   margin-top: 0.5rem;
   margin-bottom: 1rem;
 }
+
+.ui.list>.item>img.image.top-post-icon{
+  width: 4em;
+  height: 4em;
+} 
+
+/*Media Queries*/
+
+@media screen and (max-width: 540px){
+
+  *{
+    max-width: 540px;
+  }
+
+  .ui.card{
+    margin: 0;
+  }
+
+  .three-suggestions-link{
+    padding: 0.3rem;
+  }  
+
+  .ui.header.single-header{
+    margin-top: 0.5rem;
+  }
+}
+
+
+@media screen and (max-width: 539px){
+  .ui.celled.list>a{
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 1px 1px 0 rgb(0 0 0 / 6%), 0 2px 5px 0 rgb(0 0 0 / 20%);
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .ui.celled.list>.item{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .ui.celled.list>.item>.content{
+    text-align: center;
+  }
+
+  .ui.celled.list>a>.item:first-child{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .ui.celled.list>a>.item>img.image.top-post-icon{
+    width: 3em;
+    height: 3em;
+    margin-bottom: 0.5rem;
+  } 
+}
