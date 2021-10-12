@@ -379,3 +379,30 @@ h2.ui.header.links-menu-header{
 .ui.button.follow-user-button{
   align-self: center;
 }
+
+#community-hero{
+  background-image: url(https://wallpaperbat.com/img/236681-abstract-paintings-of-animals-abstract-paintings-wallpaper.jpg);
+  background-position: center;
+  background-size:cover;
+  width: 100%;
+}
+
+#community-header{
+  width: 100%;
+  text-align: center;
+  padding: 5rem;
+  color: #fff;
+  text-shadow: 2px black;
+  font-size: 5rem;
+  text-decoration: underline;
+}
+
+#top-creatives-title{
+  margin-top: 2rem;
+  margin-bottom: 0;
+}
+
+#secondary-creatives-title{
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
