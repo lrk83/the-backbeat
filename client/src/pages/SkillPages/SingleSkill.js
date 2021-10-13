@@ -17,8 +17,6 @@ const SingleSound = ({ match }) => {
 
     const skillData = data?.skillPost || {};
 
-    console.log(skillData);
-
     const tagsToShow=skillData.tags;
     const linkstoshow=skillData.links;
     const additionalToShow=skillData.aditionalTags;

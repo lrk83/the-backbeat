@@ -11,8 +11,6 @@ const Slides = (props) => {
     const photos=data;
     const [cardsToShow]=useState([length-1,length-2,length-3]);
 
-    console.log(photos);
-
     useEffect(()=>{
         AOS.init({
             duration:200

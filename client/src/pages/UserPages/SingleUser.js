@@ -21,8 +21,6 @@ const AccountPage = ({ match }) => {
     const userData = data?.user || {};
     const loggedIn = Auth.loggedIn();
 
-    console.log(userData.username);
-
     useEffect(()=>{
         AOS.init({
             duration:200

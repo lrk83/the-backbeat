@@ -8,8 +8,6 @@ const RecomendedSkills = (props) => {
 
     const photos=data;
 
-    console.log(photos);
-
     const [currentPhotos, updateCurrentPhotos] = useState(photos.slice(0, 4));
     const [currentIndex, updateCurrentIndex] = useState(4);
 

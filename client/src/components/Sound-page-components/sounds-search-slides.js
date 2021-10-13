@@ -7,8 +7,6 @@ import Sort from "../../utils/sort";
 const SoundSearchSlides = (props) => {
     const {tag, soundData}=props;
 
-    console.log(tag);
-
     const [sortedSoundData, setSortedSoundData] = useState([]);
     const [haveFormatted, setHaveFormatted] = useState(false);
 

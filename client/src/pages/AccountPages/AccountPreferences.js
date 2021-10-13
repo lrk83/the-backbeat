@@ -17,8 +17,6 @@ const AccountPreferences = () => {
     const tags = tagData?.tags || {};
     const userData = data?.me || {};
 
-    console.log(userData);
-
     //Fade in elements
     useEffect(()=>{
         AOS.init({

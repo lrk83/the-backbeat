@@ -7,8 +7,6 @@ import Sort from "../../utils/sort";
 const SkillSearchSlides = (props) => {
     const {tag, skillData}=props;
 
-    console.log(tag);
-
     const [sortedSkillData, setSortedSkillData] = useState([]);
     const [haveFormatted, setHaveFormatted] = useState(false);
 
