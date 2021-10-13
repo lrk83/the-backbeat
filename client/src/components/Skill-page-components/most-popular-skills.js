@@ -12,7 +12,6 @@ const MostPopularSkills = () => {
     const firstHalf=[0,1,2,3,4];
     const secondHalf = [5,6,7,8,9];
 
-    console.log(window.screen.width);
     const smallscreen=540;
 
     const { loading, data} = useQuery(GET_SKILLS_FOR_SUGGESTED);
@@ -76,7 +75,6 @@ const MostPopularSkills = () => {
                         <List celled>
                         {firstHalf.map(num=>(
                         <List.Item key={sortedSkillData[num]._id}>
-                            {console.log(sortedSkillData)}
                             <Image avatar src={sortedSkillData[num].image} className="top-post-icon"/>
                             <List.Content>
                                 <Link to={`skills/single-skill/${sortedSkillData[num]._id}`}>

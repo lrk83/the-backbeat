@@ -67,7 +67,7 @@ const SoundPage = () => {
         <>
         <SoundPageHero></SoundPageHero>
         <MostPopularSounds></MostPopularSounds>
-        {/*{sortedSkillData.length && <SkillSearch data={sortedSkillData}></SkillSearch>}*/}
+        {unformatedSoundData.length && <SoundSearch soundData={unformatedSoundData}></SoundSearch>}
         <Container className="big-container">
             {loggedIn && suggestedSoundData.length && 
                 <Container className="shadow-container">

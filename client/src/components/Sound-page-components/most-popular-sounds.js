@@ -75,7 +75,6 @@ const MostPopularSounds = () => {
                         <List celled>
                         {firstHalf.map(num=>(
                         <List.Item key={sortedSoundData[num]._id}>
-                            {console.log(sortedSoundData)}
                             <Image avatar src={sortedSoundData[num].image} className="top-post-icon"/>
                             <List.Content>
                                 <Link to={`sounds/single-sound/${sortedSoundData[num]._id}`}>

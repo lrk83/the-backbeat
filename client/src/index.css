@@ -433,6 +433,20 @@ h2.ui.header.links-menu-header{
   width: 4em;
   height: 4em;
 } 
+.ui.header.discover-menu-subheader{
+  margin-top: 0;
+  margin-bottom: 0;
+  color: black;
+}
+
+.ui.container.sound-search{
+  padding: 1rem;
+}
+
+.ui.container.sound-search>.ui.header{
+  width: 100%;
+  text-align: center;
+}
 
 /*Media Queries*/
 

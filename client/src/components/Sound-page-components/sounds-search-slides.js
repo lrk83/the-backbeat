@@ -1,14 +1,38 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import {Button, Header, Icon, Menu} from "semantic-ui-react";
-import CurrentSlide from "../suggestion-slides/current-skills-slides";
+import CurrentSlide from "../suggestion-slides/current-sounds-slides";
+import Sort from "../../utils/sort";
 
-const RecomendedSkills = (props) => {
-    const {data}=props
+const SoundSearchSlides = (props) => {
+    const {tag, soundData}=props;
+
+    console.log(tag);
+
+    const [sortedSoundData, setSortedSoundData] = useState([]);
+    const [haveFormatted, setHaveFormatted] = useState(false);
+
+    //get top 10
+    useEffect(()=>{
+            if (haveFormatted===false){
+                let formattingResult = Sort.formatSoundsAndTags(soundData,tag);
+                setSortedSoundData(formattingResult);
+                setHaveFormatted(true);
+            }
+    });
+
+
+    return (
+        <>
+        {sortedSoundData.length && <Slides data={sortedSoundData} tag={tag}></Slides>}
+        </>
+    )
+}
+
+const Slides = (props) => {
+    const {data, tag}=props
 
     const photos=data;
-
-    console.log(photos);
 
     const [currentPhotos, updateCurrentPhotos] = useState(photos.slice(0, 4));
     const [currentIndex, updateCurrentIndex] = useState(4);
@@ -33,10 +57,9 @@ const RecomendedSkills = (props) => {
 
     return (
         <div className="slide-show">
-            <Header as='h2'>Recomended for you</Header>
-            <Header as='h4' className="discover-menu-subheader">Based on your interests</Header>
-            <Menu secondary>
-                <Menu.Item as={Link} to='/account/preferences' >Update Preferences</Menu.Item>
+            <Header as="h1">{tag.title}</Header>
+                <Menu secondary>
+                <Menu.Item></Menu.Item>
                 <Menu.Menu className="discover-menu-buttons" position='right'>
                     <Button animated="vertical" onClick={()=>backPhotos()}>
                         <Button.Content hidden>Back</Button.Content>
@@ -58,4 +81,5 @@ const RecomendedSkills = (props) => {
     )
 }
 
-export default RecomendedSkills;
+
+export default SoundSearchSlides;
