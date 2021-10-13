@@ -10,7 +10,7 @@ import Auth from '../../utils/auth'
 import RecomendedSkills from '../../components/Skill-page-components/recomended-skills';
 import { Container } from 'semantic-ui-react';
 import SkillPageHero from '../../components/Skill-page-components/skill-page-hero';
-
+import BackBeatFavorites from '../../components/Skill-page-components/backbeat-favorites';
 
 const SkillPage = () => {
 
@@ -75,7 +75,7 @@ const SkillPage = () => {
                 </Container>
             }
         </Container>
-        
+        <BackBeatFavorites></BackBeatFavorites>
         </>
     )
 }
