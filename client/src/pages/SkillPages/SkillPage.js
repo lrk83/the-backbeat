@@ -9,7 +9,8 @@ import Sort from '../../utils/sort';
 import Auth from '../../utils/auth'
 import RecomendedSkills from '../../components/Skill-page-components/recomended-skills';
 import { Container } from 'semantic-ui-react';
-
+import SkillPageHero from '../../components/Skill-page-components/skill-page-hero';
+import BackBeatFavorites from '../../components/Skill-page-components/backbeat-favorites';
 
 const SkillPage = () => {
 
@@ -39,11 +40,13 @@ const SkillPage = () => {
     const [haveFormattedSuggested, setHaveFormattedSuggested] = useState(false);
 
     useEffect(()=>{
-        if (!skillloading && !userLoading){
-            if (haveFormattedSuggested===false){
-                let formattingResult = Sort.recomendedByTags(unformatedSkillData, userData.me);
-                setSuggestedSkillData(formattingResult);
-                setHaveFormattedSuggested(true);
+        if (loggedIn){
+            if (!skillloading && !userLoading){
+                if (haveFormattedSuggested===false){
+                    let formattingResult = Sort.recomendedByTags(unformatedSkillData, userData.me);
+                    setSuggestedSkillData(formattingResult);
+                    setHaveFormattedSuggested(true);
+                }
             }
         }
     });
@@ -62,14 +65,17 @@ const SkillPage = () => {
 
     return (
         <>
+        <SkillPageHero></SkillPageHero>
         <MostPopularSkills></MostPopularSkills>
-        {/*{sortedSkillData.length && <SkillSearch data={sortedSkillData}></SkillSearch>}*/}
+        {unformatedSkillData.length && <SkillSearch skillData={unformatedSkillData}></SkillSearch>}
         <Container className="big-container">
-            <Container className="shadow-container">
-                {loggedIn && suggestedSkillData.length && <RecomendedSkills data={suggestedSkillData}></RecomendedSkills>}
-            </Container>
+            {loggedIn && suggestedSkillData.length &&
+                <Container className="shadow-container">
+                    <RecomendedSkills data={suggestedSkillData}></RecomendedSkills>
+                </Container>
+            }
         </Container>
-        
+        <BackBeatFavorites></BackBeatFavorites>
         </>
     )
 }

@@ -8,8 +8,6 @@ const RecomendedSkills = (props) => {
 
     const photos=data;
 
-    console.log(photos);
-
     const [currentPhotos, updateCurrentPhotos] = useState(photos.slice(0, 4));
     const [currentIndex, updateCurrentIndex] = useState(4);
 
@@ -34,8 +32,8 @@ const RecomendedSkills = (props) => {
     return (
         <div className="slide-show">
             <Header as='h2'>Recomended for you</Header>
+            <Header as='h4' className="discover-menu-subheader">based on your interests</Header>
             <Menu secondary>
-                <Menu.Item><Header as='h4' className="discover-menu-subheader">Recomendations based on your interests</Header></Menu.Item>
                 <Menu.Item as={Link} to='/account/preferences' >Update Preferences</Menu.Item>
                 <Menu.Menu className="discover-menu-buttons" position='right'>
                     <Button animated="vertical" onClick={()=>backPhotos()}>

@@ -13,7 +13,7 @@ const AccountPreferences = () => {
     const loggedIn = Auth.loggedIn();
 
     const {loading, data} = useQuery(GET_ME);
-    const {data:tagData} = useQuery(GET_TAGS);
+    const {loading:tagloading, data:tagData} = useQuery(GET_TAGS);
     const tags = tagData?.tags || {};
     const userData = data?.me || {};
 
@@ -32,7 +32,7 @@ const AccountPreferences = () => {
         )
     }
 
-    if (loading){
+    if (loading || tagloading){
         return(
             <div>Loading...</div>
         )
@@ -40,7 +40,7 @@ const AccountPreferences = () => {
 
     return (
         <Container className='big-container'>
-            <PreferencesForm tags={tags} userData={userData}></PreferencesForm>
+            {!loading && !tagloading && <PreferencesForm tags={tags} userData={userData}></PreferencesForm>}
         </Container>
     )
 }

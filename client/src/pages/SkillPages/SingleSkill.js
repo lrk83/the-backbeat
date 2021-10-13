@@ -17,6 +17,8 @@ const SingleSound = ({ match }) => {
 
     const skillData = data?.skillPost || {};
 
+    console.log(skillData);
+
     const tagsToShow=skillData.tags;
     const linkstoshow=skillData.links;
     const additionalToShow=skillData.aditionalTags;
@@ -62,33 +64,19 @@ const SingleSound = ({ match }) => {
                 <Image className="skill-photo" src={skillData.image}/>
                 <Container className="single-post-content">
                     <Header as='h1' className="single-header">{skillData.name}</Header>
-                    <Container className="single-post-para">
-                        <p>{skillData.description}</p>
-                        <div className="skill-buttons-div">
+                        <p className="single-skill-description">{skillData.description}</p>
+                    
                         {loggedIn && ( <> 
-                            {skillIsSaved===true ? (<>
-                            <Button circular icon='heart' disabled color="twitter" />
-                            <Button circular icon='mail' /> 
-                            </> ):( <>
-                            <Button circular icon='heart' onClick={saveSkill} />
-                            <Button circular icon='mail' /> 
-                            </>)}
+                                <div className="skill-buttons-div">
+                                    {skillIsSaved===true ? (<>
+                                    <Button circular icon='heart' disabled color="twitter" />
+                                    <Button circular icon='mail' /> 
+                                    </> ):( <>
+                                    <Button circular icon='heart' onClick={saveSkill} />
+                                    <Button circular icon='mail' /> 
+                                    </>)}
+                                </div>
                         </> )}
-                        </div>
-                    </Container>
-                    {skillData.links[0] ? ( <>
-                    <Container className="links-container">
-                    <Menu vertical className="links-menu">
-                        <Header as="h2" className="links-menu-header">Links</Header>
-                        {linkstoshow.map(item=> (
-                            <Menu.Item 
-                            key={item} 
-                            name={item.name}
-                            href={item.content} 
-                            target="_blank"/>
-                        ))} 
-                        </Menu> 
-                    </Container></> ):(<></>)}
                     <Menu secondary className="tags-menu"> 
                         <Menu.Item name={tagsToShow[0].name}></Menu.Item>
                         <Menu.Item name={tagsToShow[1].name}></Menu.Item>
@@ -104,6 +92,22 @@ const SingleSound = ({ match }) => {
                             </Dropdown>
                         </Menu.Menu>
                     </Menu>
+                    <Container className="single-post-para">
+                        <p>{skillData.text}</p>
+                    </Container>
+                    {skillData.links[0] ? ( <>
+                    <Container className="links-container">
+                    <Menu vertical className="links-menu">
+                        <Header as="h2" className="links-menu-header">Links</Header>
+                        {linkstoshow.map(item=> (
+                            <Menu.Item 
+                            key={item} 
+                            name={item.name}
+                            href={item.content} 
+                            target="_blank"/>
+                        ))} 
+                        </Menu> 
+                    </Container></> ):(<></>)}
                 </Container>
             </Container>
         </Container>

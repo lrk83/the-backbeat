@@ -55,12 +55,14 @@ code {
   padding: 1rem;
 }
 
-.shadow-container{
+.ui.container.shadow-container{
   border: 1px rgba(0,0,0,.2);
   border-radius: 5px;
   box-shadow: 0 1px 1px 0 rgb(0 0 0 / 6%), 0 2px 5px 0 rgb(0 0 0 / 20%);
   background-color: #fff;
   padding: 1rem;
+  margin-left:0!important;
+  margin-right: 0!important;
   z-index: 2;
   margin-bottom: 1rem;
 }
@@ -185,9 +187,8 @@ main{
   border-radius: 5px;
   background-color: #e9e8e6;
   box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
-  padding: 15px;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  padding: 15px 10px;
+  margin: 1rem 0!important;
 }
 
 .buttons-div {
@@ -196,7 +197,7 @@ main{
   margin: .5rem;
 }
 
-.tags-menu{
+.ui.secondary.menu.tags-menu{
   padding-left: 1rem;
 }
 
@@ -241,9 +242,8 @@ main{
   padding: 1rem;
 }
 
-.skill-photo{
-  flex: 100%;
-  max-width: max-content;
+.ui.image.skill-photo{
+  width: 100%;
 }
 
 #skill-container{
@@ -271,8 +271,15 @@ h2.ui.header.links-menu-header{
   text-align: center;
 }
 
-.skill-button-div{
-  align-self: center;
+.skill-buttons-div{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.single-skill-description{
+  margin-bottom: 0;
 }
 
 .new-sound-button-div{
@@ -363,4 +370,194 @@ h2.ui.header.links-menu-header{
 
 #image-preview-header{
   margin-top: 0;
+}
+
+.ui.card.user-info-card{
+  align-self:center;
+}
+
+.ui.card>.extra.account-stats{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ui.button.follow-user-button{
+  align-self: center;
+}
+
+#community-hero{
+  background-image: url(https://wallpaperbat.com/img/236681-abstract-paintings-of-animals-abstract-paintings-wallpaper.jpg);
+  background-position: center;
+  background-size:cover;
+  width: 100%;
+}
+
+#sound-page-hero{
+  background-image: url(https://wallpaperbat.com/img/175383-drawing-painting-jazz-messenger-iv-gil-mayers-picture-nr-20845.jpg);
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+}
+
+#skill-page-hero{
+  background-image: url(https://wallpaperbat.com/img/152925-drawing-painting-aboriginal-jazz-gil-mayers-picture-nr-18867.jpg);
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+}
+
+#home-page-hero{
+  background-image: url(https://wallpaperbat.com/img/10293-jeremy-sutton-studios-art-of-jazz-2018-jeremy-sutton-studios.jpg);
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+}
+
+
+#community-header{
+  width: 100%;
+  text-align: center;
+  padding: 5rem;
+  color: #fff;
+  text-shadow: 2px black;
+  font-size: 5rem;
+  text-decoration: underline;
+}
+
+#top-creatives-title{
+  margin-top: 2rem;
+  margin-bottom: 0;
+}
+
+#secondary-creatives-title{
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.ui.list>.item>img.image.top-post-icon{
+  width: 4em;
+  height: 4em;
+} 
+.ui.header.discover-menu-subheader{
+  margin-top: 0;
+  margin-bottom: 0;
+  color: black;
+}
+
+.ui.container.sound-search{
+  padding: 1rem;
+}
+
+.ui.container.sound-search>.ui.header{
+  width: 100%;
+  text-align: center;
+}
+
+.ui.header.sound-search-header{
+  margin: 0;
+}
+
+.ui.container.chosen-tags-container{
+  border: 1px rgba(0,0,0,.2);
+  border-radius: 5px;
+  box-shadow: 0 1px 1px 0 rgb(0 0 0 / 6%), 0 2px 5px 0 rgb(0 0 0 / 20%);
+  background-color: #fff;
+  padding: 1rem;
+  padding-top:.5rem;
+  z-index: 2;
+  margin-left: 0!important;
+  margin-right: 0!important;
+  margin-bottom: 1rem;
+}
+
+.ui.container.chosen-tag{
+  padding: 0;
+  margin: 0;
+}
+
+.ui.container.chosen-tags-container>.ui.card{
+  margin-top: 0;
+}
+
+.chosen-tags-container .ui.secondary.menu{
+  margin-bottom: 0;
+}
+
+.ui.secondary.menu .ui.animated.button{
+  margin-top: 0;
+}
+
+/*Media Queries*/
+
+@media screen and (max-width: 540px){
+
+  *{
+    max-width: 540px;
+  }
+
+  .ui.card{
+    margin: 0;
+  }
+
+  .three-suggestions-link{
+    padding: 0.3rem;
+  }  
+
+  .ui.header.single-header{
+    margin-top: 0.5rem;
+  }
+
+  .ui.container .single-post-container{
+    flex-direction: column;
+  }
+
+  .small-screen-sound-author a{
+    color: black;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .suggested-container .ui.card{
+    width: 30%;
+  }
+}
+
+
+@media screen and (max-width: 539px){
+  .ui.celled.list>a{
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 1px 1px 0 rgb(0 0 0 / 6%), 0 2px 5px 0 rgb(0 0 0 / 20%);
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .ui.celled.list>.item{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .ui.celled.list>.item>.content{
+    text-align: center;
+  }
+
+  .ui.celled.list>a>.item:first-child{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .ui.celled.list>a>.item>img.image.top-post-icon{
+    width: 3em;
+    height: 3em;
+    margin-bottom: 0.5rem;
+  } 
 }

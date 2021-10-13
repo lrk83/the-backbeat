@@ -5,9 +5,10 @@ import {GET_SINGLE_USER} from '../../utils/queries';
 import Auth from '../../utils/auth';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import AccountInfo from '../../components/Account-page-components/account-info';
-import Sounds from '../../components/suggestion-slides/suggestion-sound-slide';
-import Skills from '../../components/suggestion-slides/suggestion-skill-slide';
+import AccountInfo from '../../components/user-page-components/user-info';
+import AccountInfoViewOnly from "../../components/user-page-components/user-info-view-only"
+import Sounds from '../../components/user-page-components/suggestion-sound-slide';
+import Skills from '../../components/user-page-components/suggestion-skill-slide';
 
 const AccountPage = ({ match }) => {
 
@@ -20,7 +21,7 @@ const AccountPage = ({ match }) => {
     const userData = data?.user || {};
     const loggedIn = Auth.loggedIn();
 
-    console.log(userData);
+    console.log(userData.username);
 
     useEffect(()=>{
         AOS.init({
@@ -32,20 +33,23 @@ const AccountPage = ({ match }) => {
         return <div>Loading...</div>;
     }
 
-    if (!loggedIn) {
-        return <div>Please login to continue</div>
-    };
-
     return (
         <Container className="big-container">
-            <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
-                <AccountInfo data={userData}></AccountInfo>
-            </Container>
-            <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
+            {loggedIn ? (
+                <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
+                    <AccountInfo data={userData}></AccountInfo>
+                </Container>
+            ):(
+                <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
+                    <AccountInfoViewOnly data={userData}></AccountInfoViewOnly>
+                </Container>
+            )}
+            
+            <Container className="shadow-container">
                 <Sounds data={userData.soundPosts}></Sounds>
             </Container>
-            <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
-                <Skills data={userData.skillPosts}></Skills>
+            <Container className="shadow-container">
+                <Skills data={userData.skillPosts} length={userData.skillPosts.length}></Skills>
             </Container>
         </Container>
     )

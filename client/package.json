@@ -17,6 +17,7 @@
     "graphql-tag": "^2.12.5",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.21",
+    "moment": "^2.29.1",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",

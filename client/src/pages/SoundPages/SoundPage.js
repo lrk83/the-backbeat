@@ -3,13 +3,14 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import MostPopularSounds from '../../components/Sound-page-components/most-popular-sounds';
 import SoundSearch from '../../components/Sound-page-components/sound-search';
+import SoundPageHero from '../../components/Sound-page-components/sound-page-hero';
 import { useQuery } from '@apollo/client';
 import { GET_SOUNDS_FOR_SUGGESTED, GET_ME } from '../../utils/queries';
 import Sort from '../../utils/sort';
 import Auth from '../../utils/auth'
 import RecomendedSounds from '../../components/Sound-page-components/recomended-sounds';
 import { Container } from 'semantic-ui-react';
-
+import BackbeatFavorites from '../../components/Sound-page-components/backbeat-favorites';
 
 const SoundPage = () => {
 
@@ -39,11 +40,13 @@ const SoundPage = () => {
     const [haveFormattedSuggested, setHaveFormattedSuggested] = useState(false);
 
     useEffect(()=>{
-        if (!soundloading && !userLoading){
-            if (haveFormattedSuggested===false){
-                let formattingResult = Sort.recomendedByTags(unformatedSoundData, userData.me);
-                setSuggestedSoundData(formattingResult);
-                setHaveFormattedSuggested(true);
+        if (loggedIn) {
+            if (!soundloading && !userLoading){
+                if (haveFormattedSuggested===false){
+                    let formattingResult = Sort.recomendedByTags(unformatedSoundData, userData.me);
+                    setSuggestedSoundData(formattingResult);
+                    setHaveFormattedSuggested(true);
+                }
             }
         }
     });
@@ -62,14 +65,17 @@ const SoundPage = () => {
 
     return (
         <>
+        <SoundPageHero></SoundPageHero>
         <MostPopularSounds></MostPopularSounds>
-        {/*{sortedSkillData.length && <SkillSearch data={sortedSkillData}></SkillSearch>}*/}
+        {unformatedSoundData.length && <SoundSearch soundData={unformatedSoundData}></SoundSearch>}
         <Container className="big-container">
-            <Container className="shadow-container">
-                {loggedIn && suggestedSoundData.length && <RecomendedSounds data={suggestedSoundData}></RecomendedSounds>}
-            </Container>
+            {loggedIn && suggestedSoundData.length && 
+                <Container className="shadow-container">
+                    <RecomendedSounds data={suggestedSoundData}></RecomendedSounds>
+                </Container>
+            }
         </Container>
-        
+        <BackbeatFavorites></BackbeatFavorites>
         </>
     )
 }

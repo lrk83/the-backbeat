@@ -1,16 +1,11 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import {Button, Header, Icon, Menu} from "semantic-ui-react";
-import CurrentSlide from "../suggestion-slides/current-skills-slides";
+import {Button, Menu, Header, Icon, Container} from "semantic-ui-react"; 
+import CurrentSlide from '../suggestion-slides/current-sounds-slides';
 
-const RecomendedSkills = (props) => {
-    const {data}=props
-
-    const photos=data;
-
-    console.log(photos);
-
-    const [currentPhotos, updateCurrentPhotos] = useState(photos.slice(0, 4));
+const MySoundSlides = (data) => {
+    const [photos]=useState(data);
+    const [currentPhotos, updateCurrentPhotos] = useState(photos.data.slice(0, 4));
     const [currentIndex, updateCurrentIndex] = useState(4);
 
     const forwardPhotos = () => {
@@ -19,7 +14,7 @@ const RecomendedSkills = (props) => {
             upperbound=20;
         };
         updateCurrentIndex(upperbound);
-        updateCurrentPhotos(photos.slice(upperbound-4,upperbound));
+        updateCurrentPhotos(photos.data.slice(upperbound-4,upperbound));
     }
 
     const backPhotos = () => {
@@ -28,15 +23,16 @@ const RecomendedSkills = (props) => {
             lowerbound=0;
         };
         updateCurrentIndex(lowerbound+4);
-        updateCurrentPhotos(photos.slice(lowerbound,lowerbound+4));
+        updateCurrentPhotos(photos.data.slice(lowerbound,lowerbound+4));
     }
 
     return (
-        <div className="slide-show">
-            <Header as='h2'>Recomended for you</Header>
-            <Header as='h4' className="discover-menu-subheader">Based on your interests</Header>
+        <Container>
+        <div className="my-sounds-slide-show">
+            
             <Menu secondary>
-                <Menu.Item as={Link} to='/account/preferences' >Update Preferences</Menu.Item>
+                <Menu.Item><Header as='h2'>My Sounds</Header></Menu.Item>
+                <Menu.Item as={Link} to="/sounds">See All Sounds</Menu.Item>
                 <Menu.Menu className="discover-menu-buttons" position='right'>
                     <Button animated="vertical" onClick={()=>backPhotos()}>
                         <Button.Content hidden>Back</Button.Content>
@@ -53,9 +49,9 @@ const RecomendedSkills = (props) => {
                 </Menu.Menu>
             </Menu>
             <CurrentSlide currentPhotos={currentPhotos}></CurrentSlide>
-            
         </div>
+        </Container>
     )
-}
+};
 
-export default RecomendedSkills;
+export default MySoundSlides;

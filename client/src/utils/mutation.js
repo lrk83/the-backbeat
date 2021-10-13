@@ -161,3 +161,10 @@ mutation followUser($userId: ID) {
     }
   }
 }`;
+
+export const ADD_LINK = gql`
+mutation addLink($name: String, $content: String){
+  addLink(name: $name, content: $content){
+    _id
+  }
+}`;
