@@ -10,7 +10,7 @@ import Sort from '../../utils/sort';
 import Auth from '../../utils/auth'
 import RecomendedSounds from '../../components/Sound-page-components/recomended-sounds';
 import { Container } from 'semantic-ui-react';
-
+import BackbeatFavorites from '../../components/Sound-page-components/backbeat-favorites';
 
 const SoundPage = () => {
 
@@ -75,7 +75,7 @@ const SoundPage = () => {
                 </Container>
             }
         </Container>
-        
+        <BackbeatFavorites></BackbeatFavorites>
         </>
     )
 }

@@ -66,6 +66,15 @@ class SortService {
             console.log(formattedSounds);
             return formattedSounds;
     }
+
+    BackBeatFavoriteSounds = (skilldata) => {
+        var returndata = [];
+        for(let x=0;x<skilldata.length;x++){
+            returndata.push(skilldata[x]);
+        }
+
+        return returndata;
+    }
 }
 
 
