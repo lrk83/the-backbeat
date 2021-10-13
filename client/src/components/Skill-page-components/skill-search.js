@@ -39,14 +39,13 @@ function SkillSearch(props) {
         <Container className="sound-search">
             <Header as="h2">Find Sounds by Tag</Header>
             {!loading && <TagSearch tags={tags} chosenTags={chosenTags} setChosenTags={setChosenTags}></TagSearch>}
-            <Container className='chosen-tags-container'>
                 {chosenTags.map(item=> (
-                  
+                  <Container className='chosen-tags-container'>
                         <Container className="chosen-tag" key={item.id}>
                           <SkillsbyTagSlides tag={item} skillData={skillData}></SkillsbyTagSlides>
                         </Container>
+                  </Container >
                 ))}
-            </Container >
         </Container>
     )
 }
