@@ -11,6 +11,7 @@ import Auth from '../../utils/auth'
 import RecomendedSounds from '../../components/Sound-page-components/recomended-sounds';
 import { Container } from 'semantic-ui-react';
 import BackbeatFavorites from '../../components/Sound-page-components/backbeat-favorites';
+import SmallRecomendedSounds from '../../components/small-screen/small-recomended-sounds';
 
 const SoundPage = () => {
 
@@ -69,11 +70,16 @@ const SoundPage = () => {
         <MostPopularSounds></MostPopularSounds>
         {unformatedSoundData.length && <SoundSearch soundData={unformatedSoundData}></SoundSearch>}
         <Container className="big-container">
-            {loggedIn && suggestedSoundData.length && 
+            {loggedIn && suggestedSoundData.length && <>
+                {window.screen.width<=540 ? (<>
+                <Container className="shadow-container">
+                    <SmallRecomendedSounds data={suggestedSoundData}></SmallRecomendedSounds>
+                </Container>
+                </>):(
                 <Container className="shadow-container">
                     <RecomendedSounds data={suggestedSoundData}></RecomendedSounds>
-                </Container>
-            }
+                </Container>)}
+            </>}
         </Container>
         <BackbeatFavorites></BackbeatFavorites>
         </>
