@@ -18,16 +18,16 @@ export default class AppNavbar extends Component {
           <h1 className="nav-title" id="nav-title">The Backbeat</h1>
           </Menu.Item>
           <Menu.Item
-            name='skills'
-            active={activeItem === 'skills'}
-            onClick={this.handleItemClick}
-            as={Link} to='/skills'
-          />
-          <Menu.Item
             name='sounds'
             active={activeItem === 'sounds'}
             onClick={this.handleItemClick}
             as={Link} to='/sounds'
+          />
+          <Menu.Item
+            name='skills'
+            active={activeItem === 'skills'}
+            onClick={this.handleItemClick}
+            as={Link} to='/skills'
           />
           <Menu.Item
             name='community'

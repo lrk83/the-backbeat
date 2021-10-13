@@ -198,7 +198,7 @@ main{
   margin: .5rem;
 }
 
-.tags-menu{
+.ui.secondary.menu.tags-menu{
   padding-left: 1rem;
 }
 
@@ -273,8 +273,15 @@ h2.ui.header.links-menu-header{
   text-align: center;
 }
 
-.skill-button-div{
-  align-self: center;
+.skill-buttons-div{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.single-skill-description{
+  margin-bottom: 0;
 }
 
 .new-sound-button-div{

@@ -17,6 +17,8 @@ const SingleSound = ({ match }) => {
 
     const skillData = data?.skillPost || {};
 
+    console.log(skillData);
+
     const tagsToShow=skillData.tags;
     const linkstoshow=skillData.links;
     const additionalToShow=skillData.aditionalTags;
@@ -62,20 +64,20 @@ const SingleSound = ({ match }) => {
                 <Image className="skill-photo" src={skillData.image}/>
                 <Container className="single-post-content">
                     <Header as='h1' className="single-header">{skillData.name}</Header>
-                    <Container className="single-post-para">
-                        <p>{skillData.description}</p>
-                        <div className="skill-buttons-div">
+                        <p className="single-skill-description">{skillData.description}</p>
+                    
                         {loggedIn && ( <> 
-                            {skillIsSaved===true ? (<>
-                            <Button circular icon='heart' disabled color="twitter" />
-                            <Button circular icon='mail' /> 
-                            </> ):( <>
-                            <Button circular icon='heart' onClick={saveSkill} />
-                            <Button circular icon='mail' /> 
-                            </>)}
+                                <div className="skill-buttons-div">
+                                    {skillIsSaved===true ? (<>
+                                    <Button circular icon='heart' disabled color="twitter" />
+                                    <Button circular icon='mail' /> 
+                                    </> ):( <>
+                                    <Button circular icon='heart' onClick={saveSkill} />
+                                    <Button circular icon='mail' /> 
+                                    </>)}
+                                </div>
                         </> )}
-                        </div>
-                    </Container>
+                    
                     {skillData.links[0] ? ( <>
                     <Container className="links-container">
                     <Menu vertical className="links-menu">
@@ -104,6 +106,9 @@ const SingleSound = ({ match }) => {
                             </Dropdown>
                         </Menu.Menu>
                     </Menu>
+                    <Container className="single-post-para">
+                        <p>{skillData.text}</p>
+                    </Container>
                 </Container>
             </Container>
         </Container>
