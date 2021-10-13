@@ -11,6 +11,7 @@ import Sort from "../utils/sort";
 import HomePageHero from '../components/home-page-hero';
 import SmallSoundSuggestionSlide from '../components/small-screen/small-sound-suggestion-slide';
 import SmallSkillSuggestionSlide from '../components/small-screen/small-skill-suggestion-slide'
+import SmallUserSuggestionSlide from '../components/small-screen/small-user-suggestion-slide';
 
 const HomePage = () => {
 
@@ -74,7 +75,7 @@ const HomePage = () => {
     return (
         <>
         <HomePageHero></HomePageHero>
-        {window.screen.width<=540? (<>
+        {window.screen.width<=400? (<>
             <Container className="big-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
             <Container className="shadow-container">
                 {sortedSoundData.length ? (
@@ -86,7 +87,7 @@ const HomePage = () => {
             </Container>
             <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
                 {skillData.length ? (
-                <UserSuggestionSlide data={sortedUserData}></UserSuggestionSlide>) :<></>}
+                <SmallUserSuggestionSlide data={sortedUserData}></SmallUserSuggestionSlide>) :<></>}
             </Container>
         </Container>
         

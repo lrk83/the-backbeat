@@ -608,8 +608,34 @@ h2.ui.header.links-menu-header{
   } 
 }
 
-@media screen and (max-width:375){
+@media screen and (max-width:375px){
   * {
     max-width: 375px;
+  }
+
+  .slide-show>.ui.secondary.menu{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .slide-show>.ui.secondary.menu>a{
+    padding-bottom: 15px;
+    padding-top: 5px;
+    font-size: 1.5rem;
+  }
+
+  .ui.container .suggested-container{
+    justify-content: center;
+  }
+
+  .ui.card.little-slide{
+    width: 100%;
+  }
+
+  .ui.card.little-slide .content{
+    text-align: center;
+    font-size: 1.5rem;
   }
 }

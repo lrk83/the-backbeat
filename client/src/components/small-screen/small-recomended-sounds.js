@@ -8,11 +8,15 @@ const RecomendedSkills = (props) => {
 
     const photos=data;
 
-    var num=3
+    var num=3;
 
     if (window.screen.width<=540){
         num=3;
-    }
+    };
+
+    if (window.screen<=375){
+        num=1
+    };
 
     const [currentPhotos, updateCurrentPhotos] = useState(photos.slice(0, num));
     const [currentIndex, updateCurrentIndex] = useState(num);

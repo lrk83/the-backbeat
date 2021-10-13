@@ -1,42 +1,54 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
-import {Container, Header, Icon, Card, Image, Menu} from "semantic-ui-react";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import {Button, Menu, Header, Icon} from "semantic-ui-react"; 
+import SmallCurrentSkillSlide from './small-current-skill-slides';
 
-const Slides = (props) => {
+const Slides = (data) => {
 
-    const {data, length} = props;
+    const [photos]=useState(data);
+    const [currentPhotos, updateCurrentPhotos] = useState(photos.data.slice(0, 1));
+    const [currentIndex, updateCurrentIndex] = useState(1);
 
-    const photos=data;
-    const [cardsToShow]=useState([length-1,length-2,length-3]);
+    const forwardPhotos = () => {
+        let upperbound = currentIndex+1;
+        if (upperbound>20){
+            upperbound=20;
+        };
+        updateCurrentIndex(upperbound);
+        updateCurrentPhotos(photos.data.slice(upperbound-1,upperbound));
+    }
 
-    useEffect(()=>{
-        AOS.init({
-            duration:200
-        })
-    });
+    const backPhotos = () => {
+        let lowerbound=currentIndex-2;
+        if (lowerbound<0){
+            lowerbound=0;
+        };
+        updateCurrentIndex(lowerbound+1);
+        updateCurrentPhotos(photos.data.slice(lowerbound,lowerbound+1));
+    }
 
     return (
-        <div className="three-suggestions">
+        <div className="slide-show">
             <Header as='h2'>Discover new Skills</Header>
-            <Menu secondary className="see-all-skills"> 
-                <Menu.Item name="see all" as={Link} to="/skills"></Menu.Item>
+            <Menu secondary>
+                <Menu.Item as={Link} to='/sounds' >See all</Menu.Item>
+                <Menu.Menu className="discover-menu-buttons">
+                    <Button animated="vertical" onClick={()=>backPhotos()}>
+                        <Button.Content hidden>Back</Button.Content>
+                        <Button.Content visible>
+                            <Icon name="arrow left"/>
+                        </Button.Content>
+                    </Button>
+                    <Button animated="vertical" onClick={()=>forwardPhotos()}>
+                        <Button.Content hidden>Forward</Button.Content>
+                        <Button.Content visible>
+                            <Icon name="arrow right"/>
+                        </Button.Content>
+                    </Button>
+                </Menu.Menu>
             </Menu>
-            <Container className="three-suggestions-container">
-                {cardsToShow.map((number)=> 
-                    <Link key={number} className="three-suggestions-link" to={`/skills/single-skill/${photos[number]._id}`}>
-                        <Card>
-                            
-                            <Image src={photos[number].image} wrapped ui={false} />
-                            <Card.Content>
-                            <Card.Header>{photos[number].name}</Card.Header>
-                            </Card.Content>
-                        </Card>   
-                    </Link>
-                )}
-                
-            </Container>
+            <SmallCurrentSkillSlide currentPhotos={currentPhotos}></SmallCurrentSkillSlide>
+            
         </div>
     )
 }
