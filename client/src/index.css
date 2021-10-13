@@ -166,9 +166,29 @@ main{
 }
 
 .ui.container .single-post-content{
-  flex: 1 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0!important;
+  padding: 0;
+}
+
+.ui.container.profile-picture-container{
+  width: 40%;
+  padding: 0;
+  margin: 0!important;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+}
+
+.ui.container.info-and-buttons{
+  width: 60%;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-right: 0!important;
 }
 
 .ui.card .single-post-card{
@@ -199,6 +219,9 @@ main{
 
 .ui.secondary.menu.tags-menu{
   padding-left: 1rem;
+}
+
+img.ui.image.profile-picture{
 }
 
 .ui.secondary.menu.tags-menu .item{
@@ -334,6 +357,12 @@ h2.ui.header.links-menu-header{
   display: flex;
   justify-content: space-between;
   flex-direction: row;
+  margin: 0!important;
+  padding: 0;
+}
+
+.ui.container.user-info-and-photo{
+  display: flex;
 }
 
 .ui.header.top-ten-subheader {
