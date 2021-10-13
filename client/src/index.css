@@ -638,4 +638,21 @@ h2.ui.header.links-menu-header{
     text-align: center;
     font-size: 1.5rem;
   }
+
+  #home-page-hero{
+    max-width: 375px!important;
+  }
+
+  #community-header{
+    padding: 3rem 0;
+  }
+
+  #sound-page-hero{
+    max-width: 375px!important;
+  }
+
+  #community-header{
+    padding: 3rem 0;
+    font-size: 4rem;
+  }
 }
