@@ -77,20 +77,6 @@ const SingleSound = ({ match }) => {
                                     </>)}
                                 </div>
                         </> )}
-                    
-                    {skillData.links[0] ? ( <>
-                    <Container className="links-container">
-                    <Menu vertical className="links-menu">
-                        <Header as="h2" className="links-menu-header">Links</Header>
-                        {linkstoshow.map(item=> (
-                            <Menu.Item 
-                            key={item} 
-                            name={item.name}
-                            href={item.content} 
-                            target="_blank"/>
-                        ))} 
-                        </Menu> 
-                    </Container></> ):(<></>)}
                     <Menu secondary className="tags-menu"> 
                         <Menu.Item name={tagsToShow[0].name}></Menu.Item>
                         <Menu.Item name={tagsToShow[1].name}></Menu.Item>
@@ -109,6 +95,19 @@ const SingleSound = ({ match }) => {
                     <Container className="single-post-para">
                         <p>{skillData.text}</p>
                     </Container>
+                    {skillData.links[0] ? ( <>
+                    <Container className="links-container">
+                    <Menu vertical className="links-menu">
+                        <Header as="h2" className="links-menu-header">Links</Header>
+                        {linkstoshow.map(item=> (
+                            <Menu.Item 
+                            key={item} 
+                            name={item.name}
+                            href={item.content} 
+                            target="_blank"/>
+                        ))} 
+                        </Menu> 
+                    </Container></> ):(<></>)}
                 </Container>
             </Container>
         </Container>

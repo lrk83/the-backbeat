@@ -162,11 +162,14 @@ const NewSkillPost = () => {
 
         const newLinkFromBackEnd = await createLink({
             variables: {name: newLinkText.name, content: newLinkText.content}
-        }) 
+        });
 
-        newLinks.push(newLinkFromBackEnd._id);
+        console.log(newLinkFromBackEnd);
+
+        newLinks.push(newLinkFromBackEnd.data.addLink._id);
 
         setContentFormData({...contentData, links: newLinks});
+        console.log(contentData);
         setNewLinkText({name:"",content:""});
     }
 

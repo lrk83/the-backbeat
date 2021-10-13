@@ -141,6 +141,8 @@ const resolvers = {
               {_id: context.user._id}
             );
 
+            console.log(postData);
+
             const post = await SkillPost.create({ ...postData, author: author });
 
             const updatedUser = await User.findOneAndUpdate(
@@ -307,7 +309,9 @@ const resolvers = {
       },
       addLink: async (parent, {name, content}, context) => {
         if (context.user){
-          return await SkillLink.create({name:name, content: content});
+          var newSkill = await SkillLink.create({name:name, content: content});
+          console.log(newSkill);
+          return newSkill;
         };
 
         throw new AuthenticationError('You need to be logged in!');
