@@ -4,9 +4,9 @@ import Auth from '../../utils/auth';
 import MenuTabular from '../../components/Menus/MenuTabularNewSkill';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery, useMutation, createHttpLink } from '@apollo/client';
 import {GET_TAGS} from '../../utils/queries';
-import {ADD_SKILL, ADD_TAG} from '../../utils/mutation';
+import {ADD_SKILL, ADD_TAG, ADD_LINK} from '../../utils/mutation';
 import TagSearch from "../../components/Account-page-components/tags-search";
 
 const NewSkillPost = () => {
@@ -25,9 +25,7 @@ const NewSkillPost = () => {
     const [showAlert, setShowAlert] = useState(false);
     const [addTagForm, setAddTagForm] = useState('');
     const [additionalLinkCount, setAddLinkCount] = useState([1]);
-    const [newLinkText, setNewLinkText] = useState("");
-
-    console.log(additionalLinkCount);
+    const [newLinkText, setNewLinkText] = useState({name:"",content:""});
 
     const {loading, data} = useQuery(GET_TAGS);
     const tags = data?.tags || {};
@@ -36,6 +34,7 @@ const NewSkillPost = () => {
 
     const [createSkill] = useMutation(ADD_SKILL);
     const [createTag] = useMutation(ADD_TAG);
+    const [createLink] = useMutation(ADD_LINK);
 
     //Handle which form sections are disabled
     const handleFirstFormSubmit = (event) => {
@@ -121,8 +120,8 @@ const NewSkillPost = () => {
     }
 
     const handleLinkContentChange = (event) => {
-        const {value} = event.target;
-        setNewLinkText(value);
+        const {name, value} = event.target;
+        setNewLinkText({...newLinkText, [name]: value});
     }
 
     const handleAddTag = async (event) => {
@@ -139,12 +138,11 @@ const NewSkillPost = () => {
         updatedTags.push(newFormatedTag);
 
         localStorage.setItem('newTags',JSON.stringify(updatedTags));
-        console.log(JSON.parse(localStorage.getItem('newTags')));
 
         setAddTagForm('');
     }
 
-    const handleAddLink = (event) => {
+    const handleAddLink = async (event) => {
         event.preventDefault();
 
         let newAddLinkCount = []
@@ -153,10 +151,8 @@ const NewSkillPost = () => {
         }
 
         let nextCount = additionalLinkCount.length+1;
-        console.log(nextCount)
         newAddLinkCount.push(nextCount);
 
-        console.log(newAddLinkCount)
         setAddLinkCount(newAddLinkCount);
 
         let newLinks = []
@@ -164,12 +160,14 @@ const NewSkillPost = () => {
             newLinks.push(contentData.links[x]);
         }
 
-        newLinks.push(newLinkText)
+        const newLinkFromBackEnd = await createLink({
+            variables: {name: newLinkText.name, content: newLinkText.content}
+        }) 
 
-        console.log(newLinks);
+        newLinks.push(newLinkFromBackEnd._id);
 
         setContentFormData({...contentData, links: newLinks});
-        setNewLinkText("");
+        setNewLinkText({name:"",content:""});
     }
 
     const textBackButton = (event) => {
@@ -203,7 +201,6 @@ const NewSkillPost = () => {
         setReadyToSubmit(false);
         
         try {
-            console.log(submissionData);
             await createSkill({
                 variables: {postData: {...submissionData}}
             });
@@ -246,13 +243,13 @@ const NewSkillPost = () => {
     return(
         <Container className='big-container'>
             {loggedIn && (
-                <Container className='shadow-container'>
+                <Container className='shadow-container' data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500">
                 <Header as ="h1" className="new-post-header">New Post</Header>
 
                 <MenuTabular choice='skill'></MenuTabular>
                     <Form onSubmit={handleFirstFormSubmit}>
                     {showAlert? (<Label basic color="red">Something went wrong. Please check your inputs and try again </Label>):(<></>)}
-                        <Form.Group widths='equal' data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500">
+                        <Form.Group widths='equal'>
                             <Header as ="h2" className="new-post-header">Basic Info</Header>
                             {section==="post-content" || section==="back-to-basics"  || section==="back-to-back" || section==="all-the-way-back" ? (<>
                                 <Form.Input fluid label="Name" name="name" placeholder="Name" required onChange={handleContentChange}/>
@@ -277,7 +274,7 @@ const NewSkillPost = () => {
                         </Form.Group>
                     </Form>
                     {section==="text" || section==="links" || section==="tags" || section==="back-to-basics" || section==="back-to-text" || section==="back-to-back" || section==="back-to-links" || section==="back-to-back-to-text" || section==="all-the-way-back" ? (
-                         <Form onSubmit={handleSecondFormSubmit} data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500">
+                         <Form onSubmit={handleSecondFormSubmit}>
                          <Header as ="h2" className="new-post-header">Text</Header>
                              <Form.Group widths='equal'>
                                  {section==="text" || section==="back-to-text" || section==="back-to-back-to-text" ? (<>
@@ -311,12 +308,15 @@ const NewSkillPost = () => {
                          </Form>
                     ) : (<></>)}
                     {section==="links" || section==="tags" || section==="back-to-basics" || section==="back-to-text" || section==="back-to-back" || section==="back-to-links" || section==="back-to-back-to-text" || section==="all-the-way-back"? (
-                         <Form onSubmit={handleLinkFormSubmit} data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500">
+                         <Form onSubmit={handleLinkFormSubmit}>
                          <Header as ="h2" className="new-post-header">Links</Header>
                              <Form.Group widths='equal'>
                                  {section==="links" || section==="back-to-links" ? (<>
                                      {additionalLinkCount.map(number=>(<>
-                                     <Form.Input fluid label="Add link" name="link" placeholder="Add link" onChange={handleLinkContentChange} key={number}/>
+                                     <div key={number}>
+                                        <Form.Input fluid label="link URL" name="content" placeholder="Add link URL" onChange={handleLinkContentChange}/>
+                                        <Form.Input fluid lable="link name" name="name" placeholder="Add link title" onChange={handleLinkContentChange}/>
+                                     </div>
                                      </>))}
                                      <Button onClick={handleAddLink}>Add Link</Button>
                                      <Button
@@ -350,7 +350,7 @@ const NewSkillPost = () => {
                          </Form>
                     ) : (<></>)}
                     {section==="tags" || section==="back-to-back-to-text" || section==="all-the-way-back" || section==="back-to-links" ? (
-                         <Form onSubmit={handleThirdFormSubmit} data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500">
+                         <Form onSubmit={handleThirdFormSubmit}>
                          <Header as ="h2" className="new-post-header">Tags</Header>
                              {section==="tags" ? ( <>
                              <TagSearch tags={tags} chosenTags={chosenTags} setChosenTags={setChosenTags} contentData={contentData} setContentFormData={setContentFormData}/>
