@@ -5,7 +5,7 @@ import SmallCurrentSlide from "../small-screen/small-current-slides";
 import Sort from "../../utils/sort";
 
 const SoundSearchSlides = (props) => {
-    const {tag, soundData}=props;
+    const {tag, skillData}=props;
 
     const [sortedSoundData, setSortedSoundData] = useState([]);
     const [haveFormatted, setHaveFormatted] = useState(false);
@@ -13,7 +13,7 @@ const SoundSearchSlides = (props) => {
     //get top 10
     useEffect(()=>{
             if (haveFormatted===false){
-                let formattingResult = Sort.formatSoundsAndTags(soundData,tag);
+                let formattingResult = Sort.formatSoundsAndTags(skillData,tag);
                 setSortedSoundData(formattingResult);
                 setHaveFormatted(true);
             }
@@ -58,7 +58,7 @@ const Slides = (props) => {
         <div className="slide-show">
             <Header as='h2'>{tag.title}</Header>
             <Menu secondary>
-                <Menu.Item as={Link} to='/account/preferences'> Preferences </Menu.Item>
+                <Menu.Item as={Link} to='/account/preferences' >Preferences</Menu.Item>
                 <Menu.Menu className="search-menu-buttons">
                     <Button animated="vertical" onClick={()=>backPhotos()}>
                         <Button.Content hidden>Back</Button.Content>
