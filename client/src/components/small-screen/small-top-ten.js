@@ -1,9 +1,8 @@
 import React, {useState} from "react";
-import { Link } from "react-router-dom";
-import {Button, Menu, Header, Icon} from "semantic-ui-react"; 
+import {Button, Menu, Icon} from "semantic-ui-react"; 
 import SmallCurrentSlide from './small-current-slides';
 
-const Slides = (data) => {
+const SmallTopTen = (data) => {
 
     const [photos]=useState(data);
     const [currentPhotos, updateCurrentPhotos] = useState(photos.data.slice(0, 1));
@@ -29,10 +28,9 @@ const Slides = (data) => {
 
     return (
         <div className="slide-show">
-            <Header as='h2'>Recomended for you</Header>
+            <SmallCurrentSlide currentPhotos={currentPhotos}></SmallCurrentSlide>
             <Menu secondary>
-                <Menu.Item as={Link} to='/account/preferences' >Preferences</Menu.Item>
-                <Menu.Menu className="discover-menu-buttons">
+                <Menu.Menu id="top-ten-buttons">
                     <Button animated="vertical" onClick={()=>backPhotos()}>
                         <Button.Content hidden>Back</Button.Content>
                         <Button.Content visible>
@@ -47,10 +45,9 @@ const Slides = (data) => {
                     </Button>
                 </Menu.Menu>
             </Menu>
-            <SmallCurrentSlide currentPhotos={currentPhotos}></SmallCurrentSlide>
             
         </div>
     )
 }
 
-export default Slides;
+export default SmallTopTen;

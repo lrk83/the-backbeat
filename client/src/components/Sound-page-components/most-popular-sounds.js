@@ -6,6 +6,7 @@ import { useQuery } from '@apollo/client';
 import {GET_SOUNDS_FOR_SUGGESTED} from '../../utils/queries';
 import Sort from "../../utils/sort";
 import {Link} from 'react-router-dom';
+import SmallTopTen from '../small-screen/small-top-ten';
 
 const MostPopularSounds = () => {
 
@@ -38,33 +39,15 @@ const MostPopularSounds = () => {
     return (
         <Container className="big-container" id="most-popular-container">
             <Container className="header-container"><Header as="h1" className="single-header" id="top-ten-header">Top All Time</Header></Container>
-            <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" id="top-ten-shadow-container">
                 
                 {window.screen.width<smallscreen ? (<>
 
-                    <Header as="h3" className="top-ten-subheader">Our top five most popular sound packs</Header>
-
-                    <Grid columns={1}>
-                        <Grid.Column>
+                    <Header as="h3" className="top-ten-subheader">Our most popular sound packs</Header>
                         {sortedSoundData.length &&
-                            <List celled>
-                            {firstHalf.map(num=>(
-                                <div>
-                                    <Link to={`sounds/single-sound/${sortedSoundData[num]._id}`}>
-                                    <List.Item >
-                                        
-                                        <Image avatar src={sortedSoundData[num].image} className="top-post-icon"/>
-                                        <List.Content>
-                                            <List.Header>{sortedSoundData[num].name}</List.Header>
-                                            
-                                        </List.Content>
-                                    </List.Item></Link>
-                                </div>) ) }
-                            </List>}
-                        </Grid.Column>
-                    </Grid>
-
+                            <SmallTopTen data={sortedSoundData}></SmallTopTen>
+                        }
                 </>):(<>
+                    <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" id="top-ten-shadow-container">
 
                     <Header as="h3" className="top-ten-subheader">Our top ten most popular sounds</Header>
                 
@@ -100,8 +83,10 @@ const MostPopularSounds = () => {
                             </List.Item>) ) }
                         </List>}
                     </Grid.Column>
-                </Grid></>)}
-            </Container>
+                </Grid>
+                </Container>
+                </>)}
+            
         </Container>
     )
 }

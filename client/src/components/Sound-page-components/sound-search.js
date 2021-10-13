@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/client';
 import { GET_TAGS } from '../../utils/queries';
 import { Container } from 'semantic-ui-react';
 import SoundsbyTagSlides from './sounds-search-slides';
+import SmallSoundsbyTagSlides from './small-sound-slides';
 
 const initialState = {
   loading: false,
@@ -42,7 +43,8 @@ function SoundSearch(props) {
                 {chosenTags.map(item=> (
                   <Container className='chosen-tags-container' key={item.id}>
                         <Container className="chosen-tag" >
-                          <SoundsbyTagSlides tag={item} soundData={soundData}></SoundsbyTagSlides>
+                          {window.screen.width>=540 ? (<SoundsbyTagSlides tag={item} soundData={soundData}></SoundsbyTagSlides>):(
+                          <SmallSoundsbyTagSlides tag={item} soundData={soundData}></SmallSoundsbyTagSlides>)}
                         </Container>
                   </Container >
                 ))}
