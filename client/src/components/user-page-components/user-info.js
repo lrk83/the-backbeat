@@ -56,7 +56,7 @@ const SingleSound = (data) => {
                     <Card className="user-info-card">
                         <Image src={userData.image}/>
                         <Header as='h1' className="single-header">{userData.username}</Header>
-                        <Card.Content>{userData.description}</Card.Content>
+                        <Card.Content className="user-description">{userData.description}</Card.Content>
                         <Card.Content extra className="account-stats">
                             <div>
                                 <Icon name='user'/>

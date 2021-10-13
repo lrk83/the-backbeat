@@ -552,6 +552,23 @@ h2.ui.header.links-menu-header{
   .suggested-container .ui.card{
     width: 30%;
   }
+
+  .ui.container .user-profile-data{
+    justify-content: center;
+  }
+
+  .ui.container .single-post-content{
+    width: 100%!important;
+    flex-direction: column;
+  }
+
+  .ui.card.user-info-card{
+    width: 100%;
+  }
+
+  .ui.card>.content.user-description{
+    text-align: center;
+  }
 }
 
 
