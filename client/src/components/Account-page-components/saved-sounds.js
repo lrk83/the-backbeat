@@ -4,25 +4,31 @@ import CurrentSlide from '../suggestion-slides/current-sounds-slides';
 
 const MySoundSlides = (data) => {
     const [photos]=useState(data);
-    const [currentPhotos, updateCurrentPhotos] = useState(photos.data.slice(0, 4));
-    const [currentIndex, updateCurrentIndex] = useState(4);
+
+    var num=4
+    if(window.screen.width<=540){
+        num=3
+    }
+
+    const [currentPhotos, updateCurrentPhotos] = useState(photos.data.slice(0, num));
+    const [currentIndex, updateCurrentIndex] = useState(3);
 
     const forwardPhotos = () => {
-        let upperbound = currentIndex+4;
+        let upperbound = currentIndex+num;
         if (upperbound>20){
             upperbound=20;
         };
         updateCurrentIndex(upperbound);
-        updateCurrentPhotos(photos.data.slice(upperbound-4,upperbound));
+        updateCurrentPhotos(photos.data.slice(upperbound-num,upperbound));
     }
 
     const backPhotos = () => {
-        let lowerbound=currentIndex-8;
+        let lowerbound=currentIndex-num-num;
         if (lowerbound<0){
             lowerbound=0;
         };
-        updateCurrentIndex(lowerbound+4);
-        updateCurrentPhotos(photos.data.slice(lowerbound,lowerbound+4));
+        updateCurrentIndex(lowerbound+num);
+        updateCurrentPhotos(photos.data.slice(lowerbound,lowerbound+num));
     }
 
     return (
