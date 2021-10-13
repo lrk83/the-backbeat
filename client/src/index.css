@@ -607,3 +607,9 @@ h2.ui.header.links-menu-header{
     margin-bottom: 0.5rem;
   } 
 }
+
+@media screen and (max-width:375){
+  * {
+    max-width: 375px;
+  }
+}

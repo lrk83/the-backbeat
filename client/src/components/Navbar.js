@@ -11,9 +11,36 @@ export default class AppNavbar extends Component {
   render() {
     const { activeItem } = this.state
 
+    var smallScreen=false;
+    if (window.screen.width<=400){
+      smallScreen=true;
+    }
+
     return (
       <div className="big-nav">
         <Menu secondary>
+          {smallScreen ? (<>
+            <Menu.Item as={Link} to='/'>
+          <h1 className="nav-title" id="nav-title">The Backbeat</h1>
+          </Menu.Item>
+          <Menu.Menu position='right'>
+            <Dropdown item icon="align justify">
+              <Dropdown.Menu>
+                <Dropdown.Item as={Link} to='/sounds'>Sounds</Dropdown.Item>
+                <Dropdown.Item as={Link} to='/skills'> Skills </Dropdown.Item>
+                <Dropdown.Item as={Link} to='/community' > Community </Dropdown.Item>
+                {Auth.loggedIn() ? (<>
+                  <Dropdown.Item as={Link} to='/account/profile'>Profile</Dropdown.Item>
+                  <Dropdown.Item as={Link} to='/account/content'> Content </Dropdown.Item>
+                  <Dropdown.Item as={Link} to="/account/preferences" > Preferences </Dropdown.Item>
+                  <Dropdown.Item onClick={Auth.logout}>Logout</Dropdown.Item>
+                </>):(<>
+                  <Dropdown.Item as={Link} to="/login" > Login </Dropdown.Item>
+                </>)}
+              </Dropdown.Menu>
+            </Dropdown>
+          </Menu.Menu>
+          </>):(<>
           <Menu.Item as={Link} to='/'>
           <h1 className="nav-title" id="nav-title">The Backbeat</h1>
           </Menu.Item>
@@ -55,6 +82,7 @@ export default class AppNavbar extends Component {
             />
             )}
           </Menu.Menu>
+          </>)}
         </Menu>
       </div>
     )
