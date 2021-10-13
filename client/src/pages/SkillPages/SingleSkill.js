@@ -58,9 +58,9 @@ const SingleSound = ({ match }) => {
 
     return(
         <Container className="big-container">
-            <Container id="skill-container" className="shadow-container single-post-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500">
+            <Container id="skill-container" className="shadow-container single-skill-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500">
                 <Image className="skill-photo" src={skillData.image}/>
-                <Container className="single-post-content">
+                <Container className="single-skill-content">
                     <Header as='h1' className="single-header">{skillData.name}</Header>
                         <p className="single-skill-description">{skillData.description}</p>
                     
@@ -75,20 +75,36 @@ const SingleSound = ({ match }) => {
                                     </>)}
                                 </div>
                         </> )}
-                    <Menu secondary className="tags-menu"> 
-                        <Menu.Item name={tagsToShow[0].name}></Menu.Item>
-                        <Menu.Item name={tagsToShow[1].name}></Menu.Item>
-                        <Menu.Item name={tagsToShow[2].name}></Menu.Item>
-                    
-                        <Menu.Menu position="right">
-                            <Dropdown item text='more'>
-                                <Dropdown.Menu>
-                                {additionalToShow.map(item=> (
-                                        <Dropdown.Item key={item._id}>{item.name}</Dropdown.Item>
-                                    ))}
-                                </Dropdown.Menu>
-                            </Dropdown>
-                        </Menu.Menu>
+                    <Menu secondary className="tags-menu" id="small-tags-menu"> 
+                    {window.screen.width<=400 ? (<>
+                            <Menu.Item id="small-tag-dropdown">
+                                <Dropdown item text="tags">
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item>{tagsToShow[0].name}</Dropdown.Item>
+                                        <Dropdown.Item>{tagsToShow[1].name}</Dropdown.Item>
+                                        <Dropdown.Item>{tagsToShow[2].name}</Dropdown.Item>
+                                        {additionalToShow.map(item=> (
+                                                <Dropdown.Item key={item._id}>{item.name}</Dropdown.Item>
+                                            ))}
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </Menu.Item>
+                        
+                        </>):(<>
+                            <Menu.Item name={tagsToShow[0].name}></Menu.Item>
+                            <Menu.Item name={tagsToShow[1].name}></Menu.Item>
+                            <Menu.Item name={tagsToShow[2].name}></Menu.Item>
+                        
+                            <Menu.Menu position="right">
+                                <Dropdown item text='more'>
+                                    <Dropdown.Menu>
+                                        {additionalToShow.map(item=> (
+                                            <Dropdown.Item key={item._id}>{item.name}</Dropdown.Item>
+                                        ))}
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </Menu.Menu>
+                        </>)}
                     </Menu>
                     <Container className="single-post-para">
                         <p>{skillData.text}</p>

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import {Button, Menu, Header, Icon} from "semantic-ui-react"; 
-import SmallCurrentSkillSlide from './small-current-skill-slides';
+import SmallCurrentUserSlide from './small-current-user-slides';
 
 const Slides = (data) => {
 
@@ -47,7 +47,7 @@ const Slides = (data) => {
                     </Button>
                 </Menu.Menu>
             </Menu>
-            <SmallCurrentSkillSlide currentPhotos={currentPhotos}></SmallCurrentSkillSlide>
+            <SmallCurrentUserSlide currentPhotos={currentPhotos}></SmallCurrentUserSlide>
             
         </div>
     )

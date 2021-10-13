@@ -76,17 +76,17 @@ const HomePage = () => {
         <>
         <HomePageHero></HomePageHero>
         {window.screen.width<=400? (<>
-            <Container className="big-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
+            <Container className="big-container">
             <Container className="shadow-container">
                 {sortedSoundData.length ? (
                 <SmallSoundSuggestionSlide data={sortedSoundData}></SmallSoundSuggestionSlide>) : <></>}
             </Container>
-            <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
+            <Container className="shadow-container">
                 {sortedSkillData.length ? (
                 <SmallSkillSuggestionSlide data={sortedSkillData} length={sortedSkillData.length}></SmallSkillSuggestionSlide>) :<></>}
             </Container>
-            <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
-                {skillData.length ? (
+            <Container className="shadow-container">
+                {sortedUserData.length ? (
                 <SmallUserSuggestionSlide data={sortedUserData}></SmallUserSuggestionSlide>) :<></>}
             </Container>
         </Container>
@@ -102,7 +102,7 @@ const HomePage = () => {
                 <SkillSuggestionSlide data={sortedSkillData} length={sortedSkillData.length}></SkillSuggestionSlide>) :<></>}
             </Container>
             <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
-                {skillData.length ? (
+                {sortedUserData.length ? (
                 <UserSuggestionSlide data={sortedUserData}></UserSuggestionSlide>) :<></>}
             </Container>
         </Container>
