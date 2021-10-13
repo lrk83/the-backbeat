@@ -41,9 +41,10 @@ function SoundSearch(props) {
             {!loading && <TagSearch tags={tags} chosenTags={chosenTags} setChosenTags={setChosenTags}></TagSearch>}
             <Container className='chosen-tags-container'>
                 {chosenTags.map(item=> (
-                    <Container className="chosen-tag" key={item.id} >
-                        <SoundsbyTagSlides tag={item} soundData={soundData}></SoundsbyTagSlides>
-                    </Container>
+                  
+                        <Container className="chosen-tag" key={item.id}>
+                          <SoundsbyTagSlides tag={item} soundData={soundData}></SoundsbyTagSlides>
+                        </Container>
                 ))}
             </Container >
         </Container>
@@ -65,13 +66,7 @@ function TagSearch(props) {
   const source = [];
 
   const handleSelection = (data) => {
-    const updatedTags = [];
-    for (let x=0; x<chosenTags.length;x=x+1){
-        updatedTags.push(chosenTags[x]);
-    }
-
-    updatedTags.push(data.result);
-    setChosenTags(updatedTags);
+    setChosenTags([data.result]);
 
     dispatch({ type: 'CLEAN_QUERY' });
   };

@@ -55,12 +55,14 @@ code {
   padding: 1rem;
 }
 
-.shadow-container{
+.ui.container.shadow-container{
   border: 1px rgba(0,0,0,.2);
   border-radius: 5px;
   box-shadow: 0 1px 1px 0 rgb(0 0 0 / 6%), 0 2px 5px 0 rgb(0 0 0 / 20%);
   background-color: #fff;
   padding: 1rem;
+  margin-left:0!important;
+  margin-right: 0!important;
   z-index: 2;
   margin-bottom: 1rem;
 }
@@ -446,6 +448,40 @@ h2.ui.header.links-menu-header{
 .ui.container.sound-search>.ui.header{
   width: 100%;
   text-align: center;
+}
+
+.ui.header.sound-search-header{
+  margin: 0;
+}
+
+.ui.container.chosen-tags-container{
+  border: 1px rgba(0,0,0,.2);
+  border-radius: 5px;
+  box-shadow: 0 1px 1px 0 rgb(0 0 0 / 6%), 0 2px 5px 0 rgb(0 0 0 / 20%);
+  background-color: #fff;
+  padding: 1rem;
+  padding-top:.5rem;
+  z-index: 2;
+  margin-left: 0!important;
+  margin-right: 0!important;
+  margin-bottom: 1rem;
+}
+
+.ui.container.chosen-tag{
+  padding: 0;
+  margin: 0;
+}
+
+.ui.container.chosen-tags-container>.ui.card{
+  margin-top: 0;
+}
+
+.chosen-tags-container .ui.secondary.menu{
+  margin-bottom: 0;
+}
+
+.ui.secondary.menu .ui.animated.button{
+  margin-top: 0;
 }
 
 /*Media Queries*/

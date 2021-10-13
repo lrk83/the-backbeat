@@ -67,7 +67,7 @@ const SkillPage = () => {
         <>
         <SkillPageHero></SkillPageHero>
         <MostPopularSkills></MostPopularSkills>
-        {/*{sortedSkillData.length && <SkillSearch data={sortedSkillData}></SkillSearch>}*/}
+        {unformatedSkillData.length && <SkillSearch skillData={unformatedSkillData}></SkillSearch>}
         <Container className="big-container">
             {loggedIn && suggestedSkillData.length &&
                 <Container className="shadow-container">

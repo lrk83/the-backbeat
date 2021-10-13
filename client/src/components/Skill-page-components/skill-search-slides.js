@@ -4,19 +4,19 @@ import {Button, Header, Icon, Menu} from "semantic-ui-react";
 import CurrentSlide from "../suggestion-slides/current-sounds-slides";
 import Sort from "../../utils/sort";
 
-const SoundSearchSlides = (props) => {
-    const {tag, soundData}=props;
+const SkillSearchSlides = (props) => {
+    const {tag, skillData}=props;
 
     console.log(tag);
 
-    const [sortedSoundData, setSortedSoundData] = useState([]);
+    const [sortedSkillData, setSortedSkillData] = useState([]);
     const [haveFormatted, setHaveFormatted] = useState(false);
 
     //get top 10
     useEffect(()=>{
             if (haveFormatted===false){
-                let formattingResult = Sort.formatSoundsAndTags(soundData,tag);
-                setSortedSoundData(formattingResult);
+                let formattingResult = Sort.formatSoundsAndTags(skillData,tag);
+                setSortedSkillData(formattingResult);
                 setHaveFormatted(true);
             }
     });
@@ -24,7 +24,7 @@ const SoundSearchSlides = (props) => {
 
     return (
         <>
-        {sortedSoundData.length && <Slides data={sortedSoundData} tag={tag}></Slides>}
+        {sortedSkillData.length && <Slides data={sortedSkillData} tag={tag}></Slides>}
         </>
     )
 }
@@ -83,4 +83,4 @@ const Slides = (props) => {
 }
 
 
-export default SoundSearchSlides;
+export default SkillSearchSlides;

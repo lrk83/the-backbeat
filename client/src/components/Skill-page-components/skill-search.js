@@ -1,85 +1,125 @@
 import _ from 'lodash';
-import faker from "faker";
-import React, {useState, useEffect} from 'react';
-import { Search, Header } from 'semantic-ui-react';
+import React, {useState} from 'react';
+import { Search, Grid, Header } from 'semantic-ui-react';
 import { useQuery } from '@apollo/client';
-import { GET_SKILLS_FOR_SUGGESTED } from '../../utils/queries';
-import Sort from "../../utils/sort";
+import { GET_TAGS } from '../../utils/queries';
+import { Container } from 'semantic-ui-react';
+import SkillsbyTagSlides from './skill-search-slides';
 
-  const initialState = {
-    loading: false,
-    results: [],
-    value: '',
+const initialState = {
+  loading: false,
+  results: [],
+  value: '',
+}
+
+function exampleReducer(state, action) {
+  switch (action.type) {
+    case 'CLEAN_QUERY':
+      return initialState
+    case 'START_SEARCH':
+      return { ...state, loading: true, value: action.query }
+    case 'FINISH_SEARCH':
+      return { ...state, loading: false, results: action.results }
+    case 'UPDATE_SELECTION':
+      return { ...state, value: action.selection }
+
+    default:
+      throw new Error()
   }
-  
-  function exampleReducer(state, action) {
-    switch (action.type) {
-      case 'CLEAN_QUERY':
-        return initialState
-      case 'START_SEARCH':
-        return { ...state, loading: true, value: action.query }
-      case 'FINISH_SEARCH':
-        return { ...state, loading: false, results: action.results }
-      case 'UPDATE_SELECTION':
-        return { ...state, value: action.selection }
-  
-      default:
-        throw new Error()
-    }
-  }
-  
-  function SearchExampleStandard(data) {
+}
 
-    var source = [];
-    
-    for (let x=0; x<data.data.length;x++){
-        const newSkillSearchData=data.data[x];
-        source.push(newSkillSearchData);
-    }
+function SkillSearch(props) {
+    const {skillData} = props;
+    const {loading, data} = useQuery(GET_TAGS);
+    const tags = data?.tags || {};
 
-    const [state, dispatch] = React.useReducer(exampleReducer, initialState)
-    const { loading, results, value } = state
-  
-    const timeoutRef = React.useRef()
-    const handleSearchChange = React.useCallback((e, data) => {
-        clearTimeout(timeoutRef.current)
-        dispatch({ type: 'START_SEARCH', query: data.value })
-    
-        timeoutRef.current = setTimeout(() => {
-          if (data.value.length === 0) {
-            dispatch({ type: 'CLEAN_QUERY' })
-            return
-          }
+    const [chosenTags, setChosenTags]=useState([]);
 
-          console.log(source);
-    
-          const re = new RegExp(_.escapeRegExp(data.value), 'i')
-    
-          const isMatch = (result) => re.test(result.title)
-    
-          dispatch({
-            type: 'FINISH_SEARCH',
-            results: _.filter(source, isMatch),
-          })
-        }, 300)
-      }, [])
-    React.useEffect(() => {
-      return () => {
-        clearTimeout(timeoutRef.current)
-      }
-    }, [])
-  
     return (
-          <Search
-            loading={loading}
-            onResultSelect={(e, data) =>
-              dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title })
-            }
-            onSearchChange={handleSearchChange}
-            results={results}
-            value={value}
-          />
+        <Container className="sound-search">
+            <Header as="h2">Find Sounds by Tag</Header>
+            {!loading && <TagSearch tags={tags} chosenTags={chosenTags} setChosenTags={setChosenTags}></TagSearch>}
+            <Container className='chosen-tags-container'>
+                {chosenTags.map(item=> (
+                  
+                        <Container className="chosen-tag" key={item.id}>
+                          <SkillsbyTagSlides tag={item} skillData={skillData}></SkillsbyTagSlides>
+                        </Container>
+                ))}
+            </Container >
+        </Container>
     )
-  }
-  
-  export default SearchExampleStandard
+}
+
+function TagSearch(props) {
+    const {
+        tags,
+        chosenTags,
+        setChosenTags
+    }=props;
+
+  const [state, dispatch] = React.useReducer(exampleReducer, initialState)
+  const { loading, results, value } = state
+
+  const tagData=tags;
+
+  const source = [];
+
+  const handleSelection = (data) => {
+    setChosenTags([data.result]);
+
+    dispatch({ type: 'CLEAN_QUERY' });
+  };
+
+  for (let x=0;x<tagData.length;x= x+1){
+    let newsourcedata={title:tagData[x].name, key:tagData[x]._id, id: tagData[x]._id}
+    source.push(newsourcedata);
+  };
+
+  const timeoutRef = React.useRef()
+  const handleSearchChange = React.useCallback((e, data) => {
+    clearTimeout(timeoutRef.current)
+    dispatch({ type: 'START_SEARCH', query: data.value })
+
+    timeoutRef.current = setTimeout(() => {
+      if (data.value.length === 0) {
+        dispatch({ type: 'CLEAN_QUERY' })
+        return
+      }
+
+      const re = new RegExp(_.escapeRegExp(data.value), 'i')
+
+      const isMatch = (result) => re.test(result.title)
+
+      dispatch({
+        type: 'FINISH_SEARCH',
+        results: _.filter(source, isMatch),
+      })
+    }, 300)
+  }, [])
+  React.useEffect(() => {
+    return () => {
+      clearTimeout(timeoutRef.current)
+    }
+  }, [])
+
+  return (
+    <Grid>
+      <Grid.Column>
+        <Search id="tags-search"
+          placeholder="search for tags"
+          loading={loading}
+          onResultSelect={(e, data) => {
+            dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title });
+            handleSelection(data) }
+          }
+          onSearchChange={handleSearchChange}
+          results={results}
+          value={value}
+        />
+      </Grid.Column>
+    </Grid>
+  )
+}
+
+export default SkillSearch;
