@@ -12,7 +12,7 @@ export default class AppNavbar extends Component {
     const { activeItem } = this.state
 
     var smallScreen=false;
-    if (window.screen.width<=400){
+    if (window.screen.width<=411){
       smallScreen=true;
     }
 

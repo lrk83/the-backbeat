@@ -9,7 +9,7 @@ const MySoundSlides = (data) => {
     if(window.screen.width<=540){
         num=3;
     }
-    if(window.screen.width<=400){
+    if(window.screen.width<=411){
         num=1
     }
     const [currentPhotos, updateCurrentPhotos] = useState(photos.data.slice(0, num));

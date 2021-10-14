@@ -81,7 +81,7 @@ const SingleSound = ({ match }) => {
                             </> )}
                         </div>
                         <Menu secondary className="tags-menu" id="small-tags-menu"> 
-                        {window.screen.width<=400 ? (<>
+                        {window.screen.width<=411 ? (<>
                             <Menu.Item id="small-tag-dropdown">
                                 <Dropdown item text="tags">
                                     <Dropdown.Menu>

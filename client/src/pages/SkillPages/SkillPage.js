@@ -72,7 +72,7 @@ const SkillPage = () => {
             {unformatedSkillData.length && <SkillSearch skillData={unformatedSkillData}></SkillSearch>}
             <Container className="big-container">
                 {loggedIn && suggestedSkillData.length && <>
-                    {window.screen.width<=400 ? (<>
+                    {window.screen.width<=411 ? (<>
                     <Container className="shadow-container">
                         <SmallRecomendedSkills data={suggestedSkillData}></SmallRecomendedSkills>
                     </Container>
@@ -82,7 +82,7 @@ const SkillPage = () => {
                     </Container>)}
                 </>}
             </Container>
-            {window.screen.width>=400 ? (<><BackBeatFavorites></BackBeatFavorites></>):(<>
+            {window.screen.width>411 ? (<><BackBeatFavorites></BackBeatFavorites></>):(<>
             <SmallFavorites></SmallFavorites>
             </>)}
         </>

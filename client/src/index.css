@@ -599,9 +599,9 @@ h2.ui.header.links-menu-header{
   }
 }
 
-@media screen and (max-width:375px){
+@media screen and (max-width:411px){
   * {
-    max-width: 375px;
+    max-width: 411px;
   }
 
   .slide-show>.ui.secondary.menu{
@@ -631,7 +631,7 @@ h2.ui.header.links-menu-header{
   }
 
   #home-page-hero{
-    max-width: 375px!important;
+    max-width: 411px!important;
   }
 
   #community-header{
@@ -723,3 +723,13 @@ h2.ui.header.links-menu-header{
     border-radius: 5px;
   }
 }
+
+  @media screen and (max-width:320px){
+    .ui.container.big-container{
+      margin-left: 15px!important;
+      margin-right: 15px!important;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+  }

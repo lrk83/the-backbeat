@@ -63,7 +63,7 @@ const CommunityPage = () => {
     return (
         <>
             <CommunityHero></CommunityHero>
-            {window.screen.width>=400 ? (<>
+            {window.screen.width>=411 ? (<>
                 <TopCreatives data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500"></TopCreatives>
             </>):(<>
                 <SmallFavorites></SmallFavorites>

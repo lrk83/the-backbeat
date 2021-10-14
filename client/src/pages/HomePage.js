@@ -75,7 +75,7 @@ const HomePage = () => {
     return (
         <>
         <HomePageHero></HomePageHero>
-        {window.screen.width<=400? (<>
+        {window.screen.width<=411? (<>
             <Container className="big-container">
             <Container className="shadow-container">
                 {sortedSoundData.length ? (

@@ -32,7 +32,7 @@ const AccountPage = () => {
 
     return (
         <Container className="big-container">
-            {window.screen.width>=400 ?(<>
+            {window.screen.width>=411 ?(<>
                 <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
                     <AccountInfo data={userData}></AccountInfo>
                 </Container>
