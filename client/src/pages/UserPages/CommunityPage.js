@@ -7,6 +7,7 @@ import { GET_USERS, GET_ME } from '../../utils/queries';
 import Sort from '../../utils/sort';
 import Auth from '../../utils/auth';
 import TopCreatives from '../../components/user-page-components/top-users';
+import SmallFavorites from '../../components/user-page-components/small-top-users';
 
 const CommunityPage = () => {
 
@@ -61,8 +62,12 @@ const CommunityPage = () => {
 
     return (
         <>
-        <CommunityHero></CommunityHero>
-        <TopCreatives data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500"></TopCreatives>
+            <CommunityHero></CommunityHero>
+            {window.screen.width>=400 ? (<>
+                <TopCreatives data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500"></TopCreatives>
+            </>):(<>
+                <SmallFavorites></SmallFavorites>
+            </>)}
         </>
     )
 }

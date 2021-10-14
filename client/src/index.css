@@ -707,4 +707,12 @@ h2.ui.header.links-menu-header{
   #small-tags-menu{
     justify-content: center;
   }
+
+  #new-sound-button{
+    padding: 1rem;
+    width: 100%;
+    margin-bottom: 10px;
+    margin-top: 0;
+    font-size: 1.5rem;
+  }
 }

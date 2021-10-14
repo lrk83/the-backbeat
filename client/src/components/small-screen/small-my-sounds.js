@@ -1,32 +1,43 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import {Button, Menu, Header, Icon} from "semantic-ui-react"; 
+import {Button, Menu, Header, Icon, Container} from "semantic-ui-react"; 
 import CurrentSlide from '../suggestion-slides/current-sounds-slides';
+import CurrentSlideSmall from '../small-screen/small-current-slides';
 
 const MySoundSlides = (data) => {
     const [photos]=useState(data);
-    const [currentPhotos, updateCurrentPhotos] = useState(photos.data.slice(0, 3));
+
+    var num=4;
+    if(window.screen.width<=540){
+        num=3;
+    }
+    if(window.screen.width<=400){
+        num=1
+    }
+    const [currentPhotos, updateCurrentPhotos] = useState(photos.data.slice(0, num));
     const [currentIndex, updateCurrentIndex] = useState(3);
 
     const forwardPhotos = () => {
-        let upperbound = currentIndex+3;
+        let upperbound = currentIndex+num;
         if (upperbound>20){
             upperbound=20;
         };
         updateCurrentIndex(upperbound);
-        updateCurrentPhotos(photos.data.slice(upperbound-3,upperbound));
+        updateCurrentPhotos(photos.data.slice(upperbound-num,upperbound));
     }
 
     const backPhotos = () => {
-        let lowerbound=currentIndex-7;
+        let lowerbound=currentIndex-num-num;
         if (lowerbound<0){
             lowerbound=0;
         };
-        updateCurrentIndex(lowerbound+3);
-        updateCurrentPhotos(photos.data.slice(lowerbound,lowerbound+3));
+        updateCurrentIndex(lowerbound+num);
+        updateCurrentPhotos(photos.data.slice(lowerbound,lowerbound+num));
     }
 
     return (
+        <>
+        <Container className="shadow-container">
         <div className="my-sounds-slide-show">
             
             <Menu secondary>
@@ -46,11 +57,13 @@ const MySoundSlides = (data) => {
                     </Button>
                 </Menu.Menu>
             </Menu>
-            <CurrentSlide currentPhotos={currentPhotos}></CurrentSlide>
-            <div className="new-sound-button-div">
-                <Button as={Link} to="/account/sounds/new-sound" color="blue" className="get-pack-button">New</Button>
-            </div>
+            <CurrentSlideSmall currentPhotos={currentPhotos}></CurrentSlideSmall>
         </div>
+        </Container>
+        <div className="new-sound-button-div">
+            <Button as={Link} to="/account/sounds/new-sound" color="blue" id="new-sound-button">New Sound</Button>
+        </div>
+        </>
     )
 };
 
