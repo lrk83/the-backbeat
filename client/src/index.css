@@ -409,6 +409,7 @@ h2.ui.header.links-menu-header{
 
 #top-ten-shadow-container{
   background-color: #d4d4d5;
+  width: 100%;
 }
 
 .ui.celled.list>.item{
@@ -556,6 +557,7 @@ h2.ui.header.links-menu-header{
     background-color: rgb(53,56,57);
     position: relative;
     bottom: 0;
+    width: 100%;
 }
 
 #footer .text{
