@@ -3,13 +3,13 @@ import { Container, Card, Image, Header} from 'semantic-ui-react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useQuery } from '@apollo/client';
-import {GET_SOUNDS_FOR_SUGGESTED} from '../../utils/queries';
+import {GET_SKILLS_FOR_SUGGESTED} from '../../utils/queries';
 import Sort from "../../utils/sort";
 import {Link} from 'react-router-dom';
 
 const BackBeatFavorites = () => {
 
-    const { loading, data} = useQuery(GET_SOUNDS_FOR_SUGGESTED);
+    const { loading, data} = useQuery(GET_SKILLS_FOR_SUGGESTED);
     const skillData = data?.allSoundPosts || {};
 
     const [haventSortedSkills, setSortedSkills] = useState(true);

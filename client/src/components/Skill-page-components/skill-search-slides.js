@@ -19,7 +19,6 @@ const SkillSearchSlides = (props) => {
             }
     });
 
-
     return (
         <>
         {sortedSkillData.length && <Slides data={sortedSkillData} tag={tag}></Slides>}
@@ -29,6 +28,8 @@ const SkillSearchSlides = (props) => {
 
 const Slides = (props) => {
     const {data, tag}=props
+
+    console.log(props);
 
     const photos=data;
 
