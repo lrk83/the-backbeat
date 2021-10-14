@@ -5,6 +5,7 @@ import ApolloClient from 'apollo-boost';
 
 //Components
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 //Pages
 import HomePage from './pages/HomePage';
@@ -59,6 +60,7 @@ function App() {
             <Route path="/skills/single-skill/:skillId" component={SingleSkill} />
             <Route path="/community/single-user/:userId" component={SingleUser} />
           </Switch>
+          <Footer/>
         </main>
       </Router>
     </ApolloProvider>
