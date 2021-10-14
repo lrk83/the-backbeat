@@ -93,7 +93,7 @@ function SearchBar(props) {
   return (
     <Grid>
       <Grid.Column>
-        <Search 
+        <Search className="down-search"
             id="user-search"
           placeholder="search for users"
           loading={loading}

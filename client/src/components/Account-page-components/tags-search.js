@@ -85,7 +85,8 @@ function TagSearch(props) {
   return (
     <Grid>
       <Grid.Column>
-        <Search id="tags-search"
+        <Search className="down-search"
+        id="tags-search"
           placeholder="search for tags"
           loading={loading}
           onResultSelect={(e, data) => {

@@ -542,7 +542,7 @@ h2.ui.header.links-menu-header{
   margin-top: 0;
 }
 
-.ui.search>.results {
+.ui.search.down-search>.results {
   top: auto;
   bottom: 100%;
 }
@@ -616,7 +616,8 @@ h2.ui.header.links-menu-header{
   }
 
   #top-user-buttons button{
-    width: 45%
+    width: 45%;
+    background-color: #fff;
   }
 
   .slide-show>.ui.secondary.menu{
