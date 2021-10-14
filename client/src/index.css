@@ -542,6 +542,11 @@ h2.ui.header.links-menu-header{
   margin-top: 0;
 }
 
+.ui.search>.results {
+  top: auto;
+  bottom: 100%;
+}
+
 /*Media Queries*/
 
 @media screen and (max-width: 540px){
