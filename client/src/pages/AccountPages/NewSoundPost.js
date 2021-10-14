@@ -23,6 +23,7 @@ const NewSoundPost = () => {
     const [submissionData, setSubmissionData] = useState({})
     const [readyToSubmit, setReadyToSubmit] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
+    const [showTagAlert, setShowTagAlert] = useState(false);
     const [addTagForm, setAddTagForm] = useState('');
 
     const {loading, data} = useQuery(GET_TAGS);
@@ -66,15 +67,20 @@ const NewSoundPost = () => {
             }
         }
 
-        setSubmissionData({
-            ...contentData,
-            tags:tagsToAdd,
-            aditionalTags:aditionalTagsToAdd
-        });
-
-        //Set up submission
-        setReadyToSubmit(true);
-        localStorage.setItem("newTags",JSON.stringify([]));
+        if (tagsToAdd.length+aditionalTagsToAdd.length<3){
+            setShowTagAlert(true);
+            return;
+        }else{
+            setSubmissionData({
+                ...contentData,
+                tags:tagsToAdd,
+                aditionalTags:aditionalTagsToAdd
+            });
+    
+            //Set up submission
+            setReadyToSubmit(true);
+            localStorage.setItem("newTags",JSON.stringify([]));
+        }
     };
 
 
@@ -190,7 +196,6 @@ const NewSoundPost = () => {
                     {section==="tags" || section==="back-to-basics" ? (
                          <Form onSubmit={handleSecondFormSubmit} data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500">
                          <Header as ="h2" className="new-post-header">Tags</Header>
-                         {showAlert? (<Label basic color="red">Something went wrong. Please check your inputs and try again </Label>):(<></>)}
                              {section==="tags" ? ( <>
                              <TagSearch tags={tags} chosenTags={chosenTags} setChosenTags={setChosenTags} contentData={contentData} setContentFormData={setContentFormData}/>
                              <Form.Group widths="equal">
@@ -206,6 +211,7 @@ const NewSoundPost = () => {
                                     {item.name}</div>
                               ))}
                              </Container >
+                             {showTagAlert && <Label basic color="red">Please enter at least three tags! </Label>}
                              <Button
                                  onClick={tagsBackButton}>
                                  Back
@@ -249,6 +255,7 @@ const NewSoundPost = () => {
                          </Form>
                     ) : (<></>)}
                 </Container> ) }
+        {showAlert? (<Label basic color="red">Something went wrong. Please check your inputs and try again </Label>):(<></>)}
     </Container>
     )
 };
