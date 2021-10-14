@@ -91,14 +91,6 @@ const resolvers = {
 
             return post;
           },
-          skillPostbyTag: async (parent, { tagId }) => {
-              const tag = await Tag.findById({_id:tagId});
-              return SkillPost.find({tags:{tag}}).sort({createdAt: -1});
-          },
-          soundPostbyTag: async (parent, { tagId }) => {
-            const tag = await Tag.findById({_id:tagId});
-            return SoundPost.find({tags:{tag}}).sort({createdAt: -1});
-          },
           skillLink: async(parent, {postId}) => {
             const post = await SkillPost.findById({_id:postId});
             return post.links;
@@ -140,8 +132,6 @@ const resolvers = {
             const author = await User.findOne(
               {_id: context.user._id}
             );
-
-            console.log(postData);
 
             const post = await SkillPost.create({ ...postData, author: author });
 
@@ -310,7 +300,6 @@ const resolvers = {
       addLink: async (parent, {name, content}, context) => {
         if (context.user){
           var newSkill = await SkillLink.create({name:name, content: content});
-          console.log(newSkill);
           return newSkill;
         };
 
@@ -378,8 +367,7 @@ const resolvers = {
               let tag = await Tag.findOne(
                 {_id: args.followedTags[x]}
               );
-
-              console.log(tag);
+              
               followedTags.push(tag);
             }
 

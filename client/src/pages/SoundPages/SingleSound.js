@@ -84,9 +84,9 @@ const SingleSound = ({ match }) => {
                             <Menu.Item id="small-tag-dropdown">
                                 <Dropdown item text="tags">
                                     <Dropdown.Menu>
-                                        <Dropdown.Item>{tagsToShow[0].name}</Dropdown.Item>
+                                        <Dropdown.Item></Dropdown.Item>
                                         <Dropdown.Item>{tagsToShow[1].name}</Dropdown.Item>
-                                        <Dropdown.Item>{tagsToShow[2].name}</Dropdown.Item>
+                                        <Dropdown.Item></Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </Menu.Item>
