@@ -22,21 +22,7 @@ const SkillPage = () => {
 
     const {loading:userLoading, data:userData} = useQuery(GET_ME);
 
-    const [sortedSkillData, setSortedSkillData] = useState([]);
-    const [haveFormatted, setHaveFormatted] = useState(false);
-
     const loggedIn = Auth.loggedIn();
-
-    //get top 10
-    useEffect(()=>{
-        if (!skillloading){
-            if (haveFormatted===false){
-                let formattingResult = Sort.formatSkillsForSearch(unformatedSkillData);
-                setSortedSkillData(formattingResult);
-                setHaveFormatted(true);
-            }
-        }
-    });
 
     //get suggested
     const [suggestedSkillData, setSuggestedSkillData] = useState([]);
@@ -52,7 +38,7 @@ const SkillPage = () => {
                 }
             }
         }
-    });
+    }, [loggedIn, skillloading, userLoading, haveFormattedSuggested, unformatedSkillData, userData]);
 
     useEffect(()=>{
         AOS.init({

@@ -1,6 +1,6 @@
 //Have user choose profile picture, choose tags they are interested in, write a short description about themselves
-import React, {useState, useEffect} from "react";
-import { Container, Form, Label, Button, Header} from "semantic-ui-react";
+import React, {useEffect} from "react";
+import { Container} from "semantic-ui-react";
 import Auth from '../../utils/auth';
 import AOS from 'aos';
 import 'aos/dist/aos.css';

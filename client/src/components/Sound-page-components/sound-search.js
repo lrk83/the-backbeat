@@ -39,7 +39,7 @@ function SoundSearch(props) {
     return (
         <Container className="sound-search">
             <Header as="h2">Find Sounds by Tag</Header>
-            {!loading && <TagSearch tags={tags} chosenTags={chosenTags} setChosenTags={setChosenTags}></TagSearch>}
+            {!loading && <TagSearch tags={tags} setChosenTags={setChosenTags}></TagSearch>}
                 {chosenTags.map(item=> (
                   <Container className='chosen-tags-container' key={item.id}>
                         <Container className="chosen-tag" >
@@ -55,7 +55,6 @@ function SoundSearch(props) {
 function TagSearch(props) {
     const {
         tags,
-        chosenTags,
         setChosenTags
     }=props;
 
@@ -97,7 +96,7 @@ function TagSearch(props) {
         results: _.filter(source, isMatch),
       })
     }, 300)
-  }, [])
+  }, [source])
   React.useEffect(() => {
     return () => {
       clearTimeout(timeoutRef.current)

@@ -31,6 +31,7 @@ function exampleReducer(state, action) {
 
 function SkillSearch(props) {
     const {skillData} = props;
+
     const {loading, data} = useQuery(GET_TAGS);
     const tags = data?.tags || {};
 
@@ -39,11 +40,11 @@ function SkillSearch(props) {
     return (
         <Container className="sound-search">
             <Header as="h2">Find Skills by Tag</Header>
-            {!loading && <TagSearch tags={tags} chosenTags={chosenTags} setChosenTags={setChosenTags}></TagSearch>}
+            {!loading && <TagSearch tags={tags} setChosenTags={setChosenTags}></TagSearch>}
                 {chosenTags.map(item=> (
-                  <Container className='chosen-tags-container'>
-                        <Container className="chosen-tag" key={item.id}>
-                          {window.screen.width>=540 ? (<SkillsbyTagSlides tag={item} skilldData={skillData}></SkillsbyTagSlides>):(
+                  <Container className='chosen-tags-container' key={item.id}>
+                        <Container className="chosen-tag">
+                          {window.screen.width>=540 ? (<SkillsbyTagSlides tag={item} skillData={skillData}></SkillsbyTagSlides>):(
                           <SmallSkillsbyTagSlides tag={item} skillData={skillData}></SmallSkillsbyTagSlides>)}
                         </Container>
                   </Container >
@@ -55,7 +56,6 @@ function SkillSearch(props) {
 function TagSearch(props) {
     const {
         tags,
-        chosenTags,
         setChosenTags
     }=props;
 
@@ -97,7 +97,7 @@ function TagSearch(props) {
         results: _.filter(source, isMatch),
       })
     }, 300)
-  }, [])
+  }, [source])
   React.useEffect(() => {
     return () => {
       clearTimeout(timeoutRef.current)

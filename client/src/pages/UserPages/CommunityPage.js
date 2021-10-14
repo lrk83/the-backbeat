@@ -1,11 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import CommunityHero from "../../components/user-page-components/community-page-hero";
 import { useQuery } from '@apollo/client';
-import { GET_USERS, GET_ME } from '../../utils/queries';
-import Sort from '../../utils/sort';
-import Auth from '../../utils/auth';
+import { GET_USERS } from '../../utils/queries';
 import TopCreatives from '../../components/user-page-components/top-users';
 import SmallFavorites from '../../components/user-page-components/small-top-users';
 import UserSearch from '../../components/user-page-components/user-search';

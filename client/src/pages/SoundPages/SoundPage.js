@@ -22,21 +22,7 @@ const SoundPage = () => {
 
     const {loading:userLoading, data:userData} = useQuery(GET_ME);
 
-    const [sortedSoundData, setSortedSoundData] = useState([]);
-    const [haveFormatted, setHaveFormatted] = useState(false);
-
     const loggedIn = Auth.loggedIn();
-
-    //get top 10
-    useEffect(()=>{
-        if (!soundloading){
-            if (haveFormatted===false){
-                let formattingResult = Sort.formatSkillsForSearch(unformatedSoundData);
-                setSortedSoundData(formattingResult);
-                setHaveFormatted(true);
-            }
-        }
-    });
 
     //get suggested
     const [suggestedSoundData, setSuggestedSoundData] = useState([]);
@@ -52,7 +38,7 @@ const SoundPage = () => {
                 }
             }
         }
-    });
+    }, [loggedIn, soundloading, userLoading, haveFormattedSuggested, unformatedSoundData, userData]);
 
     useEffect(()=>{
         AOS.init({

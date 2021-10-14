@@ -4,7 +4,7 @@ import Auth from '../../utils/auth';
 import MenuTabular from '../../components/Menus/MenuTabularNewSkill';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { useQuery, useMutation, createHttpLink } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import {GET_TAGS} from '../../utils/queries';
 import {ADD_SKILL, ADD_TAG, ADD_LINK} from '../../utils/mutation';
 import TagSearch from "../../components/Account-page-components/tags-search";

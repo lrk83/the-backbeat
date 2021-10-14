@@ -28,7 +28,7 @@ const MostPopularSounds = () => {
                 setSortedSounds(true);
             }
         }
-    });
+    }, [loading, haventSortedSounds, soundData]);
 
     useEffect(()=>{
         AOS.init({
