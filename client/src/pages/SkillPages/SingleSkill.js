@@ -70,7 +70,6 @@ const SingleSound = ({ match }) => {
                                     <Button circular icon='heart' disabled color="twitter" />
                                     </> ):( <>
                                     <Button circular icon='heart' onClick={saveSkill} />
-                                    <Button circular icon='mail' /> 
                                     </>)}
                                 </div>
                         </> )}

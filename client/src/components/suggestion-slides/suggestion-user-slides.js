@@ -7,8 +7,6 @@ import 'aos/dist/aos.css';
 const Slides = (data) => {
 
     const photos=data.data;
-
-    console.log(data);
     
     const [cardsToShow]=useState([0,1,2]);
 

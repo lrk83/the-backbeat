@@ -66,7 +66,7 @@ const HomePage = () => {
         })
     });
 
-    if (loading){
+    if (loading || skillloading || userloading ){
         return(
             <div>Loading...</div>
         )

@@ -51,8 +51,6 @@ function SearchBar(props) {
   const handleSelection = (data) => {
     var userID=data.result.id;
 
-    console.log(userID);
-
     window.location.assign(`/community/single-user/${userID}`);
 
     dispatch({ type: 'CLEAN_QUERY' });

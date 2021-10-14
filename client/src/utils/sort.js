@@ -51,13 +51,21 @@ class SortService {
             for(let x=0;x<soundData.length;x++){
                 for(let y=0;y<soundData[x].tags.length;y++){
                     if (soundData[x].tags[y]._id===tag.id){
-                        formattedSounds.push(soundData[x]);
+                        for(let z=0;z<formattedSounds.length;z++){
+                            if (soundData[x]._id!=formattedSounds[z]._id){
+                                formattedSounds.push(soundData[x]);
+                            }
+                        }
                     }
                 }
 
                 for(let y=0;y<soundData[x].aditionalTags.length;y++){
                     if (soundData[x].aditionalTags[y]._id===tag.id){
-                        formattedSounds.push(soundData[x]);
+                        for(let z=0;z<formattedSounds.length;z++){
+                            if (soundData[x]._id!=formattedSounds[z]._id){
+                                formattedSounds.push(soundData[x]);
+                            }
+                        }
                     }
                 }
                     
