@@ -8,7 +8,7 @@ const Slides = (data) => {
 
     const photos=data.data;
 
-    connsole.log(data);
+    console.log(data);
     
     const [cardsToShow]=useState([0,1,2]);
 
