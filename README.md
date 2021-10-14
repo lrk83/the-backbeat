@@ -14,6 +14,9 @@ The Backbeat allows producers to post all their favorite music production resour
 
 ## Screenshots
 
-![Homepage](https://github.com/lrk83/the-backbeat/blob/main/screen-shots/Screen%20Shot%202021-10-05%20at%208.40.37%20PM.png)
+![Homepage](https://github.com/lrk83/the-backbeat/blob/main/screen-shots/Screen%20Shot%202021-10-14%20at%207.26.30%20PM.png)
 ![Discover New Skills](https://github.com/lrk83/the-backbeat/blob/main/screen-shots/Screen%20Shot%202021-10-05%20at%208.40.44%20PM.png)
+![Discover New Creatives](https://github.com/lrk83/the-backbeat/blob/main/screen-shots/Screen%20Shot%202021-10-14%20at%207.26.44%20PM.png)
+![Search Skills](https://github.com/lrk83/the-backbeat/blob/main/screen-shots/Screen%20Shot%202021-10-14%20at%207.27.00%20PM.png)
 ![Single Post](https://github.com/lrk83/the-backbeat/blob/main/screen-shots/Screen%20Shot%202021-10-05%20at%208.41.13%20PM.png)
+![User Profile](https://github.com/lrk83/the-backbeat/blob/main/screen-shots/Screen%20Shot%202021-10-14%20at%207.27.39%20PM.png)
