@@ -73,7 +73,6 @@ const SingleSound = ({ match }) => {
                             {loggedIn && ( <> 
                                 {soundIsSaved===true ? (<>
                                 <Button circular icon='heart' disabled color="twitter" />
-                                <Button circular icon='mail' /> 
                                 </> ):( <>
                                 <Button circular icon='heart' onClick={saveSound} />
                                 <Button circular icon='mail' /> 
@@ -140,7 +139,6 @@ const SingleSound = ({ match }) => {
                             {loggedIn && ( <> 
                                 {soundIsSaved===true ? (<>
                                 <Button circular icon='heart' disabled color="twitter" />
-                                <Button circular icon='mail' /> 
                                 </> ):( <>
                                 <Button circular icon='heart' onClick={saveSound} />
                                 <Button circular icon='mail' /> 
