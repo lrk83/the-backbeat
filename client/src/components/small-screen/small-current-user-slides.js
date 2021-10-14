@@ -10,10 +10,10 @@ function CurrentSlides ({currentPhotos}){
             {currentPhotos[0] && ( <>
             
             <Card className="little-slide">
-                <Link to={`/sounds/single-sound/${currentPhotos[0]._id}`}>
+                <Link to={`/users/single-user/${currentPhotos[0]._id}`}>
                     <Image src={currentPhotos[0].image}/>
                     <Card.Content>
-                        <Card.Header>{currentPhotos[0].name}</Card.Header>
+                        <Card.Header>{currentPhotos[0].username}</Card.Header>
                     </Card.Content>
                 </Link>
             </Card> </> )}

@@ -58,9 +58,9 @@ const SingleSound = ({ match }) => {
     return(
         <Container className="big-container">
             {window.screen.width<=540 ? (
-                <Container className="shadow-container single-post-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500">
+                <Container className="shadow-container single-sound-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500">
                     <Image src={soundData.image} />
-                    <Container className="single-post-content">
+                    <Container className="single-sound-content">
                         <Header as='h1' className="single-header">{soundData.name}</Header>
                         <div className="small-screen-sound-author">
                             <Link to={`/users/single-user/${soundData.author._id}`}>
@@ -68,7 +68,7 @@ const SingleSound = ({ match }) => {
                                 Posted by {soundData.author.username}
                             </Link>
                         </div>
-                        <div className="buttons-div">
+                        <div className="buttons-div" id="single-sound-buttons-div">
                             <Button color="blue" className="get-pack-button" href={soundData.link} target="_blank">Get Pack</Button>
                             {loggedIn && ( <> 
                                 {soundIsSaved===true ? (<>
@@ -80,7 +80,19 @@ const SingleSound = ({ match }) => {
                                 </>)}
                             </> )}
                         </div>
-                        <Menu secondary className="tags-menu"> 
+                        <Menu secondary className="tags-menu" id="small-tags-menu"> 
+                        {window.screen.width<=411 ? (<>
+                            <Menu.Item id="small-tag-dropdown">
+                                <Dropdown item text="tags">
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item>{tagsToShow[0].name}</Dropdown.Item>
+                                        <Dropdown.Item>{tagsToShow[1].name}</Dropdown.Item>
+                                        <Dropdown.Item>{tagsToShow[2].name}</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            </Menu.Item>
+                        
+                        </>):(<>
                             <Menu.Item name={tagsToShow[0].name}></Menu.Item>
                             <Menu.Item name={tagsToShow[1].name}></Menu.Item>
                             <Menu.Item name={tagsToShow[2].name}></Menu.Item>
@@ -94,6 +106,7 @@ const SingleSound = ({ match }) => {
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </Menu.Menu>
+                        </>)}
                         </Menu>
                         <Container className="single-post-para">
                             <p>{soundData.description}</p>
@@ -101,7 +114,7 @@ const SingleSound = ({ match }) => {
                     </Container>
                 </Container>
             ):(
-                <Container className="shadow-container single-post-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500">
+                <Container className="shadow-container single-sound-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500">
                     <Card className="single-post-card">
                         <Image src={soundData.image} wrapped ui={false} />
                         <Card.Content>
@@ -120,7 +133,7 @@ const SingleSound = ({ match }) => {
                             </Link>
                         </Card.Content>
                     </Card>
-                    <Container className="single-post-content">
+                    <Container className="single-sound-content">
                         <Header as='h1' className="single-header">{soundData.name}</Header>
                         <div className="buttons-div">
                             <Button color="blue" className="get-pack-button" href={soundData.link} target="_blank">Get Pack</Button>

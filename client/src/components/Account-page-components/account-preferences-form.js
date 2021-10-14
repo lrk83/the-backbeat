@@ -36,8 +36,6 @@ const AccountPreferences = (props) => {
             const submitElemnt = await submitUserData ({
             variables: {image: userFormData.image, description: userFormData.description, followedTags: tagIds} 
             });
-
-            console.log(submitElemnt);
             
             setShowSuccess(true);
         }catch (err) {

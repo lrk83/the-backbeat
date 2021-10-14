@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import {Button, Menu, Header, Icon} from "semantic-ui-react"; 
-import CurrentSlide from '../suggestion-slides/current-sounds-slides';
+import {Button, Menu, Header, Icon, Container} from "semantic-ui-react";
+import CurrentSlideSmall from '../small-screen/small-current-slides';
 
 const MySoundSlides = (data) => {
     const [photos]=useState(data);
 
-    var num=4
+    var num=4;
     if(window.screen.width<=540){
-        num=3
+        num=3;
     }
-
+    if(window.screen.width<=411){
+        num=1
+    }
     const [currentPhotos, updateCurrentPhotos] = useState(photos.data.slice(0, num));
     const [currentIndex, updateCurrentIndex] = useState(3);
 
@@ -32,6 +34,8 @@ const MySoundSlides = (data) => {
     }
 
     return (
+        <>
+        <Container className="shadow-container">
         <div className="my-sounds-slide-show">
             
             <Menu secondary>
@@ -51,8 +55,10 @@ const MySoundSlides = (data) => {
                     </Button>
                 </Menu.Menu>
             </Menu>
-            <CurrentSlide currentPhotos={currentPhotos}></CurrentSlide>
+            <CurrentSlideSmall currentPhotos={currentPhotos}></CurrentSlideSmall>
         </div>
+        </Container>
+        </>
     )
 };
 

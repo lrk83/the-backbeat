@@ -11,6 +11,8 @@ import RecomendedSkills from '../../components/Skill-page-components/recomended-
 import { Container } from 'semantic-ui-react';
 import SkillPageHero from '../../components/Skill-page-components/skill-page-hero';
 import BackBeatFavorites from '../../components/Skill-page-components/backbeat-favorites';
+import SmallFavorites from '../../components/small-screen/small-favorites';
+import SmallRecomendedSkills from '../../components/small-screen/small-recomended-sounds';
 
 const SkillPage = () => {
 
@@ -65,17 +67,24 @@ const SkillPage = () => {
 
     return (
         <>
-        <SkillPageHero></SkillPageHero>
-        <MostPopularSkills></MostPopularSkills>
-        {unformatedSkillData.length && <SkillSearch skillData={unformatedSkillData}></SkillSearch>}
-        <Container className="big-container">
-            {loggedIn && suggestedSkillData.length &&
-                <Container className="shadow-container">
-                    <RecomendedSkills data={suggestedSkillData}></RecomendedSkills>
-                </Container>
-            }
-        </Container>
-        <BackBeatFavorites></BackBeatFavorites>
+            <SkillPageHero></SkillPageHero>
+            <MostPopularSkills></MostPopularSkills>
+            {unformatedSkillData.length && <SkillSearch skillData={unformatedSkillData}></SkillSearch>}
+            <Container className="big-container">
+                {loggedIn && suggestedSkillData.length && <>
+                    {window.screen.width<=411 ? (<>
+                    <Container className="shadow-container">
+                        <SmallRecomendedSkills data={suggestedSkillData}></SmallRecomendedSkills>
+                    </Container>
+                    </>):(
+                    <Container className="shadow-container">
+                        <RecomendedSkills data={suggestedSkillData}></RecomendedSkills>
+                    </Container>)}
+                </>}
+            </Container>
+            {window.screen.width>411 ? (<><BackBeatFavorites></BackBeatFavorites></>):(<>
+            <SmallFavorites></SmallFavorites>
+            </>)}
         </>
     )
 }

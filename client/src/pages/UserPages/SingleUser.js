@@ -9,6 +9,8 @@ import AccountInfo from '../../components/user-page-components/user-info';
 import AccountInfoViewOnly from "../../components/user-page-components/user-info-view-only"
 import Sounds from '../../components/user-page-components/suggestion-sound-slide';
 import Skills from '../../components/user-page-components/suggestion-skill-slide';
+import SmallSounds from '../../components/small-screen/small-single-user-sounds';
+import SmallSkills from '../../components/small-screen/small-single-user-skills';
 
 const AccountPage = ({ match }) => {
 
@@ -20,8 +22,6 @@ const AccountPage = ({ match }) => {
 
     const userData = data?.user || {};
     const loggedIn = Auth.loggedIn();
-
-    console.log(userData.username);
 
     useEffect(()=>{
         AOS.init({
@@ -45,12 +45,17 @@ const AccountPage = ({ match }) => {
                 </Container>
             )}
             
-            <Container className="shadow-container">
-                <Sounds data={userData.soundPosts}></Sounds>
-            </Container>
-            <Container className="shadow-container">
-                <Skills data={userData.skillPosts} length={userData.skillPosts.length}></Skills>
-            </Container>
+            {window.screen.width<=540 ? (<>
+                    <SmallSounds data={userData.soundPosts}></SmallSounds>
+                    <SmallSkills data={userData.skillPosts} length={userData.skillPosts.length}></SmallSkills>
+            </>):(<>
+                <Container className="shadow-container">
+                    <Sounds data={userData.soundPosts}></Sounds>
+                </Container>
+                <Container className="shadow-container">
+                    <Skills data={userData.skillPosts} length={userData.skillPosts.length}></Skills>
+                </Container>
+            </>)}
         </Container>
     )
 }

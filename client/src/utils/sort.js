@@ -62,8 +62,6 @@ class SortService {
                 }
                     
             }
-
-            console.log(formattedSounds);
             return formattedSounds;
     }
 

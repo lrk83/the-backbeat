@@ -1,45 +1,36 @@
 import React, {useState} from "react";
-import { Link } from "react-router-dom";
-import {Button, Menu, Header, Icon} from "semantic-ui-react"; 
-import CurrentSlide from './current-sounds-slides';
+import {Button, Menu, Icon} from "semantic-ui-react"; 
+import SmallCurrentSlide from './small-current-slides';
 
-const Slides = (data) => {
+const SmallTopTen = (data) => {
 
     const [photos]=useState(data);
-
-    var num=4;
-    if (window.screen.width<=540){
-        num=3;
-    };
-
-    const [currentPhotos, updateCurrentPhotos] = useState(photos.data.slice(0, num));
-    const [currentIndex, updateCurrentIndex] = useState(num);
+    const [currentPhotos, updateCurrentPhotos] = useState(photos.data.slice(0, 1));
+    const [currentIndex, updateCurrentIndex] = useState(1);
 
     const forwardPhotos = () => {
-        let upperbound = currentIndex+num;
+        let upperbound = currentIndex+1;
         if (upperbound>20){
             upperbound=20;
         };
         updateCurrentIndex(upperbound);
-        updateCurrentPhotos(photos.data.slice(upperbound-num,upperbound));
+        updateCurrentPhotos(photos.data.slice(upperbound-1,upperbound));
     }
 
     const backPhotos = () => {
-        let lowerbound=currentIndex-num-num;
+        let lowerbound=currentIndex-2;
         if (lowerbound<0){
             lowerbound=0;
         };
-        updateCurrentIndex(lowerbound+num);
-        updateCurrentPhotos(photos.data.slice(lowerbound,lowerbound+num));
+        updateCurrentIndex(lowerbound+1);
+        updateCurrentPhotos(photos.data.slice(lowerbound,lowerbound+1));
     }
 
     return (
         <div className="slide-show">
-            <Header as='h2'>Discover new Sounds</Header>
+            <SmallCurrentSlide currentPhotos={currentPhotos}></SmallCurrentSlide>
             <Menu secondary>
-                <Menu.Item><Header as='h4' className="discover-menu-subheader">Recently posted sound packs</Header></Menu.Item>
-                <Menu.Item as={Link} to='/sounds' >See all</Menu.Item>
-                <Menu.Menu className="discover-menu-buttons" position='right'>
+                <Menu.Menu id="top-ten-buttons">
                     <Button animated="vertical" onClick={()=>backPhotos()}>
                         <Button.Content hidden>Back</Button.Content>
                         <Button.Content visible>
@@ -54,10 +45,9 @@ const Slides = (data) => {
                     </Button>
                 </Menu.Menu>
             </Menu>
-            <CurrentSlide currentPhotos={currentPhotos}></CurrentSlide>
             
         </div>
     )
 }
 
-export default Slides;
+export default SmallTopTen;

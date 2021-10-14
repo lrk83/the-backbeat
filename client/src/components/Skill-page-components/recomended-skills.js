@@ -8,27 +8,31 @@ const RecomendedSkills = (props) => {
 
     const photos=data;
 
-    console.log(photos);
+    var num=4;
 
-    const [currentPhotos, updateCurrentPhotos] = useState(photos.slice(0, 4));
-    const [currentIndex, updateCurrentIndex] = useState(4);
+    if(window.screen.width<=540){
+        num=3
+    }
+
+    const [currentPhotos, updateCurrentPhotos] = useState(photos.slice(0, num));
+    const [currentIndex, updateCurrentIndex] = useState(num);
 
     const forwardPhotos = () => {
-        let upperbound = currentIndex+4;
+        let upperbound = currentIndex+num;
         if (upperbound>20){
             upperbound=20;
         };
         updateCurrentIndex(upperbound);
-        updateCurrentPhotos(photos.slice(upperbound-4,upperbound));
+        updateCurrentPhotos(photos.slice(upperbound-num,upperbound));
     }
 
     const backPhotos = () => {
-        let lowerbound=currentIndex-8;
+        let lowerbound=currentIndex-num-num;
         if (lowerbound<0){
             lowerbound=0;
         };
-        updateCurrentIndex(lowerbound+4);
-        updateCurrentPhotos(photos.slice(lowerbound,lowerbound+4));
+        updateCurrentIndex(lowerbound+num);
+        updateCurrentPhotos(photos.slice(lowerbound,lowerbound+num));
     }
 
     return (

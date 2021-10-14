@@ -164,12 +164,9 @@ const NewSkillPost = () => {
             variables: {name: newLinkText.name, content: newLinkText.content}
         });
 
-        console.log(newLinkFromBackEnd);
-
         newLinks.push(newLinkFromBackEnd.data.addLink._id);
 
         setContentFormData({...contentData, links: newLinks});
-        console.log(contentData);
         setNewLinkText({name:"",content:""});
     }
 
@@ -213,7 +210,6 @@ const NewSkillPost = () => {
 
         window.location.assign('/account/profile')
         } catch (err) {
-            console.log(err);
             setShowAlert(true);
         }
     }

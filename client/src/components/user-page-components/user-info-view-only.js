@@ -7,8 +7,6 @@ const SingleSound = (data) => {
 
     const userData = data?.data || {};
 
-    console.log(userData);
-
     useEffect(()=>{
         AOS.init({
             duration:200

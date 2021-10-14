@@ -92,7 +92,6 @@ const NewSoundPost = () => {
         setReadyToSubmit(false);
         
         try {
-            console.log(submissionData);
             await createSound({
                 variables: {postData: {...submissionData}}
             });
@@ -124,7 +123,6 @@ const NewSoundPost = () => {
         updatedTags.push(newFormatedTag);
 
         localStorage.setItem('newTags',JSON.stringify(updatedTags));
-        console.log(JSON.parse(localStorage.getItem('newTags')));
 
         setAddTagForm('');
     }

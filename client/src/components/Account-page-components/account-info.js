@@ -52,56 +52,57 @@ const SingleSound = (data) => {
         <Container className="user-profile-data">
 
             {window.screen.width<=540 ? (
-                        <Container className="single-post-content">
-                        <Card className="user-info-card">
-                            <Image src={userData.image}/>
-                            <Header as='h1' className="single-header">{userData.username}</Header>
-                            <Card.Content>{userData.description}</Card.Content>
-                            <Card.Content extra className="account-stats">
-                                <div>
+                <Container className="single-post-content">
+                    <Card className="user-info-card">
+                        <Image src={userData.image}/>
+                        <Header as='h1' className="single-header">{userData.username}</Header>
+                        <Card.Content className="user-description">{userData.description}</Card.Content>
+                        <Card.Content extra className="account-stats">
+                            <div>
                                 <Icon name='user'/>
                                 Followers: {userData.followerCount}
-                                </div>
-                                <div>
+                            </div>
+                            <div>
                                 <Icon name="industry" />
                                 Skill posts: {userData.skillPostCount}
-                                </div>
-                                <div>
+                            </div>
+                            <div>
                                 <Icon name='bandcamp' />
                                 Sound posts: {userData.skillPostCount}
-                                </div>
-                            </Card.Content>
-                        </Card>
-                        {loggedIn && ( <>
-                            {IAmUser? ( <> <Button color="blue" className="get-pack-button">Edit Profile</Button> </> ):( <> 
-                                {userIsSaved? ( <>
-                                    <Button color="blue" disabled className="get-pack-button">Followed</Button>
-                                </> ):( <>
-                                    <Button className="follow-user-button" onClick={saveUser}>Follow User</Button>
-                                </>)}
-                            </>)}
-                        </> ) } 
-                    </Container>
-                ) : ( <>
-                    <Card className="single-post-card">
-                        <Image src={userData.image} wrapped ui={false} />
+                            </div>
+                        </Card.Content>
                     </Card>
-                    <Container className="single-post-content">
+                    {loggedIn && ( <>
+                        {IAmUser? ( <> <Button color="blue" className="get-pack-button">Edit Profile</Button> </> ):( <> 
+                            {userIsSaved? ( <>
+                                <Button color="blue" disabled className="get-pack-button">Followed</Button>
+                            </> ):( <>
+                                <Button className="follow-user-button" onClick={saveUser}>Follow User</Button>
+                            </>)}
+                        </>)}
+                    </> ) } 
+                </Container>
+            ) : ( <>
+                <Container className="single-post-content">
+                    <Container className="profile-picture-container">
+                        <Image className="profile-picture" src={userData.image} />
+                    </Container>
+                    <Container className="info-and-buttons">
                         <Card className="user-info-card">
                             <Header as='h1' className="single-header">My Info</Header>
                             <Card.Content>{userData.description}</Card.Content>
                             <Card.Content extra className="account-stats">
                                 <div>
-                                <Icon name='user'/>
-                                Followers: {userData.followerCount}
+                                    <Icon name='user'/>
+                                    Followers: {userData.followerCount}
                                 </div>
                                 <div>
-                                <Icon name="industry" />
-                                Skill posts: {userData.skillPostCount}
+                                    <Icon name="industry" />
+                                    Skill posts: {userData.skillPostCount}
                                 </div>
                                 <div>
-                                <Icon name='bandcamp' />
-                                Sound posts: {userData.skillPostCount}
+                                    <Icon name='bandcamp' />
+                                    Sound posts: {userData.skillPostCount}
                                 </div>
                             </Card.Content>
                         </Card>
@@ -114,8 +115,9 @@ const SingleSound = (data) => {
                                 </>)}
                             </>)}
                         </> ) }
-                    </Container> 
-                </>)}
+                    </Container>
+                </Container> 
+            </>)}
         </Container>
     )
 }

@@ -7,6 +7,8 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import SavedSounds from "../../components/Account-page-components/saved-sounds";
 import SavedSkills from "../../components/Account-page-components/saved-skills";
+import SmallSavedSounds from "../../components/small-screen/small-saved-sounds";
+import SmallSavedSkills from "../../components/small-screen/small-saved-skills";
 
 const AccountPage = () => {
     const {loading, data} = useQuery(GET_ME);
@@ -29,12 +31,17 @@ const AccountPage = () => {
 
     return (
         <Container className="big-container">
-            <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
-                <SavedSounds data={userData.savedSoundPosts}></SavedSounds>
-            </Container>
-            <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
-                <SavedSkills data={userData.savedSkillPosts}></SavedSkills>
-            </Container>
+            {window.screen.width>=411 ?(<>
+                <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
+                    <SavedSounds data={userData.savedSoundPosts}></SavedSounds>
+                </Container>
+                <Container className="shadow-container" data-aos="fade-in" data-aos-delay="100" data-aos-duration="1500" >
+                    <SavedSkills data={userData.savedSkillPosts}></SavedSkills>
+                </Container>
+            </>):(<>
+                <SmallSavedSounds data={userData.savedSoundPosts}></SmallSavedSounds>
+                <SmallSavedSkills data={userData.savedSkillPosts}></SmallSavedSkills>
+            </>)}
         </Container>
     )
 }
