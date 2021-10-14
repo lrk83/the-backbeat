@@ -604,6 +604,16 @@ h2.ui.header.links-menu-header{
     max-width: 411px;
   }
 
+  #top-user-buttons{
+    width: 100%;
+    justify-content: center;
+    padding: 10px;
+  }
+
+  #top-user-buttons button{
+    width: 45%
+  }
+
   .slide-show>.ui.secondary.menu{
     display: flex;
     flex-direction: column;
@@ -702,6 +712,16 @@ h2.ui.header.links-menu-header{
   #small-tag-dropdown{
     box-shadow: none;
     align-self: center;
+    width: 100%;
+  }
+
+  #small-tag-dropdown > .item {
+    width: 100%;
+    justify-content: center;
+  }
+
+  #small-tag-dropdown > .item > .text {
+    font-size: 1.5rem;
   }
 
   #small-tags-menu{
@@ -730,6 +750,11 @@ h2.ui.header.links-menu-header{
       margin-right: 15px!important;
       padding-left: 0;
       padding-right: 0;
+    }
+
+    #single-sound-buttons-div{
+      display: flex;
+      flex-direction: column;
     }
 
   }

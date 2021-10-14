@@ -39,7 +39,7 @@ const SmallFavorites = () => {
     return (
         <div>
             <Header id="small-favorite-header" as="h2">Backbeat Favorites</Header>
-            <Header id="small-favorite-header" as="h3">Handpicked by the backbeat team </Header>
+            {window.screen.width>280 && <Header id="small-favorite-header" as="h3">Handpicked by the backbeat team </Header>}
             {sortedSkillData[0] && <Slides data={sortedSkillData}></Slides> }   
         </div>
     )

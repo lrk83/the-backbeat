@@ -85,7 +85,7 @@ const Slides = (data) => {
         <div className="slide-show">
             <SmallCurrentUserSlide currentPhotos={currentPhotos}></SmallCurrentUserSlide>
             <Menu secondary>
-                <Menu.Menu id="top-ten-buttons">
+                <Menu.Menu id="top-ten-buttons" id="top-user-buttons">
                     <Button animated="vertical" onClick={()=>backPhotos()}>
                         <Button.Content hidden>Back</Button.Content>
                         <Button.Content visible>

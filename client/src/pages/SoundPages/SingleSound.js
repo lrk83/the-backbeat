@@ -68,7 +68,7 @@ const SingleSound = ({ match }) => {
                                 Posted by {soundData.author.username}
                             </Link>
                         </div>
-                        <div className="buttons-div">
+                        <div className="buttons-div" id="single-sound-buttons-div">
                             <Button color="blue" className="get-pack-button" href={soundData.link} target="_blank">Get Pack</Button>
                             {loggedIn && ( <> 
                                 {soundIsSaved===true ? (<>
