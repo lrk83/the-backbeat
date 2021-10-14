@@ -29,8 +29,6 @@ const SkillSearchSlides = (props) => {
 const Slides = (props) => {
     const {data, tag}=props
 
-    console.log(props);
-
     const photos=data;
 
     const [currentPhotos, updateCurrentPhotos] = useState(photos.slice(0, 4));

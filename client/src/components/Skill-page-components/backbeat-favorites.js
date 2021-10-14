@@ -10,7 +10,7 @@ import {Link} from 'react-router-dom';
 const BackBeatFavorites = () => {
 
     const { loading, data} = useQuery(GET_SKILLS_FOR_SUGGESTED);
-    const skillData = data?.allSoundPosts || {};
+    const skillData = data?.allSkillPosts || {};
 
     const [haventSortedSkills, setSortedSkills] = useState(true);
     const [sortedSkillData, setSortedSkillData]=useState([]);
