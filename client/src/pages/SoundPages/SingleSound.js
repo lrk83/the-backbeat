@@ -63,7 +63,7 @@ const SingleSound = ({ match }) => {
                     <Container className="single-sound-content">
                         <Header as='h1' className="single-header">{soundData.name}</Header>
                         <div className="small-screen-sound-author">
-                            <Link to={`/users/single-user/${soundData.author._id}`}>
+                            <Link to={`/community/single-user/${soundData.author._id}`}>
                                 <Icon name='user'/>
                                 Posted by {soundData.author.username}
                             </Link>
@@ -127,7 +127,7 @@ const SingleSound = ({ match }) => {
                             </Card.Description>
                         </Card.Content>
                         <Card.Content extra>
-                            <Link to={`/users/single-user/${soundData.author._id}`}>
+                            <Link to={`/community/single-user/${soundData.author._id}`}>
                             <Icon name='user'/>
                             Posted by {soundData.author.username}
                             </Link>

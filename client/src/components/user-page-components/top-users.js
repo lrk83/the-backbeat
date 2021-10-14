@@ -53,7 +53,7 @@ const MostPopularSkills = () => {
             {sortedSkillData[0] &&
             <Container className="three-suggestions-container">
                 {cardsToShow.map((number)=> 
-                    <Link key={number} className="three-suggestions-link" to={`/users/single-user/${sortedSkillData[number]._id}`}>
+                    <Link key={number} className="three-suggestions-link" to={`/community/single-user/${sortedSkillData[number]._id}`}>
                         <Card>
                             <Image src={sortedSkillData[number].image} wrapped ui={false} />
                             <Card.Content>

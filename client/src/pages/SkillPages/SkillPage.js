@@ -13,6 +13,7 @@ import SkillPageHero from '../../components/Skill-page-components/skill-page-her
 import BackBeatFavorites from '../../components/Skill-page-components/backbeat-favorites';
 import SmallFavorites from '../../components/small-screen/small-favorites';
 import SmallRecomendedSkills from '../../components/small-screen/small-recomended-sounds';
+import SearchByName from '../../components/Skill-page-components/search-by-name';
 
 const SkillPage = () => {
 
@@ -85,6 +86,7 @@ const SkillPage = () => {
             {window.screen.width>411 ? (<><BackBeatFavorites></BackBeatFavorites></>):(<>
             <SmallFavorites></SmallFavorites>
             </>)}
+            {unformatedSkillData.length && <SearchByName skillData={unformatedSkillData}></SearchByName>}
         </>
     )
 }

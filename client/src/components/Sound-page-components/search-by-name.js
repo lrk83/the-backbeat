@@ -25,41 +25,39 @@ function exampleReducer(state, action) {
   }
 }
 
-function UserSearch(props) {
-    const {userData} = props;
+function SoundSearch(props) {
+    const {soundData} = props;
 
     return (
         <Container className="sound-search">
-            <Header as="h2">Search Users</Header>
-            <SearchBar users={userData}></SearchBar>
+            <Header as="h2">Search Sounds</Header>
+            <SearchBar sounds={soundData}></SearchBar>
         </Container>
     )
 }
 
 function SearchBar(props) {
     const {
-        users
+        sounds
     }=props;
 
   const [state, dispatch] = React.useReducer(exampleReducer, initialState)
   const { loading, results, value } = state
 
-  const userData=users;
+  const soundData=sounds;
 
   const source = [];
 
   const handleSelection = (data) => {
-    var userID=data.result.id;
+    var soundID=data.result.id;
 
-    console.log(userID);
-
-    window.location.assign(`/community/single-user/${userID}`);
+    window.location.assign(`/sounds/single-sound/${soundID}`);
 
     dispatch({ type: 'CLEAN_QUERY' });
   };
 
-  for (let x=0;x<userData.length;x= x+1){
-    let newsourcedata={title:userData[x].username, key:userData[x]._id, id: userData[x]._id,image:userData[x].image}
+  for (let x=0;x<soundData.length;x= x+1){
+    let newsourcedata={title:soundData[x].name, key:soundData[x]._id, id: soundData[x]._id,image:soundData[x].image}
     source.push(newsourcedata);
   };
 
@@ -94,8 +92,8 @@ function SearchBar(props) {
     <Grid>
       <Grid.Column>
         <Search className="down-search"
-            id="user-search"
-          placeholder="search for users"
+            id="sound-search"
+          placeholder="search for sounds"
           loading={loading}
           onResultSelect={(e, data) => {
             dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title });
@@ -110,9 +108,4 @@ function SearchBar(props) {
   )
 }
 
-export default UserSearch;
-
-
-
-
-
+export default SoundSearch;

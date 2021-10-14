@@ -37,7 +37,7 @@ const Slides = (data) => {
             {photos[0] &&
             <Container className="three-suggestions-container">
                 {cardsToShow.map((number)=> 
-                    <Link key={number} className="three-suggestions-link" to={`/users/single-user/${photos[number]._id}`}>
+                    <Link key={number} className="three-suggestions-link" to={`/community/single-user/${photos[number]._id}`}>
                         <Card>
                             <Image src={photos[number].image} wrapped ui={false} />
                             <Card.Content>
