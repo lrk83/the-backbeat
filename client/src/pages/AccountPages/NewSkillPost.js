@@ -4,7 +4,7 @@ import Auth from '../../utils/auth';
 import MenuTabular from '../../components/Menus/MenuTabularNewSkill';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { useQuery, useMutation, createHttpLink } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import {GET_TAGS} from '../../utils/queries';
 import {ADD_SKILL, ADD_TAG, ADD_LINK} from '../../utils/mutation';
 import TagSearch from "../../components/Account-page-components/tags-search";
@@ -23,6 +23,7 @@ const NewSkillPost = () => {
     const [submissionData, setSubmissionData] = useState({})
     const [readyToSubmit, setReadyToSubmit] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
+    const [showTagAlert, setShowTagAlert] = useState(false);
     const [addTagForm, setAddTagForm] = useState('');
     const [additionalLinkCount, setAddLinkCount] = useState([1]);
     const [newLinkText, setNewLinkText] = useState({name:"",content:""});
@@ -98,15 +99,20 @@ const NewSkillPost = () => {
             }
         }
 
-        setSubmissionData({
-            ...contentData,
-            tags:tagsToAdd,
-            aditionalTags:aditionalTagsToAdd
-        });
-
-        //Set up submission
-        setReadyToSubmit(true);
-        localStorage.setItem("newTags",JSON.stringify([]));
+        if (tagsToAdd.length+aditionalTagsToAdd.length<3){
+            setShowTagAlert(true);
+            return;
+        }else{
+            setSubmissionData({
+                ...contentData,
+                tags:tagsToAdd,
+                aditionalTags:aditionalTagsToAdd
+            });
+    
+            //Set up submission
+            setReadyToSubmit(true);
+            localStorage.setItem("newTags",JSON.stringify([]));
+        }
     };
 
     const handleContentChange = (event) => {
@@ -366,6 +372,7 @@ const NewSkillPost = () => {
                                     {item.name}</div>
                                 ))}
                              </Container >
+                             {showTagAlert && <Label basic color="red"> Please enter at least 3 tags! </Label>}
                              <Button
                                  onClick={tagsBackButton}>
                                  Back

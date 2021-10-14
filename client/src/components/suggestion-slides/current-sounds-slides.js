@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import { Container, Card, Image, Icon } from "semantic-ui-react";
+import { Container, Card, Image} from "semantic-ui-react";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import {Link} from 'react-router-dom';

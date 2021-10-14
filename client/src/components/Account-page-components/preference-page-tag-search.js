@@ -74,7 +74,7 @@ function TagSearch(props) {
         results: _.filter(source, isMatch),
       });
     }, 300);
-  }, []);
+  }, [source]);
 
   React.useEffect(() => {
     return () => {
@@ -85,7 +85,8 @@ function TagSearch(props) {
   return (
     <Grid>
       <Grid.Column>
-        <Search id="tags-search"
+        <Search className="down-search"
+        id="tags-search"
           placeholder="search for tags"
           loading={loading}
           onResultSelect={(e, data) => {

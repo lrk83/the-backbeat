@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import { Container,Card, Image, Header, Button, Icon} from "semantic-ui-react";
+import React, {useEffect} from "react";
+import { Container,Card, Image, Header, Icon} from "semantic-ui-react";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 

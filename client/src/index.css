@@ -542,6 +542,30 @@ h2.ui.header.links-menu-header{
   margin-top: 0;
 }
 
+.ui.search.down-search>.results {
+  top: auto;
+  bottom: 100%;
+}
+
+#footer{
+    margin: 0!important;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(53,56,57);
+    position: relative;
+    bottom: 0;
+}
+
+#footer .text{
+  color: #fff;
+}
+
+#footer .icons >i {
+  padding-right: 10px;
+}
+
 /*Media Queries*/
 
 @media screen and (max-width: 540px){
@@ -611,7 +635,8 @@ h2.ui.header.links-menu-header{
   }
 
   #top-user-buttons button{
-    width: 45%
+    width: 45%;
+    background-color: #fff;
   }
 
   .slide-show>.ui.secondary.menu{

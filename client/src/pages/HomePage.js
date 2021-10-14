@@ -28,7 +28,7 @@ const HomePage = () => {
                 setSortedSounds(true);
             }
         }
-    });
+    }, [loading, haventSortedSounds, soundData]);
 
     const { loading: skillloading, data: skilldata} = useQuery(GET_SKILLS_FOR_SUGGESTED);
     const skillData = skilldata?.allSkillPosts || {};
@@ -43,7 +43,7 @@ const HomePage = () => {
                 setSortedSkills(true);
             }
         }
-    },);
+    },[skillloading, haventSortedSkills, skillData]);
 
     const { loading: userloading, data: userdata } = useQuery(GET_USERS);
     const userData = userdata?.users || {};
@@ -58,7 +58,7 @@ const HomePage = () => {
                 setSortedUsers(true);
             }
         }
-    });
+    }, [userloading, haventSortedUsers, userData]);
 
     useEffect(()=>{
         AOS.init({

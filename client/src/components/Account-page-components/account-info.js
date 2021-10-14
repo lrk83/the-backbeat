@@ -46,7 +46,7 @@ const SingleSound = (data) => {
                 }
             }
         }
-    },[userData.followers,loggedInUserData.data._id])
+    },[userData.followers,loggedInUserData.data._id, IAmUser, loggedIn])
 
     return(
         <Container className="user-profile-data">

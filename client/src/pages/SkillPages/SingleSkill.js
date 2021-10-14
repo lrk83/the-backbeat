@@ -68,7 +68,6 @@ const SingleSound = ({ match }) => {
                                 <div className="skill-buttons-div">
                                     {skillIsSaved===true ? (<>
                                     <Button circular icon='heart' disabled color="twitter" />
-                                    <Button circular icon='mail' /> 
                                     </> ):( <>
                                     <Button circular icon='heart' onClick={saveSkill} />
                                     <Button circular icon='mail' /> 

@@ -13,6 +13,7 @@ import SkillPageHero from '../../components/Skill-page-components/skill-page-her
 import BackBeatFavorites from '../../components/Skill-page-components/backbeat-favorites';
 import SmallFavorites from '../../components/small-screen/small-favorites';
 import SmallRecomendedSkills from '../../components/small-screen/small-recomended-sounds';
+import SearchByName from '../../components/Skill-page-components/search-by-name';
 
 const SkillPage = () => {
 
@@ -21,21 +22,7 @@ const SkillPage = () => {
 
     const {loading:userLoading, data:userData} = useQuery(GET_ME);
 
-    const [sortedSkillData, setSortedSkillData] = useState([]);
-    const [haveFormatted, setHaveFormatted] = useState(false);
-
     const loggedIn = Auth.loggedIn();
-
-    //get top 10
-    useEffect(()=>{
-        if (!skillloading){
-            if (haveFormatted===false){
-                let formattingResult = Sort.formatSkillsForSearch(unformatedSkillData);
-                setSortedSkillData(formattingResult);
-                setHaveFormatted(true);
-            }
-        }
-    });
 
     //get suggested
     const [suggestedSkillData, setSuggestedSkillData] = useState([]);
@@ -51,7 +38,7 @@ const SkillPage = () => {
                 }
             }
         }
-    });
+    }, [loggedIn, skillloading, userLoading, haveFormattedSuggested, unformatedSkillData, userData]);
 
     useEffect(()=>{
         AOS.init({
@@ -85,6 +72,7 @@ const SkillPage = () => {
             {window.screen.width>411 ? (<><BackBeatFavorites></BackBeatFavorites></>):(<>
             <SmallFavorites></SmallFavorites>
             </>)}
+            {unformatedSkillData.length && <SearchByName skillData={unformatedSkillData}></SearchByName>}
         </>
     )
 }

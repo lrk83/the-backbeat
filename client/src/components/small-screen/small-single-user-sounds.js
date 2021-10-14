@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import {Button, Menu, Header, Icon, Container} from "semantic-ui-react";
 import CurrentSlideSmall from '../small-screen/small-current-slides';
 

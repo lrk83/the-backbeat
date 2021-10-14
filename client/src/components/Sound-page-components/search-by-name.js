@@ -1,11 +1,7 @@
 import _ from 'lodash';
-import React, {useState} from 'react';
+import React from 'react';
 import { Search, Grid, Header } from 'semantic-ui-react';
-import { useQuery } from '@apollo/client';
-import { GET_TAGS } from '../../utils/queries';
 import { Container } from 'semantic-ui-react';
-import SoundsbyTagSlides from './sounds-search-slides';
-import SmallSoundsbyTagSlides from './small-sound-slides';
 
 const initialState = {
   loading: false,
@@ -31,48 +27,37 @@ function exampleReducer(state, action) {
 
 function SoundSearch(props) {
     const {soundData} = props;
-    const {loading, data} = useQuery(GET_TAGS);
-    const tags = data?.tags || {};
-
-    const [chosenTags, setChosenTags]=useState([]);
 
     return (
         <Container className="sound-search">
-            <Header as="h2">Find Sounds by Tag</Header>
-            {!loading && <TagSearch tags={tags} setChosenTags={setChosenTags}></TagSearch>}
-                {chosenTags.map(item=> (
-                  <Container className='chosen-tags-container' key={item.id}>
-                        <Container className="chosen-tag" >
-                          {window.screen.width>=540 ? (<SoundsbyTagSlides tag={item} soundData={soundData}></SoundsbyTagSlides>):(
-                          <SmallSoundsbyTagSlides tag={item} soundData={soundData}></SmallSoundsbyTagSlides>)}
-                        </Container>
-                  </Container >
-                ))}
+            <Header as="h2">Search Sounds</Header>
+            <SearchBar sounds={soundData}></SearchBar>
         </Container>
     )
 }
 
-function TagSearch(props) {
+function SearchBar(props) {
     const {
-        tags,
-        setChosenTags
+        sounds
     }=props;
 
   const [state, dispatch] = React.useReducer(exampleReducer, initialState)
   const { loading, results, value } = state
 
-  const tagData=tags;
+  const soundData=sounds;
 
   const source = [];
 
   const handleSelection = (data) => {
-    setChosenTags([data.result]);
+    var soundID=data.result.id;
+
+    window.location.assign(`/sounds/single-sound/${soundID}`);
 
     dispatch({ type: 'CLEAN_QUERY' });
   };
 
-  for (let x=0;x<tagData.length;x= x+1){
-    let newsourcedata={title:tagData[x].name, key:tagData[x]._id, id: tagData[x]._id}
+  for (let x=0;x<soundData.length;x= x+1){
+    let newsourcedata={title:soundData[x].name, key:soundData[x]._id, id: soundData[x]._id,image:soundData[x].image}
     source.push(newsourcedata);
   };
 
@@ -106,8 +91,9 @@ function TagSearch(props) {
   return (
     <Grid>
       <Grid.Column>
-        <Search id="tags-search"
-          placeholder="search for tags"
+        <Search className="down-search"
+            id="sound-search"
+          placeholder="search for sounds"
           loading={loading}
           onResultSelect={(e, data) => {
             dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title });

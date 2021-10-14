@@ -63,7 +63,7 @@ const SingleSound = ({ match }) => {
                     <Container className="single-sound-content">
                         <Header as='h1' className="single-header">{soundData.name}</Header>
                         <div className="small-screen-sound-author">
-                            <Link to={`/users/single-user/${soundData.author._id}`}>
+                            <Link to={`/community/single-user/${soundData.author._id}`}>
                                 <Icon name='user'/>
                                 Posted by {soundData.author.username}
                             </Link>
@@ -73,7 +73,6 @@ const SingleSound = ({ match }) => {
                             {loggedIn && ( <> 
                                 {soundIsSaved===true ? (<>
                                 <Button circular icon='heart' disabled color="twitter" />
-                                <Button circular icon='mail' /> 
                                 </> ):( <>
                                 <Button circular icon='heart' onClick={saveSound} />
                                 <Button circular icon='mail' /> 
@@ -85,9 +84,9 @@ const SingleSound = ({ match }) => {
                             <Menu.Item id="small-tag-dropdown">
                                 <Dropdown item text="tags">
                                     <Dropdown.Menu>
-                                        <Dropdown.Item>{tagsToShow[0].name}</Dropdown.Item>
+                                        <Dropdown.Item></Dropdown.Item>
                                         <Dropdown.Item>{tagsToShow[1].name}</Dropdown.Item>
-                                        <Dropdown.Item>{tagsToShow[2].name}</Dropdown.Item>
+                                        <Dropdown.Item></Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </Menu.Item>
@@ -127,7 +126,7 @@ const SingleSound = ({ match }) => {
                             </Card.Description>
                         </Card.Content>
                         <Card.Content extra>
-                            <Link to={`/users/single-user/${soundData.author._id}`}>
+                            <Link to={`/community/single-user/${soundData.author._id}`}>
                             <Icon name='user'/>
                             Posted by {soundData.author.username}
                             </Link>
@@ -140,7 +139,6 @@ const SingleSound = ({ match }) => {
                             {loggedIn && ( <> 
                                 {soundIsSaved===true ? (<>
                                 <Button circular icon='heart' disabled color="twitter" />
-                                <Button circular icon='mail' /> 
                                 </> ):( <>
                                 <Button circular icon='heart' onClick={saveSound} />
                                 <Button circular icon='mail' /> 

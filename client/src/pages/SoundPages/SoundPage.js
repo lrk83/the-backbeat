@@ -13,6 +13,7 @@ import { Container } from 'semantic-ui-react';
 import BackbeatFavorites from '../../components/Sound-page-components/backbeat-favorites';
 import SmallRecomendedSounds from '../../components/small-screen/small-recomended-sounds';
 import SmallFavorites from '../../components/small-screen/small-favorites';
+import SearchByName from '../../components/Sound-page-components/search-by-name';
 
 const SoundPage = () => {
 
@@ -21,21 +22,7 @@ const SoundPage = () => {
 
     const {loading:userLoading, data:userData} = useQuery(GET_ME);
 
-    const [sortedSoundData, setSortedSoundData] = useState([]);
-    const [haveFormatted, setHaveFormatted] = useState(false);
-
     const loggedIn = Auth.loggedIn();
-
-    //get top 10
-    useEffect(()=>{
-        if (!soundloading){
-            if (haveFormatted===false){
-                let formattingResult = Sort.formatSkillsForSearch(unformatedSoundData);
-                setSortedSoundData(formattingResult);
-                setHaveFormatted(true);
-            }
-        }
-    });
 
     //get suggested
     const [suggestedSoundData, setSuggestedSoundData] = useState([]);
@@ -51,7 +38,7 @@ const SoundPage = () => {
                 }
             }
         }
-    });
+    }, [loggedIn, soundloading, userLoading, haveFormattedSuggested, unformatedSoundData, userData]);
 
     useEffect(()=>{
         AOS.init({
@@ -85,6 +72,7 @@ const SoundPage = () => {
             {window.screen.width>411 ? (<><BackbeatFavorites></BackbeatFavorites></>):(<>
             <SmallFavorites></SmallFavorites>
             </>)}
+            {unformatedSoundData.length && <SearchByName soundData={unformatedSoundData}></SearchByName>}
         </>
     )
 }

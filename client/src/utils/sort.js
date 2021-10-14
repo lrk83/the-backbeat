@@ -76,4 +76,4 @@ class SortService {
 }
 
 
-export default new SortService
+export default new SortService();

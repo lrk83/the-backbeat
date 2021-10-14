@@ -109,8 +109,6 @@ const typeDefs = gql`
         soundPosts(username: String): [SoundPost]
         skillPost(_id: ID):SkillPost
         soundPost(_id: ID):SoundPost
-        skillPostbyTag(tagId: ID): [SkillPost]
-        soundPostbyTag(tagId: ID): [SoundPost]
         skillLink(postId: ID): [SkillLink]
         tags: [Tag]
     }

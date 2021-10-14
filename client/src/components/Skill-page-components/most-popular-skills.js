@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Icon, Grid, Container, List, Header, Image } from 'semantic-ui-react';
+import { Grid, Container, List, Header, Image } from 'semantic-ui-react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useQuery } from '@apollo/client';
@@ -28,7 +28,7 @@ const MostPopularSkills = () => {
                 setSortedSkills(true);
             }
         }
-    });
+    }, [loading, haventSortedSkills, skillData]);
 
     useEffect(()=>{
         AOS.init({

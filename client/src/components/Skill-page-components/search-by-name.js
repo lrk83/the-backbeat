@@ -1,11 +1,7 @@
 import _ from 'lodash';
-import React, {useState} from 'react';
+import React from 'react';
 import { Search, Grid, Header } from 'semantic-ui-react';
-import { useQuery } from '@apollo/client';
-import { GET_TAGS } from '../../utils/queries';
 import { Container } from 'semantic-ui-react';
-import SoundsbyTagSlides from './sounds-search-slides';
-import SmallSoundsbyTagSlides from './small-sound-slides';
 
 const initialState = {
   loading: false,
@@ -29,50 +25,39 @@ function exampleReducer(state, action) {
   }
 }
 
-function SoundSearch(props) {
-    const {soundData} = props;
-    const {loading, data} = useQuery(GET_TAGS);
-    const tags = data?.tags || {};
-
-    const [chosenTags, setChosenTags]=useState([]);
+function SkillSearch(props) {
+    const {skillData} = props;
 
     return (
         <Container className="sound-search">
-            <Header as="h2">Find Sounds by Tag</Header>
-            {!loading && <TagSearch tags={tags} setChosenTags={setChosenTags}></TagSearch>}
-                {chosenTags.map(item=> (
-                  <Container className='chosen-tags-container' key={item.id}>
-                        <Container className="chosen-tag" >
-                          {window.screen.width>=540 ? (<SoundsbyTagSlides tag={item} soundData={soundData}></SoundsbyTagSlides>):(
-                          <SmallSoundsbyTagSlides tag={item} soundData={soundData}></SmallSoundsbyTagSlides>)}
-                        </Container>
-                  </Container >
-                ))}
+            <Header as="h2">Search Skills</Header>
+            <SearchBar skills={skillData}></SearchBar>
         </Container>
     )
 }
 
-function TagSearch(props) {
+function SearchBar(props) {
     const {
-        tags,
-        setChosenTags
+        skills
     }=props;
 
   const [state, dispatch] = React.useReducer(exampleReducer, initialState)
   const { loading, results, value } = state
 
-  const tagData=tags;
+  const skillData=skills;
 
   const source = [];
 
   const handleSelection = (data) => {
-    setChosenTags([data.result]);
+    var skillID=data.result.id;
+
+    window.location.assign(`/skills/single-skill/${skillID}`);
 
     dispatch({ type: 'CLEAN_QUERY' });
   };
 
-  for (let x=0;x<tagData.length;x= x+1){
-    let newsourcedata={title:tagData[x].name, key:tagData[x]._id, id: tagData[x]._id}
+  for (let x=0;x<skillData.length;x= x+1){
+    let newsourcedata={title:skillData[x].name, key:skillData[x]._id, id: skillData[x]._id,image:skillData[x].image}
     source.push(newsourcedata);
   };
 
@@ -106,8 +91,9 @@ function TagSearch(props) {
   return (
     <Grid>
       <Grid.Column>
-        <Search id="tags-search"
-          placeholder="search for tags"
+        <Search className="down-search"
+            id="skill-search"
+          placeholder="search for skill"
           loading={loading}
           onResultSelect={(e, data) => {
             dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title });
@@ -122,4 +108,4 @@ function TagSearch(props) {
   )
 }
 
-export default SoundSearch;
+export default SkillSearch;
