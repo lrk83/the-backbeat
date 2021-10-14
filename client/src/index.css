@@ -715,4 +715,11 @@ h2.ui.header.links-menu-header{
     margin-top: 0;
     font-size: 1.5rem;
   }
+
+  .ui.blue.button.get-pack-button{
+    padding: 1rem;
+    width: 100%;
+    font-size: 1.5rem;
+    border-radius: 5px;
+  }
 }

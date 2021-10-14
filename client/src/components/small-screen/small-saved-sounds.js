@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import {Button, Menu, Header, Icon, Container} from "semantic-ui-react";
 import CurrentSlideSmall from '../small-screen/small-current-slides';
 
@@ -40,7 +39,7 @@ const MySoundSlides = (data) => {
         <div className="my-sounds-slide-show">
             
             <Menu secondary>
-                <Menu.Item><Header as='h2'>My Sounds</Header></Menu.Item>
+                <Menu.Item><Header as='h2'>Saved Sounds</Header></Menu.Item>
                 <Menu.Menu className="discover-menu-buttons" position='right'>
                     <Button animated="vertical" onClick={()=>backPhotos()}>
                         <Button.Content hidden>Back</Button.Content>
@@ -59,9 +58,6 @@ const MySoundSlides = (data) => {
             <CurrentSlideSmall currentPhotos={currentPhotos}></CurrentSlideSmall>
         </div>
         </Container>
-        <div className="new-sound-button-div">
-            <Button as={Link} to="/account/sounds/new-sound" color="blue" id="new-sound-button">New Sound</Button>
-        </div>
         </>
     )
 };

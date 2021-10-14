@@ -1,32 +1,42 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import {Button, Menu, Header, Icon} from "semantic-ui-react"; 
-import CurrentSkillSlide from '../suggestion-slides/current-skills-slides';
+import {Button, Menu, Header, Icon, Container} from "semantic-ui-react"; 
+import CurrentSlideSmall from '../small-screen/small-current-skill-slides';
 
-const MySkillSlides = (data) => {
+const MySoundSlides = (data) => {
     const [photos]=useState(data);
-    const [currentPhotos, updateCurrentPhotos] = useState(photos.data.slice(0, 3));
+
+    var num=4;
+    if(window.screen.width<=540){
+        num=3;
+    }
+    if(window.screen.width<=400){
+        num=1
+    }
+    const [currentPhotos, updateCurrentPhotos] = useState(photos.data.slice(0, num));
     const [currentIndex, updateCurrentIndex] = useState(3);
 
     const forwardPhotos = () => {
-        let upperbound = currentIndex+3;
+        let upperbound = currentIndex+num;
         if (upperbound>20){
             upperbound=20;
         };
         updateCurrentIndex(upperbound);
-        updateCurrentPhotos(photos.data.slice(upperbound-3,upperbound));
+        updateCurrentPhotos(photos.data.slice(upperbound-num,upperbound));
     }
 
     const backPhotos = () => {
-        let lowerbound=currentIndex-7;
+        let lowerbound=currentIndex-num-num;
         if (lowerbound<0){
             lowerbound=0;
         };
-        updateCurrentIndex(lowerbound+3);
-        updateCurrentPhotos(photos.data.slice(lowerbound,lowerbound+3));
+        updateCurrentIndex(lowerbound+num);
+        updateCurrentPhotos(photos.data.slice(lowerbound,lowerbound+num));
     }
 
     return (
+        <>
+        <Container className="shadow-container">
         <div className="my-sounds-slide-show">
             
             <Menu secondary>
@@ -46,12 +56,14 @@ const MySkillSlides = (data) => {
                     </Button>
                 </Menu.Menu>
             </Menu>
-            <CurrentSkillSlide currentPhotos={currentPhotos}></CurrentSkillSlide>
-            <div className="new-sound-button-div">
-                <Button as={Link} to="/account/skills/new-skill" color="blue" className="get-pack-button">New</Button>
-            </div>
+            <CurrentSlideSmall currentPhotos={currentPhotos}></CurrentSlideSmall>
         </div>
+        </Container>
+        <div className="new-sound-button-div">
+            <Button as={Link} to="/account/skills/new-skill" color="blue" id="new-sound-button">New Skill</Button>
+        </div>
+        </>
     )
 };
 
-export default MySkillSlides;
+export default MySoundSlides;
