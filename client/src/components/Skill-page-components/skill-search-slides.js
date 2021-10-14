@@ -17,7 +17,7 @@ const SkillSearchSlides = (props) => {
                 setSortedSkillData(formattingResult);
                 setHaveFormatted(true);
             }
-    }, [haveFormatted, skillData, tag]);
+    });
 
 
     return (

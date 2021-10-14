@@ -38,7 +38,7 @@ const SoundPage = () => {
                 }
             }
         }
-    }, [loggedIn, soundloading, userLoading, haveFormattedSuggested, unformatedSoundData, userData]);
+    });
 
     useEffect(()=>{
         AOS.init({

@@ -75,7 +75,7 @@ function TagSearch(props) {
         results: _.filter(source, isMatch),
       })
     }, 300)
-  }, [source])
+  }, [])
   React.useEffect(() => {
     return () => {
       clearTimeout(timeoutRef.current)

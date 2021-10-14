@@ -17,7 +17,7 @@ const SoundSearchSlides = (props) => {
                 setSortedSoundData(formattingResult);
                 setHaveFormatted(true);
             }
-    }, [haveFormatted, skillData, tag]);
+    });
 
 
     return (

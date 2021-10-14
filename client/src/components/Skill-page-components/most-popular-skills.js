@@ -28,7 +28,7 @@ const MostPopularSkills = () => {
                 setSortedSkills(true);
             }
         }
-    }, [loading, haventSortedSkills, skillData]);
+    });
 
     useEffect(()=>{
         AOS.init({

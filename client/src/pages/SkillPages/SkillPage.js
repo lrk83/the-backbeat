@@ -38,7 +38,7 @@ const SkillPage = () => {
                 }
             }
         }
-    }, [loggedIn, skillloading, userLoading, haveFormattedSuggested, unformatedSkillData, userData]);
+    });
 
     useEffect(()=>{
         AOS.init({
