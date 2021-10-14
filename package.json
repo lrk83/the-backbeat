@@ -17,8 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "apollo-boost": "^0.4.9",
-    "if-env": "^1.0.4",
-    "react-scripts": "^4.0.3"
+    "if-env": "^1.0.4"
   },
   "devDependencies": {
     "concurrently": "^5.1.0"
