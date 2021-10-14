@@ -4,7 +4,7 @@
 
 [Github Repository](https://github.com/lrk83/the-backbeat/)
 
-## Elevator Pitch
+## Concept
 
 The backbeat is a place for home producers to share and collect music production knowledge. 
 
@@ -20,3 +20,11 @@ The Backbeat allows producers to post all their favorite music production resour
 ![Search Skills](https://github.com/lrk83/the-backbeat/blob/main/screen-shots/Screen%20Shot%202021-10-14%20at%207.27.00%20PM.png)
 ![Single Post](https://github.com/lrk83/the-backbeat/blob/main/screen-shots/Screen%20Shot%202021-10-05%20at%208.41.13%20PM.png)
 ![User Profile](https://github.com/lrk83/the-backbeat/blob/main/screen-shots/Screen%20Shot%202021-10-14%20at%207.27.39%20PM.png)
+
+## Technologies
+
+The backbeat is written using React, Graphql, Node, Express, MongoDB and Mongoose, React Router, JWT Authentication, and Semantic UI.
+
+## Questions
+
+Please reach out! lrk83@cornell.edu
