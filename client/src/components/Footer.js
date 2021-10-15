@@ -8,8 +8,8 @@ const Footer = () => {
                 Made with Love
             </div>
             <div className="icons">
-                <Icon inverted name="github" src="https://github.com/lrk83" />
-                <Icon inverted name="youtube" src="https://www.youtube.com/channel/UC8U0XY-hO52WWZgOkIW8aWg"/>
+                <a href="https://github.com/lrk83"><Icon inverted name="github"/></a>
+                <a href="https://www.youtube.com/channel/UC8U0XY-hO52WWZgOkIW8aWg"><Icon inverted name="youtube"/></a>
             </div>
         </Container>
     )
